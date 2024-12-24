@@ -1,0 +1,108 @@
+uniform vec2 winResolution;
+uniform sampler2D uTexture;
+
+varying vec3 worldNormal;
+varying vec3 eyeVector;
+
+const int ITER = 16;
+const float uTorR = 1.01;
+const float uTorY = 1.16;
+const float uTorG = 1.015;
+const float uTorC = 1.22;
+const float uTorB = 1.02;
+const float uTorV = 1.22;
+
+const float uRefractPower = 0.5;
+const float uChromaticAberration = 0.4;
+
+const vec3 uLight = vec3(10.0, 5.0, 5.0);
+const float uShininess = 40.0;
+const float uDiffuseness = 0.4;
+
+const float uFresnelPower = 16.0;
+
+float fresnel(vec3 eyeVector, vec3 worldNormal, float power) {
+  float fresnelFactor = abs(dot(eyeVector, worldNormal));
+  float inversefresnelFactor = 1.0 - fresnelFactor;
+
+  return pow(inversefresnelFactor, power);
+}
+
+float specular(vec3 light, float shininess, float diffuseness) {
+  vec3 normal = worldNormal;
+  vec3 lightVector = normalize(-light);
+  vec3 halfVector = normalize(eyeVector + lightVector);
+
+  float NdotL = dot(normal, lightVector);
+  float NdotH =  dot(normal, halfVector);
+  float NdotH2 = NdotH * NdotH;
+
+  float kDiffuse = max(0.0, NdotL);
+  float kSpecular = pow(NdotH2, shininess);
+
+  return  kSpecular + kDiffuse * diffuseness;
+}
+
+vec3 sat(vec3 rgb, float intensity) {
+  vec3 L = vec3(0.2125, 0.7154, 0.0721);
+  vec3 grayscale = vec3(dot(rgb, L));
+  return mix(grayscale, rgb, intensity);
+}
+
+void main() {
+
+
+  vec2 uv = gl_FragCoord.xy / winResolution.xy;
+  vec3 normal = worldNormal;
+
+  vec3 color = vec3(0.0);
+  for(int i = 0; i < ITER; i++) {
+    float slide = float(i) / float(ITER) * 0.1;
+
+    vec3 refractVecR = refract(eyeVector, normal, 1.0/uTorR);
+    vec3 refractVecY = refract(eyeVector, normal, 1.0/uTorY);
+    vec3 refractVecG = refract(eyeVector, normal, 1.0/uTorG);
+    vec3 refractVecC = refract(eyeVector, normal, 1.0/uTorC);
+    vec3 refractVecB = refract(eyeVector, normal, 1.0/uTorB);
+    vec3 refractVecV = refract(eyeVector, normal, 1.0/uTorV);
+
+    float r = texture2D(uTexture, uv + refractVecR.xy * (uRefractPower + slide * 1.0) * uChromaticAberration).x * 0.5;
+
+    float y = (texture2D(uTexture, uv + refractVecY.xy * (uRefractPower + slide * 1.0) * uChromaticAberration).x * 2.0 +
+               texture2D(uTexture, uv + refractVecY.xy * (uRefractPower + slide * 1.0) * uChromaticAberration).y * 2.0 -
+               texture2D(uTexture, uv + refractVecY.xy * (uRefractPower + slide * 1.0) * uChromaticAberration).z) / 6.0;
+
+    float g = texture2D(uTexture, uv + refractVecG.xy * (uRefractPower + slide * 2.0) * uChromaticAberration).y * 0.5;
+
+    float c = (texture2D(uTexture, uv + refractVecC.xy * (uRefractPower + slide * 2.5) * uChromaticAberration).y * 2.0 +
+               texture2D(uTexture, uv + refractVecC.xy * (uRefractPower + slide * 2.5) * uChromaticAberration).z * 2.0 -
+               texture2D(uTexture, uv + refractVecC.xy * (uRefractPower + slide * 2.5) * uChromaticAberration).x) / 6.0;
+    float b = texture2D(uTexture, uv + refractVecB.xy * (uRefractPower + slide * 3.0) * uChromaticAberration).z * 0.5;
+
+    float v = (texture2D(uTexture, uv + refractVecV.xy * (uRefractPower + slide * 1.0) * uChromaticAberration).z * 2.0 +
+               texture2D(uTexture, uv + refractVecV.xy * (uRefractPower + slide * 1.0) * uChromaticAberration).x * 2.0 -
+               texture2D(uTexture, uv + refractVecV.xy * (uRefractPower + slide * 1.0) * uChromaticAberration).y) / 6.0;
+
+    float R = r + (2.0*v + 2.0*y - c)/3.0;
+    float G = g + (2.0*y + 2.0*c - v)/3.0;
+    float B = b + (2.0*c + 2.0*v - y)/3.0;
+
+    color.r += R;
+    color.g += G;
+    color.b += B;
+    color = sat(color, 1.2);
+  }
+  color /= float(ITER);
+
+  //add specular lighting
+  float specularLight = specular(uLight, uShininess, uDiffuseness);
+  color += specularLight;
+
+  // add fresnel effect
+  float f = fresnel(eyeVector, normal, uFresnelPower);
+  color.rgb += f * vec3(1.0);
+
+  gl_FragColor = vec4(color, 1.0);
+  #include <tonemapping_fragment>
+  #include <colorspace_fragment>
+}
