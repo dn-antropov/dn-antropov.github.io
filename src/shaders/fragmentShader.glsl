@@ -1,21 +1,22 @@
 uniform vec2 winResolution;
 uniform sampler2D uTexture;
+uniform float uTime;
 
 varying vec3 worldNormal;
 varying vec3 eyeVector;
 
 const int ITER = 16;
-const float uTorR = 1.01;
-const float uTorY = 1.16;
-const float uTorG = 1.015;
-const float uTorC = 1.22;
-const float uTorB = 1.02;
-const float uTorV = 1.22;
+float uIorR = 1.01;
+float uIorY = 1.16;
+float uIorG = 1.015;
+float uIorC = 1.22;
+float uIorB = 1.02;
+float uIorV = 1.22;
 
 const float uRefractPower = 0.5;
 const float uChromaticAberration = 0.4;
 
-const vec3 uLight = vec3(10.0, 5.0, 5.0);
+const vec3 uLight = vec3(10.0, -5.0, 5.0);
 const float uShininess = 40.0;
 const float uDiffuseness = 0.4;
 
@@ -49,22 +50,39 @@ vec3 sat(vec3 rgb, float intensity) {
   return mix(grayscale, rgb, intensity);
 }
 
+float rand(float n){return fract(sin(n) * 43758.5453123);}
+
+float noise(float p){
+	float fl = floor(p);
+  float fc = fract(p);
+	return mix(rand(fl), rand(fl + 1.0), fc);
+}
+
+void animate() {
+  uIorR = noise(uTime*0.1 + 000.0) * 0.16 + 1.0;
+  uIorY = noise(uTime*0.1 + 100.0) * 0.22 + 1.0;
+  uIorG = noise(uTime*0.1 + 200.0) * 0.01 + 1.0;
+  uIorC = noise(uTime*0.1 + 300.0) * 0.22 + 1.0;
+  uIorB = noise(uTime*0.1 + 400.0) * 0.22 + 1.0;
+  uIorV = noise(uTime*0.1 + 500.0) * 0.01 + 1.0;
+}
+
 void main() {
-
-
   vec2 uv = gl_FragCoord.xy / winResolution.xy;
   vec3 normal = worldNormal;
+
+  animate();
 
   vec3 color = vec3(0.0);
   for(int i = 0; i < ITER; i++) {
     float slide = float(i) / float(ITER) * 0.1;
 
-    vec3 refractVecR = refract(eyeVector, normal, 1.0/uTorR);
-    vec3 refractVecY = refract(eyeVector, normal, 1.0/uTorY);
-    vec3 refractVecG = refract(eyeVector, normal, 1.0/uTorG);
-    vec3 refractVecC = refract(eyeVector, normal, 1.0/uTorC);
-    vec3 refractVecB = refract(eyeVector, normal, 1.0/uTorB);
-    vec3 refractVecV = refract(eyeVector, normal, 1.0/uTorV);
+    vec3 refractVecR = refract(eyeVector, normal, 1.0/uIorR);
+    vec3 refractVecY = refract(eyeVector, normal, 1.0/uIorY);
+    vec3 refractVecG = refract(eyeVector, normal, 1.0/uIorG);
+    vec3 refractVecC = refract(eyeVector, normal, 1.0/uIorC);
+    vec3 refractVecB = refract(eyeVector, normal, 1.0/uIorB);
+    vec3 refractVecV = refract(eyeVector, normal, 1.0/uIorV);
 
     float r = texture2D(uTexture, uv + refractVecR.xy * (uRefractPower + slide * 1.0) * uChromaticAberration).x * 0.5;
 

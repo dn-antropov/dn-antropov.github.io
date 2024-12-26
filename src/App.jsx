@@ -10,8 +10,7 @@ import './scene.css';
 import DoublePenrose from "./geometries/double_penrose";
 import Spheres from "./geometries/spheres";
 
-import { Bloom, ToneMapping, EffectComposer, Noise } from '@react-three/postprocessing'
-// import { ToneMappingMode } from 'postprocessing';
+import { ToneMapping, EffectComposer, Noise } from '@react-three/postprocessing'
 
 const Scene = () => {
   const ratio =  window.innerHeight / window.innerWidth;
@@ -38,9 +37,8 @@ const Scene = () => {
       />
 
       <EffectComposer>
-        <Bloom luminanceThreshold={0} luminanceSmoothing={0.9} height={300} />
         <Noise opacity={0.02} />
-        <ToneMapping middleGrey={0.75}/>
+        <ToneMapping mode={6} />
       </EffectComposer>
     </Canvas>
   );

@@ -1,12 +1,8 @@
 import * as THREE from 'three';
 import{ useRef } from 'react';
-import { range } from '../utils';
+import { range, easeInOutQuad } from '../utils';
 
 import { useFrame } from "@react-three/fiber";
-
-function easeInOutQuad(t) {
-  return t < 0.5 ? 2 * t * t : 1 - Math.pow(-2 * t + 2, 2) / 2;
-}
 
 export default function Spheres(props) {
   const backgroundGroup = useRef();
