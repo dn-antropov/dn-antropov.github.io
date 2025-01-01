@@ -75,14 +75,14 @@ export default function DoublePenrose(props) {
 
   return (
     <mesh ref={mesh} geometry={modelGeometry}>
-        {/* <icosahedronGeometry args={[2.84, 20]} /> */}
-        <shaderMaterial
-          key={uuidv4()}
-          vertexShader={vertexShader}
-          fragmentShader={fragmentShader}
-          uniforms={uniforms}
-        />
-      </mesh>
+      {/* <icosahedronGeometry args={[2.84, 20]} /> */}
+      <shaderMaterial
+        key={uuidv4()}
+        vertexShader={vertexShader}
+        fragmentShader={fragmentShader}
+        uniforms={uniforms}
+      />
+    </mesh>
   );
 }
 

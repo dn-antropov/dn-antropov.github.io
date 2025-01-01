@@ -1,11 +1,9 @@
 
 
-import { OrbitControls, OrthographicCamera } from "@react-three/drei";
+import { OrthographicCamera } from "@react-three/drei";
 import { Canvas } from "@react-three/fiber";
 
-import { range } from './utils';
-
-import './scene.css';
+import './App.css';
 
 import DoublePenrose from "./geometries/double_penrose";
 import Spheres from "./geometries/spheres";
@@ -19,28 +17,33 @@ const Scene = () => {
   const vertical = ratio < 1 ? frustum : frustum * ratio;
 
   return (
-    <Canvas dpr={[1, 2]}>
-      <ambientLight intensity={1.0} />
-      <Spheres />
-      <DoublePenrose/>
+    <div style={{ position: 'relative', width: '100%', height: '100%' }}>
+      <div className='background'>
+        <Canvas className='canvas' dpr={[1, 2]}>
+          <ambientLight intensity={1.0} />
+          <Spheres />
+          <DoublePenrose/>
 
-      <OrthographicCamera
-        makeDefault
-        zoom={7}
-        top={vertical}
-        bottom={-vertical}
-        left={-horizonal}
-        right={horizonal}
-        near={1}
-        far={500}
-        position={[0, 0, 100]}
-      />
+          <OrthographicCamera
+            makeDefault
+            zoom={7}
+            top={vertical}
+            bottom={-vertical}
+            left={-horizonal}
+            right={horizonal}
+            near={1}
+            far={500}
+            position={[0, 0, 100]}
+          />
 
-      <EffectComposer>
-        <Noise opacity={0.02} />
-        <ToneMapping mode={6} />
-      </EffectComposer>
-    </Canvas>
+          <EffectComposer>
+            <Noise opacity={0.02} />
+            <ToneMapping mode={6} />
+          </EffectComposer>
+        </Canvas>
+      </div>
+      <div className="overlay">Dmitrii Antropov</div>
+    </div>
   );
 };
 
