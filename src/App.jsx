@@ -1,12 +1,13 @@
 
 
-import { OrthographicCamera } from "@react-three/drei";
-import { Canvas } from "@react-three/fiber";
+import { OrthographicCamera } from '@react-three/drei';
+import { Canvas } from '@react-three/fiber';
 
 import './App.css';
 
-import DoublePenrose from "./geometries/double_penrose";
-import Spheres from "./geometries/spheres";
+import DoublePenrose from './geometries/double_penrose';
+import Spheres from './geometries/spheres';
+import Header from './components/header'
 
 import { ToneMapping, EffectComposer, Noise } from '@react-three/postprocessing'
 
@@ -19,7 +20,7 @@ const Scene = () => {
   return (
     <div style={{ position: 'relative', width: '100%', height: '100%' }}>
       <div className='background'>
-        <Canvas className='canvas' dpr={[1, 2]}>
+        <Canvas dpr={[1, 2]}>
           <ambientLight intensity={1.0} />
           <Spheres />
           <DoublePenrose/>
@@ -42,7 +43,8 @@ const Scene = () => {
           </EffectComposer>
         </Canvas>
       </div>
-      <div className="overlay">Dmitrii Antropov</div>
+      <Header />
+      {/* <div className="overlay">Dmitrii Antropov</div> */}
     </div>
   );
 };
