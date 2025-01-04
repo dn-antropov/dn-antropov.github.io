@@ -1,9 +1,11 @@
-@import url(https://fonts.googleapis.com/css?family=Rubik);
 @import url(https://fonts.googleapis.com/css?family=Raleway);
-
 
 /* Header styles */
 .header {
+  font-family: 'Raleway';
+  font-size: 1.5rem;
+  font-style: normal;
+  color: white;
   position: absolute;
   top: 0;
   left: 0;
@@ -13,28 +15,48 @@
   align-items: center;
   padding: 1rem 0rem;
   background: rgba(0, 0, 0, 0.5); /* Transparent background */
-  color: white;
   z-index: 10;
-
 }
 
 /* Header title */
-.header-title {
-  font-family: 'Raleway';
-  font-size: 1.5rem;
-  font-style: normal;
+.title {
   margin-left: 1rem;
-  letter-spacing: 0.1rem;
+  letter-spacing: 0.17rem;
 }
 
-/* Burger menu */
-.burger-menu {
+.title a {
+  color: white;
+  text-decoration: none;
+  transition: color 0.3s ease;
+}
+
+.title a:hover {
+  color: #ffffff6c; /* Highlight color on hover */
+}
+
+/* Navigation menu */
+.menu ul {
+  list-style: none;
+  display: flex;
+  gap: 20px; /* Space between menu items */
+  margin: 0;
+  margin-right: 1rem;
+  padding: 0;
+}
+
+.menu li {
+  display: inline-block;
+  letter-spacing: 0.075rem;
+
+}
+
+.menu-link {
+  color: white;
   cursor: pointer;
+  text-decoration: none;
+  transition: color 0.3s ease;
 }
 
-.burger-bar {
-  width: 25px;
-  height: 2px;
-  background: white;
-  margin: 6px 16px;
+.menu-link:hover {
+  color: #ffffff6c; /* Highlight color on hover */
 }

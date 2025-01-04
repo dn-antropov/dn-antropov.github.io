@@ -2,12 +2,18 @@
 
 import { OrthographicCamera } from '@react-three/drei';
 import { Canvas } from '@react-three/fiber';
+import { Element } from "react-scroll";
 
 import './App.css';
 
+// load art components
 import DoublePenrose from './geometries/double_penrose';
 import Spheres from './geometries/spheres';
+//load web components
 import Header from './components/header'
+import About from './components/about'
+import Work from './components/work'
+import Contact from './components/contact'
 
 import { ToneMapping, EffectComposer, Noise } from '@react-three/postprocessing'
 
@@ -19,7 +25,7 @@ const Scene = () => {
 
   return (
     <div style={{ position: 'relative', width: '100%', height: '100%' }}>
-      <div className='background'>
+      <div className='art'>
         <Canvas dpr={[1, 2]}>
           <ambientLight intensity={1.0} />
           <Spheres />
@@ -44,7 +50,15 @@ const Scene = () => {
         </Canvas>
       </div>
       <Header />
-      {/* <div className="overlay">Dmitrii Antropov</div> */}
+      <Element name='about'>
+        <About />
+      </Element>
+      <Element name='work'>
+        <Work />
+      </Element>
+      <Element name='contact'>
+        <Contact />
+      </Element>
     </div>
   );
 };
