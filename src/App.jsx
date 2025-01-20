@@ -3,6 +3,7 @@
 import { OrthographicCamera } from '@react-three/drei';
 import { Canvas } from '@react-three/fiber';
 import { Element } from "react-scroll";
+import { ParallaxProvider } from 'react-scroll-parallax';
 
 import './App.css';
 
@@ -24,42 +25,44 @@ const Scene = () => {
   const vertical = ratio < 1 ? frustum : frustum * ratio;
 
   return (
-    <div style={{ position: 'relative', width: '100%', height: '100%' }}>
-      <div className='art'>
-        <Canvas dpr={[1, 2]}>
-          <ambientLight intensity={1.0} />
-          <Spheres />
-          <DoublePenrose/>
+    <ParallaxProvider>
+      <div style={{ position: 'relative', width: '100%', height: '100%' }}>
+        <div className='art'>
+          <Canvas dpr={[1, 2]}>
+            <ambientLight intensity={1.0} />
+            <Spheres />
+            <DoublePenrose/>
 
-          <OrthographicCamera
-            makeDefault
-            zoom={7}
-            top={vertical}
-            bottom={-vertical}
-            left={-horizonal}
-            right={horizonal}
-            near={1}
-            far={500}
-            position={[0, 0, 100]}
-          />
+            <OrthographicCamera
+              makeDefault
+              zoom={7}
+              top={vertical}
+              bottom={-vertical}
+              left={-horizonal}
+              right={horizonal}
+              near={1}
+              far={500}
+              position={[0, 0, 100]}
+            />
 
-          <EffectComposer>
-            <Noise opacity={0.02} />
-            <ToneMapping mode={6} />
-          </EffectComposer>
-        </Canvas>
+            <EffectComposer>
+              <Noise opacity={0.02} />
+              <ToneMapping mode={6} />
+            </EffectComposer>
+          </Canvas>
+        </div>
+        <Header />
+        <Element name='about'>
+          <About />
+        </Element>
+        <Element name='work'>
+          <Work />
+        </Element>
+        <Element name='contact'>
+          <Contact />
+        </Element>
       </div>
-      <Header />
-      <Element name='about'>
-        <About />
-      </Element>
-      <Element name='work'>
-        <Work />
-      </Element>
-      <Element name='contact'>
-        <Contact />
-      </Element>
-    </div>
+    </ParallaxProvider>
   );
 };
 
