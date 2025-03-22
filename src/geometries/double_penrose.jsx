@@ -1,88 +1,81 @@
-import * as THREE from 'three'
-
-import { v4 as uuidv4 } from "uuid";
-import { useFrame, useLoader } from "@react-three/fiber";
-import { useFBO } from "@react-three/drei";
-
-
-import React, { useRef, useState, useLayoutEffect, useMemo } from 'react'
-
-import { GLTFLoader } from 'three/addons/loaders/GLTFLoader.js';
-
-import vertexShader from "../shaders/vertexShader.glsl";
-import fragmentShader from "../shaders/fragmentShader.glsl";
-
-import { easeInOutQuad } from '../utils';
+import * as THREE from 'three';
+import { v4 as uuidv4 } from 'uuid';
+import { useFrame, useLoader } from '@react-three/fiber';
+import { useFBO, useAnimations } from '@react-three/drei';
+import React, { useRef, useMemo } from 'react';
+import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader.js';
+import vertexShader from '../shaders/vertexShader.glsl';
+import fragmentShader from '../shaders/fragmentShader.glsl';
 
 export default function DoublePenrose(props) {
-  // This reference gives us direct access to our mesh
-  const mesh = useRef();
+  const meshRefs = useRef([]);
+  
+  // Load the model and animations
+  const { scene, animations } = useLoader(GLTFLoader, './glb/animated_double_penrose.glb');
+  
+  // Use animation clips from the model
+  const { actions } = useAnimations(animations, scene);
 
-  // Load the GLTF model using useLoader
-  const { scene } = useLoader(GLTFLoader, './glb/double_penrose.glb');
+  // Extract geometries from all child meshes in the scene
+  const geometries = useMemo(() => {
+    return scene.children.map(child => child.geometry).filter(Boolean);
+  }, [scene]);
 
-  // Extract the geometry of the model (assuming it's the first child in the scene)
-  const modelGeometry = scene.children[0]?.geometry;
-
-  // This is our main render target where we'll render and store the scene as a texture
+  // Offscreen rendering target (FBO)
   const mainRenderTarget = useFBO();
 
+  // Shader uniforms
   const uniforms = useMemo(() => ({
-    uTime: {
-      value: null
-    },
-    uTexture: {
-      value: null
-    },
-    winResolution: {
+    uTime: { value: 0 },
+    uTexture: { value: null },
+    winResolution: { 
       value: new THREE.Vector2(
-        window.innerWidth,
+        window.innerWidth, 
         window.innerHeight
-      ).multiplyScalar(Math.min(window.devicePixelRatio, 2)), // if DPR is 3 the shader glitches 🤷‍♂️
+      ).multiplyScalar(Math.min(window.devicePixelRatio, 2))
     },
-  }), [])
+  }), []);
+
+  // Start animation on mount
+  React.useEffect(() => {
+    if (actions) {
+      Object.values(actions).forEach(action => action.play()); // Play all animations
+    }
+  }, [actions]);
 
   useFrame((state) => {
-    const { gl, scene, camera } = state;
-    // Hide the mesh
-    mesh.current.visible = false;
+    const { gl, scene, camera, clock } = state;
+
+    meshRefs.current.forEach(mesh => {
+      if (!mesh) return;
+      mesh.visible = false;
+    });
+
     gl.setRenderTarget(mainRenderTarget);
-    // Render into the FBO
     gl.render(scene, camera);
 
-    // Pass the texture data to our shader material
-    mesh.current.material.uniforms.uTexture.value = mainRenderTarget.texture;
-    mesh.current.material.uniforms.uTime.value = state.clock.getElapsedTime();
-
-    // rotate the mesh
-    // i use fractional part of time and scale to last the cycle for 10 seconds
-    let rotationTime = state.clock.getElapsedTime() * 0.1;
-    mesh.current.rotation.y = Math.PI *
-                              //make first two seconds rotate the penrose by 180 degrees
-                              (easeInOutQuad(((Math.min(rotationTime % 1, 0.2) * 5.0))) +
-                              // repeat rotation starting from second 5
-                              easeInOutQuad(((Math.min(Math.max(rotationTime % 1,0.5), 0.7) - 0.5) * 5.0)));
-
-    // mesh.current.rotation.y =
-    // if (time * 2 % 1 >= 0.5 && time * 2 % 1 <= 0.75) {
-    //   mesh.current.rotation.y = 180 + (((time * 2 % 1 - 0.5) * 4) * 180);
-    // }
+    meshRefs.current.forEach(mesh => {
+      if (!mesh) return;
+      mesh.material.uniforms.uTexture.value = mainRenderTarget.texture;
+      mesh.material.uniforms.uTime.value = clock.getElapsedTime();
+      mesh.visible = true;
+    });
 
     gl.setRenderTarget(null);
-    // Show the mesh
-    mesh.current.visible = true;
   });
 
   return (
-    <mesh ref={mesh} geometry={modelGeometry}>
-      {/* <icosahedronGeometry args={[2.84, 20]} /> */}
-      <shaderMaterial
-        key={uuidv4()}
-        vertexShader={vertexShader}
-        fragmentShader={fragmentShader}
-        uniforms={uniforms}
-      />
-    </mesh>
+    <group>
+      {geometries.map((geometry, index) => (
+        <mesh key={index} ref={(el) => (meshRefs.current[index] = el)} geometry={geometry}>
+          <shaderMaterial
+            key={uuidv4()}
+            vertexShader={vertexShader}
+            fragmentShader={fragmentShader}
+            uniforms={uniforms}
+          />
+        </mesh>
+      ))}
+    </group>
   );
 }
-

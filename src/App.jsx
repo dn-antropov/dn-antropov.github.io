@@ -9,6 +9,7 @@ import './App.css';
 
 // load art components
 import DoublePenrose from './geometries/double_penrose';
+import DoublePenroseTest from './geometries/double_penrose_test';
 import Spheres from './geometries/spheres';
 //load web components
 import Header from './components/header'
@@ -31,11 +32,12 @@ const Scene = () => {
           <Canvas dpr={[1, 2]}>
             <ambientLight intensity={1.0} />
             <Spheres />
-            <DoublePenrose/>
+            <DoublePenroseTest />
+            {/* <DoublePenrose/> */}
 
             <OrthographicCamera
               makeDefault
-              zoom={7}
+              zoom={6}
               top={vertical}
               bottom={-vertical}
               left={-horizonal}
