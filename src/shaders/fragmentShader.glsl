@@ -1,9 +1,12 @@
 uniform vec2 winResolution;
 uniform sampler2D uTexture;
 uniform float uTime;
+uniform vec3 cutPlaneNormal;
 
 varying vec3 worldNormal;
 varying vec3 eyeVector;
+
+varying vec4 worldPos;
 
 const int ITER = 16;
 float uIorR = 1.01;
@@ -16,11 +19,11 @@ float uIorV = 1.22;
 const float uRefractPower = 0.5;
 const float uChromaticAberration = 0.4;
 
-const vec3 uLight = vec3(10.0, -5.0, 5.0);
-const float uShininess = 40.0;
-const float uDiffuseness = 0.4;
+const vec3 uLight = vec3(10.0, -10.0, 5.0);
+const float uShininess = 2.0;
+const float uDiffuseness = 0.1;
 
-const float uFresnelPower = 16.0;
+const float uFresnelPower = 1.0;
 
 float fresnel(vec3 eyeVector, vec3 worldNormal, float power) {
   float fresnelFactor = abs(dot(eyeVector, worldNormal));
@@ -60,11 +63,11 @@ float noise(float p){
 
 void animate() {
   uIorR = noise(uTime*0.1 + 000.0) * 0.16 + 1.0;
-  uIorY = noise(uTime*0.1 + 100.0) * 0.22 + 1.0;
-  uIorG = noise(uTime*0.1 + 200.0) * 0.01 + 1.0;
-  uIorC = noise(uTime*0.1 + 300.0) * 0.22 + 1.0;
-  uIorB = noise(uTime*0.1 + 400.0) * 0.22 + 1.0;
-  uIorV = noise(uTime*0.1 + 500.0) * 0.01 + 1.0;
+  uIorY = noise(uTime*0.1 + 110.0) * 0.22 + 1.0;
+  uIorG = noise(uTime*0.1 + 220.0) * 0.01 + 1.0;
+  uIorC = noise(uTime*0.1 + 330.0) * 0.22 + 1.0;
+  uIorB = noise(uTime*0.1 + 440.0) * 0.22 + 1.0;
+  uIorV = noise(uTime*0.1 + 550.0) * 0.01 + 1.0;
 }
 
 void main() {
@@ -114,13 +117,19 @@ void main() {
 
   //add specular lighting
   float specularLight = specular(uLight, uShininess, uDiffuseness);
-  color += specularLight;
+  color += specularLight * 0.25;
 
   // add fresnel effect
-  float f = fresnel(eyeVector, normal, uFresnelPower);
-  color.rgb += f * vec3(1.0);
+  // float f = fresnel(eyeVector, normal, uFresnelPower);
+  // color.rgb += f * vec3(1.0);
 
-  gl_FragColor = vec4(color, 1.0);
+  float cutPlane = dot(worldPos.xyz, cutPlaneNormal);
+  float alpha = 1.;
+  if (cutPlane > 1.38 || cutPlane < - 1.38 ) {
+    discard;
+  }
+
+  gl_FragColor = vec4(color, 1);
   #include <tonemapping_fragment>
   #include <colorspace_fragment>
 }

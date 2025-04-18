@@ -2,12 +2,13 @@ import React, { useEffect, useRef, useMemo } from 'react';
 import { useLoader, useFrame } from '@react-three/fiber';
 import { useAnimations, useFBO } from '@react-three/drei';
 import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader.js';
-import { MeshStandardMaterial, Vector2, ShaderMaterial } from 'three';
+import { Vector2, Vector3, Quaternion, Euler, ShaderMaterial } from 'three';
 
 import vertexShader from '../shaders/vertexShader.glsl';
 import fragmentShader from '../shaders/fragmentShader.glsl';
 
 export default function DoublePenrose(props) {
+  const rotation = new Vector3(35.265, -45.0, 0.0);
   const group = useRef();
   const meshRefs = useRef([]);
 
@@ -21,6 +22,9 @@ export default function DoublePenrose(props) {
   const uniforms = useMemo(() => ({
     uTime: { value: 0 },
     uTexture: { value: null },
+    cutPlaneNormal: {
+      value: new Vector3(0, 0, 0)
+    },
     winResolution: {
       value: new Vector2(
         window.innerWidth,
@@ -39,15 +43,15 @@ export default function DoublePenrose(props) {
   useEffect(() => {
     scene.traverse(child => {
       if (child.isMesh) {
-        // child.material = new MeshStandardMaterial({ color: 0x888888, roughness: 0.5, metalness: 0.2 });
         child.material = shaderMaterial;
         meshRefs.current.push(child);
       }
     });
     // Set a static rotations
     if (group.current) {
-      group.current.rotation.set( Math.PI * 0.14, Math.PI * 1.75, Math.PI * 0.0); // Set static rotation (in radians)
+      group.current.rotation.set(rotation.x * (Math.PI/180.0), rotation.y * (Math.PI/180.0), rotation.z * (Math.PI/180.0)); // Set static rotation (in radians)
       group.current.scale.set(0.2,0.2,0.2);
+
     }
   }, [scene]);
 
@@ -73,7 +77,11 @@ export default function DoublePenrose(props) {
 
     // Pass the texture data to our shader material
     shaderMaterial.uniforms.uTexture.value = mainRenderTarget.texture;
-    shaderMaterial.uniforms.uTime.value = state.clock.getElapsedTime();;
+    shaderMaterial.uniforms.uTime.value = state.clock.getElapsedTime();
+    const localNormal = new Vector3(0, 1, 0);
+    const quaternion = new Quaternion().setFromEuler(new Euler(rotation.x, rotation.y, rotation.z));
+    const planeNormal = localNormal.clone().applyQuaternion(quaternion).normalize();
+    shaderMaterial.uniforms.cutPlaneNormal.value.copy(planeNormal);
 
     gl.setRenderTarget(null);
     // Show the mesh
