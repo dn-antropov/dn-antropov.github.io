@@ -6,8 +6,9 @@ import { useFrame } from "@react-three/fiber";
 
 export default function Spheres(props) {
   const backgroundGroup = useRef();
-  const columns = range(-3., 3., 1.0);
-  const rows = range(-2.5, 2.5, 1.0);
+  let amount = 8;
+  const columns = range(-4., 4., 1.0);
+  const rows = range(-3.5, 3.5, 1.0);
   let prevTime = 0;
   let progress = 0;
 
@@ -25,18 +26,18 @@ export default function Spheres(props) {
         // Create unique animation for each mesh based on index
         if (progress % 1 <= 0.5 ) {
           const easyProgress = easeInOutQuad(progress % 1 * 2);
-          if ( index % 6 % 2 == 0) {
-            mesh.position.x =  Math.floor(index / 6) - 3.0  + easyProgress;
+          if ( index % amount % 2 == 0) {
+            mesh.position.x =  Math.floor(index / amount) - amount/2.0  + easyProgress;
           } else {
-            mesh.position.x =  Math.floor(index / 6) - 3.0  - easyProgress;
+            mesh.position.x =  Math.floor(index / amount) - amount/2.0  - easyProgress;
           }
         }
         else {
           const easyProgress = easeInOutQuad((progress - 0.5) % 1 * 2);
-          if ( Math.floor(index / 6) % 2 == 0) {
-            mesh.position.y =  index % 6  + easyProgress - 2.5;
+          if ( Math.floor(index / amount) % 2 == 0) {
+            mesh.position.y =  index % amount  + easyProgress - 3.5;
           } else {
-            mesh.position.y =  index % 6  - easyProgress - 2.5;
+            mesh.position.y =  index % amount  - easyProgress - 3.5;
           }
         }
       });

@@ -2,6 +2,7 @@ uniform vec2 winResolution;
 uniform sampler2D uTexture;
 uniform float uTime;
 uniform vec3 cutPlaneNormal;
+uniform vec2 uMouse;
 
 varying vec3 worldNormal;
 varying vec3 eyeVector;
@@ -19,7 +20,7 @@ float uIorV = 1.22;
 const float uRefractPower = 0.5;
 const float uChromaticAberration = 0.4;
 
-const vec3 uLight = vec3(10.0, -10.0, 5.0);
+const vec3 uLight = vec3(10.0, 10.0, -10.0);
 const float uShininess = 2.0;
 const float uDiffuseness = 0.1;
 
@@ -116,8 +117,8 @@ void main() {
   color /= float(ITER);
 
   //add specular lighting
-  float specularLight = specular(uLight, uShininess, uDiffuseness);
-  color += specularLight * 0.25;
+  float specularLight = specular(uLight * vec3(uMouse.x, uMouse.y, 1)  , uShininess, uDiffuseness);
+  color += specularLight * 0.4;
 
   // add fresnel effect
   // float f = fresnel(eyeVector, normal, uFresnelPower);

@@ -25,6 +25,7 @@ export default function DoublePenrose(props) {
     cutPlaneNormal: {
       value: new Vector3(0, 0, 0)
     },
+    uMouse: { value: new Vector2(0.5, 0.5) },
     winResolution: {
       value: new Vector2(
         window.innerWidth,
@@ -61,6 +62,17 @@ export default function DoublePenrose(props) {
       Object.values(actions).forEach(action => action.play()); // Play all animations
     }
   }, [actions]);
+
+  // Use mouse coordinates to set light
+  useEffect(() => {
+    const handleMouseMove = (event) => {
+      uniforms.uMouse.value.x = event.clientX / window.innerWidth * 2 - 1.0;
+      uniforms.uMouse.value.y = (1.0 - event.clientY / window.innerHeight) * 2 - 1.0;
+    };
+
+    window.addEventListener('mousemove', handleMouseMove);
+    return () => window.removeEventListener('mousemove', handleMouseMove);
+  }, [uniforms]);
 
   // Offscreen rendering target (FBO)
   const mainRenderTarget = useFBO();
