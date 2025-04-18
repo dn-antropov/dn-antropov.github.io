@@ -9,10 +9,10 @@ import fragmentShader from '../shaders/fragmentShader.glsl';
 
 export default function DoublePenrose(props) {
   const meshRefs = useRef([]);
-  
+
   // Load the model and animations
   const { scene, animations } = useLoader(GLTFLoader, './glb/animated_double_penrose.glb');
-  
+
   // Use animation clips from the model
   const { actions } = useAnimations(animations, scene);
 
@@ -28,9 +28,9 @@ export default function DoublePenrose(props) {
   const uniforms = useMemo(() => ({
     uTime: { value: 0 },
     uTexture: { value: null },
-    winResolution: { 
+    winResolution: {
       value: new THREE.Vector2(
-        window.innerWidth, 
+        window.innerWidth,
         window.innerHeight
       ).multiplyScalar(Math.min(window.devicePixelRatio, 2))
     },

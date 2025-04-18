@@ -1,23 +1,16 @@
 import React from "react";
+import { Parallax } from "react-scroll-parallax";
 
-const VideoPlayer = ({ src, autoPlay = false, loop = false, muted = false }) => {
+const VideoPlayer = ({ src, autoPlay = false, loop = false, muted = false, offset = "62%" }) => {
   return (
-    <video
-      src={src}
-      autoPlay={autoPlay}
-      loop={loop}
-      muted={muted}
-      style={{  position: "relative",
-                top: "50%",
-                left: "75%",
-                width: "25%",
-                height: "auto",
-                transform: "translate(-50%, -50%)",
-                objectFit: "cover",
-                zIndex: -1 }} // Optional: Customize styles
-    >
-      Your browser does not support the video tag.
-    </video>
+      <video
+        src={src}
+        autoPlay={autoPlay}
+        loop={loop}
+        muted={muted}
+      >
+        Your browser does not support the video tag.
+      </video>
   );
 };
 

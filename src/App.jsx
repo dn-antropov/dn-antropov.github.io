@@ -8,8 +8,7 @@ import { ParallaxProvider } from 'react-scroll-parallax';
 import './App.css';
 
 // load art components
-import DoublePenrose from './geometries/double_penrose';
-import DoublePenroseTest from './geometries/double_penrose_test';
+import DoublePenroseTest from './geometries/double_penrose_animated';
 import Spheres from './geometries/spheres';
 //load web components
 import Header from './components/header'
@@ -17,7 +16,7 @@ import About from './components/about'
 import Work from './components/work'
 import Contact from './components/contact'
 
-import { ToneMapping, EffectComposer, Noise } from '@react-three/postprocessing'
+// import { ToneMapping, EffectComposer, Noise } from '@react-three/postprocessing'
 
 const Scene = () => {
   const ratio =  window.innerHeight / window.innerWidth;
@@ -47,10 +46,10 @@ const Scene = () => {
               position={[0, 0, 100]}
             />
 
-            <EffectComposer>
+            {/* <EffectComposer>
               <Noise opacity={0.02} />
               <ToneMapping mode={6} />
-            </EffectComposer>
+            </EffectComposer> */}
           </Canvas>
         </div>
         <Header />

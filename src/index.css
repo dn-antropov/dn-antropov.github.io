@@ -34,8 +34,25 @@ h1 {
 }
 
 p {
+  position: relative;
   font-size: 1.3em;
   margin-left:9rem;
-  margin-right:25rem;
+  letter-spacing: 0.075rem;
+}
+
+.container {
+  position: relative;
+  width: fit-content; /* Adjust width based on content */
+}
+
+.video {
+  width: 50%; /* Make video responsive */
+  height: 50%; /* Full height of the container */
+  object-fit: cover; /* Ensures the video covers the container area */
+}
+
+.text {
+  position: absolute;
+  font-size: 1.3em;
   letter-spacing: 0.075rem;
 }
