@@ -117,7 +117,8 @@ void main() {
   color /= float(ITER);
 
   //add specular lighting
-  float specularLight = specular(uLight * vec3(uMouse.x, uMouse.y, 1)  , uShininess, uDiffuseness);
+  vec3 uMouseNorm = normalize(vec3 (uMouse, 0));
+  float specularLight = specular(uLight * vec3(uMouseNorm.x, uMouseNorm.y, 1)  , uShininess, uDiffuseness);
   color += specularLight * 0.4;
 
   // add fresnel effect
@@ -126,7 +127,7 @@ void main() {
 
   float cutPlane = dot(worldPos.xyz, cutPlaneNormal);
   float alpha = 1.;
-  if (cutPlane > 1.38 || cutPlane < - 1.38 ) {
+  if (cutPlane >= 1.38 || cutPlane <= -1.38) {
     discard;
   }
 

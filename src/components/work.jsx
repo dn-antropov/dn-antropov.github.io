@@ -4,7 +4,9 @@ const Work = () => {
     return (
     <>
       <h1>Work</h1>
-      <p>My work</p>
+      <p class="text">
+        Selected works.
+      </p>
     </>
     );
   };

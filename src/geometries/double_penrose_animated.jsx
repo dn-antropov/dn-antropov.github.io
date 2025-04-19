@@ -2,7 +2,7 @@ import React, { useEffect, useRef, useMemo } from 'react';
 import { useLoader, useFrame } from '@react-three/fiber';
 import { useAnimations, useFBO } from '@react-three/drei';
 import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader.js';
-import { Vector2, Vector3, Quaternion, Euler, ShaderMaterial } from 'three';
+import { Vector2, Vector3, Quaternion, Euler, LoopRepeat, ShaderMaterial } from 'three';
 
 import vertexShader from '../shaders/vertexShader.glsl';
 import fragmentShader from '../shaders/fragmentShader.glsl';
@@ -59,7 +59,9 @@ export default function DoublePenrose(props) {
   // Play animations on mount
   useEffect(() => {
     if (actions) {
-      Object.values(actions).forEach(action => action.play()); // Play all animations
+      Object.values(actions).forEach(action => {
+        action.reset().setLoop(LoopRepeat).play();
+      }); // Play all animations
     }
   }, [actions]);
 

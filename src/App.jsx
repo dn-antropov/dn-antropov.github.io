@@ -8,7 +8,7 @@ import { ParallaxProvider } from 'react-scroll-parallax';
 import './App.css';
 
 // load art components
-import DoublePenroseTest from './geometries/double_penrose_animated';
+import DoublePenrose from './geometries/double_penrose_animated';
 import Spheres from './geometries/spheres';
 //load web components
 import Header from './components/header'
@@ -31,8 +31,7 @@ const Scene = () => {
           <Canvas dpr={[1, 2]}>
             <ambientLight intensity={1.0} />
             <Spheres />
-            <DoublePenroseTest />
-            {/* <DoublePenrose/> */}
+            <DoublePenrose />
 
             <OrthographicCamera
               makeDefault
