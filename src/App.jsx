@@ -15,6 +15,7 @@ import Header from './components/header'
 import About from './components/about'
 import Work from './components/work'
 import Contact from './components/contact'
+import Footer from './components/footer'
 
 // import { ToneMapping, EffectComposer, Noise } from '@react-three/postprocessing'
 
@@ -61,6 +62,7 @@ const Scene = () => {
         <Element name='contact'>
           <Contact />
         </Element>
+        <Footer />
       </div>
     </ParallaxProvider>
   );

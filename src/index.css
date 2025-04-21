@@ -38,16 +38,44 @@ p {
   position: relative;
   font-size: 1.3em;
   margin-left:9rem;
+  margin-right:6rem;
   letter-spacing: 0.075rem;
 }
 
 .container {
   position: relative;
-  width: fit-content; /* Adjust width based on content */
+  width: fit-content;
 }
 
 .text {
-  /* position: absolute; */
   font-size: 1.3em;
+  letter-spacing: 0.075rem;
+}
+
+.thumbnail {
+  padding-top: 2rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+}
+
+.thumbnail img {
+  width: 75%;
+  max-width: 100%;
+  height: auto;
+  cursor: pointer;
+  transition: transform 0.2s ease;
+}
+
+.thumbnail a {
+  color: inherit;
+  text-decoration: none;
+}
+
+.caption {
+  font-size: 1.2rem;
+  margin-top: 1rem;
   letter-spacing: 0.075rem;
 }
