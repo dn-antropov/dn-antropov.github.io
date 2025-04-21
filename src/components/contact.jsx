@@ -13,7 +13,7 @@ const Contact = () => {
       <p class="text">
         I'm not very active on socials, but you can find some of my
         audiovisual works, travel photos or political yapping on <a href="https://www.instagram.com/pastichegram">Instagram</a> and
-        more corporate-flavored stuff on <a href="https://www.linkedin.com/in/dn-antropov">LinkedIn</a>. Also my don't hesitate to
+        more corporate-flavored stuff on <a href="https://www.linkedin.com/in/dn-antropov">LinkedIn</a>. Don't hesitate to
         check some of my private coding projects on <a href="https://www.github.com/umanema">GitHub</a>.
       </p>
     </>
