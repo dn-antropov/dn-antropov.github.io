@@ -79,3 +79,16 @@ p {
   margin-top: 1rem;
   letter-spacing: 0.075rem;
 }
+
+.iframe-container {
+  display: flex;
+  justify-content: center;
+}
+
+.bandcamp-iframe {
+  border: 0;
+  width: 100%;
+  max-width: 700px; /* optional: control max width */
+  height: 120px;
+  background-color: #000000;
+}

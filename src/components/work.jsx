@@ -15,31 +15,42 @@ const Work = () => {
         — especially for mobile app development.
       </p>
       <p>
-        Interestingly, I started my journey by creating interactive experiences with VVVV and TouchDesigner
-        — tools I still consider unbeatable for rapid prototyping and for projects requiring unconventional hardware integration.
+        When I create interactive experiences for museum exhibitions and stage shows, I often turn to VVVV and TouchDesigner
+        — tools I consider unbeatable for rapid prototyping and for integrating unconventional hardware
       </p>
       <p>
         I'm fascinated by the mathematical beauty of shaders and always try to find time to tinker with GLSL or HLSL snippets.
-        Another major interest of mine is artificial intelligence. While I'm not entirely sold on the surrounding hype,
+        Example of such experimentations you see on top of this website. Another major interest of mine is artificial intelligence. While I'm not entirely sold on the surrounding hype,
         I'm genuinely curious about the creative potential it unlocks.
       </p>
       <p>
-        Here is a list of selected works that I believe represent what interests and moves me.
+        Here is a short list of selected works that I believe represent what interests and moves me.
         It's a mix of commissioned and personal projects, shown in no particular order. The only
         criterion is that each piece reveals some facet of my work.
       </p>
-      <div class="thumbnail">
-        <a href="https://example.com" class="thumbnail" target="_blank">
+      <div className="thumbnail">
+        <a href="https://example.com" className="thumbnail" target="_blank">
           <img src="/projects/comissioned/ish23/jpg/ish23_01.jpg" alt="Image Processing Pipeline"></img>
-          <p class="caption">Image Processing Pipeline for Viessmann at ISH23</p>
+          <p className="caption">Image Processing Pipeline for Viessmann at ISH23</p>
         </a>
       </div>
-      <div class="thumbnail">
-        <a href="https://example.com" class="thumbnail" target="_blank">
+      <div className="thumbnail">
+        <a href="https://example.com" className="thumbnail" target="_blank">
           <img src="/projects/comissioned/bmw23/jpg/bmw23_01.jpg" alt="Driving Simulator"></img>
-          <p class="caption">Driving Simulator for BMW i Vision Dee</p>
+          <p className="caption">Driving Simulator for BMW i Vision Dee</p>
         </a>
       </div>
+      <div className="iframe-container">
+        <iframe
+          className="bandcamp-iframe"
+          src="https://bandcamp.com/EmbeddedPlayer/album=2455724268/size=large/bgcol=333333/linkcol=ffffff/tracklist=false/artwork=small/track=558240815/transparent=true/"
+          seamless>
+          <a href="https://godacollective.bandcamp.com/album/nohomo">NOHOMO by GODA</a>
+        </iframe>
+      </div>
+      <p>
+        My early experiments with Recursive Neural Networks for creating sounds (2019).
+      </p>
     </>
     );
   };
