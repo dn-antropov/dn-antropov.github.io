@@ -64,7 +64,7 @@ const Work = () => {
             playsInline
             className="vid"
           />
-          <p className="caption">Use Hallusinating AI for Generation of Gaussian Splats</p>
+          <p className="caption">Use Hallucinating AI for Generation of Gaussian Splats</p>
         </a>
       </div>
       <div className="iframe-container">
@@ -76,13 +76,10 @@ const Work = () => {
         </iframe>
         <a href="">
           <p className="caption">
-            Experiments with Recursive Neural Networks for creating sounds (2019)
+            Experiments with Recursive Neural Networks for Sound Creation (2019)
           </p>
         </a>
       </div>
-
-      <iframe src="https://www.linkedin.com/embed/feed/update/urn:li:ugcPost:7269340176869429251?compact=1" height="399" width="504" frameBorder="0" allowFullScreen="" title="Embedded post"></iframe>
-
     </>
     );
   };
