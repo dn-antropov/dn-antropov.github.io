@@ -16,7 +16,7 @@ const Work = () => {
       </p>
       <p>
         When I create interactive experiences for museum exhibitions and stage shows, I often turn to VVVV and TouchDesigner
-        — tools I consider unbeatable for rapid prototyping and for integrating unconventional hardware
+        — tools I consider unbeatable for rapid prototyping and for integrating unconventional hardware.
       </p>
       <p>
         I'm fascinated by the mathematical beauty of shaders and always try to find time to tinker with GLSL or HLSL snippets.
@@ -30,27 +30,59 @@ const Work = () => {
       </p>
       <div className="thumbnail">
         <a href="https://example.com" className="thumbnail" target="_blank">
-          <img src="/projects/comissioned/ish23/jpg/ish23_01.jpg" alt="Image Processing Pipeline"></img>
+          <video
+            src="/projects/comissioned/bmw23/webm/bmw-i-vision-dee_2-vp9.webm"
+            autoPlay
+            muted
+            loop
+            playsInline
+            className="vid"
+          />
+          <p className="caption">Driving Simulator for BMW i Vision Dee</p>
+        </a>
+      </div>
+      <div className="thumbnail">
+        <a href="https://example.com" className="thumbnail" target="_blank">
+          <video
+            src="/projects/comissioned/ish23/webm/230330_vi_ish23_cut_03-vp9.webm"
+            autoPlay
+            muted
+            loop
+            playsInline
+            className="vid"
+          />
           <p className="caption">Image Processing Pipeline for Viessmann at ISH23</p>
         </a>
       </div>
       <div className="thumbnail">
         <a href="https://example.com" className="thumbnail" target="_blank">
-          <img src="/projects/comissioned/bmw23/jpg/bmw23_01.jpg" alt="Driving Simulator"></img>
-          <p className="caption">Driving Simulator for BMW i Vision Dee</p>
+          <video
+            src="/projects/private/dreamscene/webm/dreamscene.webm"
+            autoPlay
+            muted
+            loop
+            playsInline
+            className="vid"
+          />
+          <p className="caption">Use Hallusinating AI for Generation of Gaussian Splats</p>
         </a>
       </div>
       <div className="iframe-container">
         <iframe
           className="bandcamp-iframe"
-          src="https://bandcamp.com/EmbeddedPlayer/album=2455724268/size=large/bgcol=333333/linkcol=ffffff/tracklist=false/artwork=small/track=558240815/transparent=true/"
+          src="https://bandcamp.com/EmbeddedPlayer/album=2455724268/size=large/bgcol=333333/linkcol=0f91ff/tracklist=false/track=558240815/transparent=true/"
           seamless>
           <a href="https://godacollective.bandcamp.com/album/nohomo">NOHOMO by GODA</a>
         </iframe>
+        <a href="">
+          <p className="caption">
+            Experiments with Recursive Neural Networks for creating sounds (2019)
+          </p>
+        </a>
       </div>
-      <p>
-        My early experiments with Recursive Neural Networks for creating sounds (2019).
-      </p>
+
+      <iframe src="https://www.linkedin.com/embed/feed/update/urn:li:ugcPost:7269340176869429251?compact=1" height="399" width="504" frameBorder="0" allowFullScreen="" title="Embedded post"></iframe>
+
     </>
     );
   };

@@ -7,10 +7,10 @@ const Footer = () => {
     <footer className='footer'>
       {/* <div className='title'><a href='/'>Dmitrii Antropov</a></div> */}
       <p>
-        <a href="https://www.instagram.com/pastichegram" target="_blank" rel="noopener noreferrer">
+        <a href="https://instagram.com/pastichegram" target="_blank" rel="noopener noreferrer">
           <img src="svg/Instagram_Glyph_White.svg" alt="Instagram" className="footer-icon" />
         </a>
-        <a href="https://www.linkedin.com/in/dn-antropov" target="_blank" rel="noopener noreferrer">
+        <a href="https://linkedin.com/in/dn-antropov" target="_blank" rel="noopener noreferrer">
           <img src="svg/LI-In-Bug-White.png" alt="LinkedIn" className="footer-icon linkedin-icon"/>
         </a>
         <a href="https://github.com/umanema" target="_blank" rel="noopener noreferrer">
