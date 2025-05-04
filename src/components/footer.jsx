@@ -1,11 +1,9 @@
 import React from 'react';
-
 import './footer.css'
 
 const Footer = () => {
   return (
     <footer className='footer'>
-      {/* <div className='title'><a href='/'>Dmitrii Antropov</a></div> */}
       <p>
         <a href="https://instagram.com/pastichegram" target="_blank" rel="noopener noreferrer">
           <img src="svg/Instagram_Glyph_White.svg" alt="Instagram" className="footer-icon" />

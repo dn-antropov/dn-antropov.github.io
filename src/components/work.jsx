@@ -1,5 +1,7 @@
 import React from 'react';
 
+import { Link } from 'react-router-dom';
+
 const Work = () => {
     return (
     <>
@@ -29,7 +31,7 @@ const Work = () => {
         criterion is that each piece reveals some facet of my work.
       </p>
       <div className="thumbnail">
-        <a href="https://example.com" className="thumbnail" target="_blank">
+        <Link to="/projects/bmw23" className="thumbnail">
           <video
             src="/projects/comissioned/bmw23/webm/bmw-i-vision-dee_2-vp9.webm"
             autoPlay
@@ -38,11 +40,11 @@ const Work = () => {
             playsInline
             className="vid"
           />
-          <p className="caption">Driving Simulator for BMW i Vision Dee</p>
-        </a>
+          <p className="caption">Metaverse Drive for BMW i Vision Dee</p>
+        </Link>
       </div>
       <div className="thumbnail">
-        <a href="https://example.com" className="thumbnail" target="_blank">
+        <a href="/projects/ish23" className="thumbnail">
           <video
             src="/projects/comissioned/ish23/webm/230330_vi_ish23_cut_03-vp9.webm"
             autoPlay

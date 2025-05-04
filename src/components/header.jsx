@@ -1,52 +1,42 @@
-import React, {useState} from 'react';
-import { Link } from 'react-scroll'
-import './header.css'
+import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
+import './header.css';
 
 const Header = () => {
   const [menuOpen, setMenuOpen] = useState(false);
-  const toggleMenu = () => setMenuOpen(!menuOpen);
+  const navigate = useNavigate();
+
+  const handleNav = (section) => {
+    setMenuOpen(false);
+    navigate('/', { state: { scrollTo: section } });
+  };
+
   return (
     <header className='header'>
       <div className='header-top'>
-        <div className='title'><a href='/cv/CV.pdf'>Dmitrii Antropov</a></div>
-        <div className='hamburger' onClick={toggleMenu}>
+        <div className='title'>
+          <a href='/cv/CV.pdf'>Dmitrii Antropov</a>
+        </div>
+        <div className='hamburger' onClick={() => setMenuOpen(!menuOpen)}>
           ☰
         </div>
       </div>
       <nav className={`menu ${menuOpen ? 'open' : ''}`}>
         <ul>
           <li>
-            <Link
-              className='menu-link'
-              to='about'
-              smooth={true}
-              duration={333}
-              onClick={() => setMenuOpen(false)}
-            >
+            <button className='menu-link button-reset' onClick={() => handleNav('about')}>
               About
-            </Link>
+            </button>
           </li>
           <li>
-            <Link
-              className='menu-link'
-              to='work'
-              smooth={true}
-              duration={333}
-              onClick={() => setMenuOpen(false)}
-            >
+            <button className='menu-link button-reset' onClick={() => handleNav('work')}>
               Work
-            </Link>
+            </button>
           </li>
           <li>
-            <Link
-              className='menu-link'
-              to='contact'
-              smooth={true}
-              duration={333}
-              onClick={() => setMenuOpen(false)}
-            >
+            <button className='menu-link button-reset' onClick={() => handleNav('contact')}>
               Contact
-            </Link>
+            </button>
           </li>
         </ul>
       </nav>
