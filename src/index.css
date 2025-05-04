@@ -20,36 +20,44 @@ body {
   margin: 0;
   display: flex;
   place-items: center;
-  min-width: 320px;
-  min-height: 100vh;
 }
 
 h1 {
   font-family: 'Raleway';
   font-weight: bold;
-  font-size: 3.6em;
   line-height: 1.1;
-  letter-spacing: 0.35rem;
-  margin-left:9rem;
+  margin-left: 9rem;
   padding-top: 8rem;
+  font-size: 3.6em;
+  letter-spacing: 0.35rem;
 }
 
 p {
   position: relative;
-  font-size: 1.3em;
   margin-left:9rem;
   margin-right:6rem;
+  font-size: 1.3em;
   letter-spacing: 0.075rem;
+}
+
+@media(max-width: 600px) {
+  h1 {
+    margin-left: 1.5rem;
+    font-size: 2.4em;
+    padding-top: 4rem;
+    letter-spacing: 0.2rem;
+  }
+
+  p {
+    margin-left: 1.5rem;
+    margin-right: 1.5rem;
+    font-size: 1.2em;
+  }
 }
 
 .container {
   position: relative;
   width: fit-content;
-}
-
-.text {
-  font-size: 1.3em;
-  letter-spacing: 0.075rem;
 }
 
 .thumbnail {
@@ -59,15 +67,14 @@ p {
   align-items: center;
   justify-content: center;
   text-align: center;
-  width: 100vw; /* Stretch to full viewport width */
-  margin-left: calc(-50vw + 50%); /* Center full-width section inside normal content flow */
+  width: 100vw;
+  margin-left: calc(-50vw + 50%);
 }
 
 .thumbnail a {
   color: inherit;
   text-decoration: none;
 }
-
 
 .caption {
   font-size: 1.2rem;

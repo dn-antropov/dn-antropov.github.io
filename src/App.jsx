@@ -55,7 +55,7 @@ const Scene = () => {
       <Header />
       <Element name='about'>
         <About />
-      </Element>
+      </Element>  
       <Element name='work'>
         <Work />
       </Element>
