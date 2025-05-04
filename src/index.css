@@ -1,14 +1,14 @@
-@import url(https://fonts.googleapis.com/css?family=Roboto);
-@import url(https://fonts.googleapis.com/css?family=Raleway);
+@import url('https://fonts.googleapis.com/css?family=Roboto');
+@import url('https://fonts.googleapis.com/css?family=Raleway');
 
 :root {
-  font-family: 'Roboto';
-  line-height: 1.5;
+  font-family: 'Roboto', sans-serif;
   font-weight: 400;
+  line-height: 1.5;
 
-  color-scheme: dark;
   color: rgba(255, 255, 255, 0.87);
-  background-color: #000000;
+  background-color: #000;
+  color-scheme: dark;
 
   font-synthesis: none;
   text-rendering: optimizeLegibility;
@@ -23,36 +23,20 @@ body {
 }
 
 h1 {
-  font-family: 'Raleway';
+  font-family: 'Raleway', sans-serif;
+  font-size: 3.6em;
   font-weight: bold;
+  letter-spacing: 0.35rem;
   line-height: 1.1;
   margin-left: 9rem;
   padding-top: 8rem;
-  font-size: 3.6em;
-  letter-spacing: 0.35rem;
 }
 
 p {
-  position: relative;
-  margin-left:9rem;
-  margin-right:6rem;
   font-size: 1.3em;
   letter-spacing: 0.075rem;
-}
-
-@media(max-width: 600px) {
-  h1 {
-    margin-left: 1.5rem;
-    font-size: 2.4em;
-    padding-top: 4rem;
-    letter-spacing: 0.2rem;
-  }
-
-  p {
-    margin-left: 1.5rem;
-    margin-right: 1.5rem;
-    font-size: 1.2em;
-  }
+  margin: 1.5rem 6rem 0 9rem;
+  position: relative;
 }
 
 .container {
@@ -61,50 +45,60 @@ p {
 }
 
 .thumbnail {
-  padding-top: 2rem;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
+  margin-left: calc(-50vw + 50%);
+  padding-top: 2rem;
   text-align: center;
   width: 100vw;
-  margin-left: calc(-50vw + 50%);
 }
 
-.thumbnail a {
+.thumbnail a,
+.iframe-container a {
   color: inherit;
   text-decoration: none;
+}
+
+.thumbnail .vid {
+  display: block;
+  height: auto;
+  object-fit: cover;
+  width: 100%;
 }
 
 .caption {
   font-size: 1.2rem;
-  margin-top: 1rem;
   letter-spacing: 0.075rem;
-}
-
-.thumbnail .vid {
-  width: 100%;
-  height: auto;
-  display: block;
-  object-fit: cover;
+  margin-top: 1rem;
 }
 
 .iframe-container {
-  padding-top: 2rem;
+  align-items: center;
   display: flex;
   flex-direction: column;
-  align-items: center;
+  padding-top: 2rem;
   text-align: center;
 }
 
-.iframe-container a{
-  color: inherit;
-  text-decoration: none;
+.bandcamp-iframe {
+  background-color: #000;
+  border: 0;
+  height: 470px;
+  width: 350px;
 }
 
-.bandcamp-iframe {
-  border: 0;
-  width: 350px;
-  height: 470px;
-  background-color: #000000;
+@media (max-width: 600px) {
+  h1 {
+    font-size: 2.4em;
+    letter-spacing: 0.2rem;
+    margin-left: 1.5rem;
+    padding-top: 4rem;
+  }
+
+  p {
+    font-size: 1.2em;
+    margin: 1rem 1.5rem;
+  }
 }

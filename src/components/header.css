@@ -1,36 +1,37 @@
-@import url(https://fonts.googleapis.com/css?family=Raleway);
+@import url('https://fonts.googleapis.com/css?family=Raleway');
 
 * {
   box-sizing: border-box;
 }
+
 .header {
-  font-family: 'Raleway';
+  align-items: stretch;
+  background: rgba(0, 0, 0, 0.5);
+  color: white;
+  display: flex;
+  font-family: 'Raleway', sans-serif;
   font-size: 1.5rem;
   font-style: normal;
-  color: white;
+  justify-content: space-between;
+  left: 0;
+  padding: 1rem 0;
   position: fixed;
   top: 0;
-  left: 0;
   width: 100%;
-  display: flex;
-  justify-content: space-between;
-  align-items: stretch;
-  padding: 1rem 0rem;
-  background: rgba(0, 0, 0, 0.5);
   z-index: 10;
 }
 
 .header-top {
+  align-items: center;
   display: flex;
   justify-content: space-between;
-  align-items: center;
   width: 100%;
 }
 
-/* Header title */
+/* Title */
 .title {
-  margin-left: 1rem;
   letter-spacing: 0.17rem;
+  margin-left: 1rem;
 }
 
 .title a {
@@ -43,22 +44,26 @@
   color: #ffffff6c;
 }
 
-/* Hamburger icon */
+/* Hamburger */
 .hamburger {
-  display: none;
-  font-size: 1.8rem;
   color: white;
   cursor: pointer;
+  display: none;
+  font-size: 1.8rem;
   margin-right: 1rem;
 }
 
-/* Navigation menu */
+/* Menu */
+.menu {
+  display: flex;
+  margin-right: 2rem;
+}
+
 .menu ul {
-  list-style: none;
   display: flex;
   gap: 20px;
+  list-style: none;
   margin: 0;
-  margin-right: 2rem;
   padding: 0;
 }
 
@@ -78,23 +83,23 @@
   color: #ffffff6c;
 }
 
-/* Responsive for small screens */
+/* Responsive */
 @media (max-width: 600px) {
   .header {
-    flex-direction: column;
     align-items: flex-start;
-    padding: 1rem 0rem;
+    flex-direction: column;
+    padding: 1rem 0;
   }
 
   .hamburger {
-    display: block;
     align-self: flex-end;
+    display: block;
   }
 
   .menu {
     display: none;
-    width: 100%;
     text-align: right;
+    width: 100%;
   }
 
   .menu.open {
@@ -102,11 +107,11 @@
   }
 
   .menu ul {
+    align-items: flex-end;
     flex-direction: column;
     gap: 10px;
     margin: 0;
     padding: 0 1rem;
-    align-items: flex-end;
     width: 100%;
   }
 
@@ -117,13 +122,13 @@
 
   .menu-link {
     display: block;
-    width: 100%;
     padding: 0.5rem 0;
     text-align: right;
+    width: 100%;
   }
 
   .title {
-    margin-left: 1rem;
     margin-bottom: 0.5rem;
+    margin-left: 1rem;
   }
 }
