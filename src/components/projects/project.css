@@ -48,3 +48,96 @@
   word-break: break-word;
   white-space: normal;
 }
+
+.project .media-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); /* responsive grid */
+  gap: 1.5rem;
+  margin: 1.5rem 6rem 0 9rem; /* align with your other content */
+}
+
+.project .media-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr; /* two equal columns */
+  grid-auto-rows: 400px; /* fixed row height */
+  gap: 1.5rem;
+  margin: 1.5rem 6rem 0 9rem;
+}
+
+.project .media-grid video {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  border-radius: 0.5rem;
+}
+
+/* Apply styling to the vertical video */
+.project .media-grid .vertical-video {
+  grid-row: span 2; /* This makes the vertical video span two rows */
+}
+
+.project .vid-full-width {
+  width: 100%;
+  height: auto;
+  display: block;
+
+  border-radius: 0.5rem; /* optional */
+}
+
+@media (max-width: 1024px) {
+  .project h1 {
+    font-size: 2rem;
+    margin-left: 3rem;
+    margin-right: 3rem;
+  }
+
+  .project .column-left,
+  .project .column-right,
+  .project .media-grid {
+    margin: 1.5rem 3rem 0 3rem;
+  }
+
+  .project .project-meta {
+    grid-template-columns: 1fr; /* stack columns on medium screens */
+    gap: 1.5rem;
+  }
+
+  .project .media-grid {
+    grid-template-columns: 1fr 1fr; /* keep 2 columns if space allows */
+    grid-auto-rows: 300px;
+  }
+}
+
+@media (max-width: 600px) {
+  .project h1 {
+    font-size: 1.6rem;
+    margin: 1rem;
+  }
+
+  .project .column-left,
+  .project .column-right,
+  .project .media-grid {
+    margin: 1rem;
+    font-size: 1.1rem;
+  }
+
+  .project p {
+    font-size: 1.1rem;
+    margin: 0 0 1rem 0;
+  }
+
+  .project .project-meta {
+    grid-template-columns: 1fr;
+    gap: 1rem;
+  }
+
+  .project .media-grid {
+    grid-template-columns: 1fr; /* single column layout */
+    grid-auto-rows: auto;
+  }
+
+  .project .media-grid .vertical-video {
+    grid-row: auto; /* no spanning necessary on mobile */
+  }
+}
