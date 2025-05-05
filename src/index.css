@@ -55,6 +55,12 @@ p {
   width: 100vw;
 }
 
+.thumbnail h1 {
+  font-size: 2.5rem;
+  text-align: left;
+  letter-spacing: 0.2rem;
+}
+
 .thumbnail a,
 .iframe-container a {
   color: inherit;
@@ -68,10 +74,8 @@ p {
   width: 100%;
 }
 
-.caption {
-  font-size: 1.2rem;
-  letter-spacing: 0.075rem;
-  margin-top: 1rem;
+.thumbnail.headline {
+  align-items: flex-start; /* pushes content to the left */
 }
 
 .iframe-container {
@@ -89,6 +93,27 @@ p {
   width: 350px;
 }
 
+@media (max-width: 1024px) {
+  h1 {
+    font-size: 3em;
+    margin-left: 3rem;
+    padding-top: 6rem;
+  }
+
+  p {
+    margin: 1.5rem 3rem 0 3rem;
+  }
+
+  .thumbnail h1 {
+    font-size: 2.2rem;
+    margin-left: 3rem;
+  }
+
+  .container {
+    padding: 0 3rem;
+  }
+}
+
 @media (max-width: 600px) {
   h1 {
     font-size: 2.4em;
@@ -100,5 +125,37 @@ p {
   p {
     font-size: 1.2em;
     margin: 1rem 1.5rem;
+  }
+
+  .thumbnail {
+    margin-left: 0;
+    padding-top: 1.5rem;
+    width: 100%;
+  }
+
+  .thumbnail h1 {
+    font-size: 1.8rem;
+    text-align: left;
+    margin-left: 1.5rem;
+  }
+
+  .thumbnail .vid {
+    width: 100%;
+    height: auto;
+  }
+
+  .iframe-container {
+    padding-top: 1rem;
+  }
+
+  .bandcamp-iframe {
+    width: 100%;
+    max-width: 350px;
+    height: 400px;
+  }
+
+  .container {
+    width: 100%;
+    padding: 0 1.5rem;
   }
 }
