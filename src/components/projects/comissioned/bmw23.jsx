@@ -8,7 +8,7 @@ const BMW23 = () => {
       <div className="project-meta">
         <div className="column-left">
           <p>
-            At CES, more than 16,000 visitors stepped into an interactive driving experience unlike any other.
+            At CES, more than 16,000 visitors stepped into an interactive driving experience.
             Thanks to a close collaboration between Journee, Usaneers, THE GAME, and NSYNK, attendees were
             invited to explore both reality and the Metaverse from behind the wheel of DEE.
           </p>
@@ -35,10 +35,37 @@ const BMW23 = () => {
           <div className="meta-row">
             <div className="meta-label">Role</div>
             <div className="meta-value">
-              Camera tracking software, software development support, implementation of content, setup on site
+              Development of a driving simulation within Unreal Engine,
+              integrating real-time physical vehicle data into the simulation,
+              and implementing the rendering of the driving experience on the vehicle's internal displays,
+              on-site support
             </div>
           </div>
         </div>
+      </div>
+      <div className='media-grid'>
+        <video
+              src="/projects/comissioned/bmw23/webm/bmw-i-vision-dee_2-vp9.webm"
+              autoPlay
+              muted
+              loop
+              playsInline
+        />
+        <video
+              className="vertical-video"
+              src="/projects/comissioned/bmw23/webm/img_0168_1-vp9.webm"
+              autoPlay
+              muted
+              loop
+              playsInline
+        />
+        <video
+              src="/projects/comissioned/bmw23/webm/playoutsection-vp9.webm"
+              autoPlay
+              muted
+              loop
+              playsInline
+        />
       </div>
     </div>
   );

@@ -39,10 +39,28 @@ const ISH23 = () => {
           <div className="meta-row">
             <div className="meta-label">Role</div>
             <div className="meta-value">
-              Camera tracking software, software development support, implementation of content, setup on site
+              Research and development of an advanced background removal algorithm,
+              processing visitor photos into Unreal Engine from a database,
+              and optimizing performance for rendering on an LED wall, on-site support
             </div>
           </div>
         </div>
+      </div>
+      <div className='media-grid'>
+        <video
+              src="/projects/comissioned/ish23/webm/230330_vi_ish23_cut_02-vp9.webm"
+              autoPlay
+              muted
+              loop
+              playsInline
+        />
+        <video
+              src="/projects/comissioned/ish23/webm/230330_vi_ish23_cut_01-vp9.webm"
+              autoPlay
+              muted
+              loop
+              playsInline
+        />
       </div>
     </div>
   );
