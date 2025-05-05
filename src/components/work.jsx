@@ -31,7 +31,8 @@ const Work = () => {
         criterion is that each piece reveals some facet of my work.
       </p>
       <div className="thumbnail">
-        <Link to="/projects/bmw23" className="thumbnail">
+        <Link to="/projects/bmw23">
+          <h1 className="caption">Metaverse Drive for BMW i Vision Dee</h1>
           <video
             src="/projects/comissioned/bmw23/webm/bmw-i-vision-dee_2-vp9.webm"
             autoPlay
@@ -40,11 +41,11 @@ const Work = () => {
             playsInline
             className="vid"
           />
-          <p className="caption">Metaverse Drive for BMW i Vision Dee</p>
         </Link>
       </div>
       <div className="thumbnail">
-        <a href="/projects/ish23" className="thumbnail">
+        <Link to="/projects/ish23">
+          <h1>Image Processing Pipeline for Viessmann at ISH23</h1>
           <video
             src="/projects/comissioned/ish23/webm/230330_vi_ish23_cut_03-vp9.webm"
             autoPlay
@@ -53,21 +54,23 @@ const Work = () => {
             playsInline
             className="vid"
           />
-          <p className="caption">Image Processing Pipeline for Viessmann at ISH23</p>
-        </a>
+        </Link>
       </div>
       <div className="thumbnail">
-        <a href="https://example.com" className="thumbnail" target="_blank">
+        <Link to="/projects/gaussiandreams">
+          <h1>AI Hallucinations as Gaussian Splats</h1>
           <video
-            src="/projects/private/dreamscene/webm/dreamscene.webm"
+            src="/projects/private/gaussiandreams/webm/gaussiandreams.webm"
             autoPlay
             muted
             loop
             playsInline
             className="vid"
           />
-          <p className="caption">Use Hallucinating AI for Generation of Gaussian Splats</p>
-        </a>
+        </Link>
+      </div>
+      <div className="thumbnail headline">
+        <h1>Recursive Neural Networks for Sounds Creation</h1>
       </div>
       <div className="iframe-container">
         <iframe
@@ -76,11 +79,6 @@ const Work = () => {
           seamless>
           <a href="https://godacollective.bandcamp.com/album/nohomo">NOHOMO by GODA</a>
         </iframe>
-        <a href="">
-          <p className="caption">
-            Experiments with Recursive Neural Networks for Sound Creation (2019)
-          </p>
-        </a>
       </div>
     </>
     );
