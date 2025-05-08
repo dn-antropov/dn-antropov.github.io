@@ -6,7 +6,7 @@
 
 .project .project-meta {
   display: grid;
-  grid-template-columns: 1fr 1fr; /* 2 columns for now */
+  grid-template-columns: 1fr 1fr;
   gap: 2rem;
 }
 
@@ -14,7 +14,6 @@
   font-size: 1.3em;
   letter-spacing: 0.075rem;
   margin: 1.5rem 6rem 0 9rem;
-  /* position: relative; */
 }
 
 .project .column-right {
@@ -51,15 +50,15 @@
 
 .project .media-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); /* responsive grid */
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
   gap: 1.5rem;
-  margin: 1.5rem 6rem 0 9rem; /* align with your other content */
+  margin: 1.5rem 6rem 0 9rem;
 }
 
 .project .media-grid {
   display: grid;
-  grid-template-columns: 1fr 1fr; /* two equal columns */
-  grid-auto-rows: 400px; /* fixed row height */
+  grid-template-columns: 1fr 1fr;
+  grid-auto-rows: 400px;
   gap: 1.5rem;
   margin: 1.5rem 6rem 0 9rem;
 }
@@ -74,7 +73,7 @@
 
 /* Apply styling to the vertical video */
 .project .media-grid .vertical-video {
-  grid-row: span 2; /* This makes the vertical video span two rows */
+  grid-row: span 2;
 }
 
 .project .vid-full-width {
@@ -82,7 +81,7 @@
   height: auto;
   display: block;
 
-  border-radius: 0.5rem; /* optional */
+  border-radius: 0.5rem;
 }
 
 @media (max-width: 1024px) {
@@ -99,12 +98,12 @@
   }
 
   .project .project-meta {
-    grid-template-columns: 1fr; /* stack columns on medium screens */
+    grid-template-columns: 1fr;
     gap: 1.5rem;
   }
 
   .project .media-grid {
-    grid-template-columns: 1fr 1fr; /* keep 2 columns if space allows */
+    grid-template-columns: 1fr 1fr;
     grid-auto-rows: 300px;
   }
 }
@@ -133,11 +132,11 @@
   }
 
   .project .media-grid {
-    grid-template-columns: 1fr; /* single column layout */
+    grid-template-columns: 1fr;
     grid-auto-rows: auto;
   }
 
   .project .media-grid .vertical-video {
-    grid-row: auto; /* no spanning necessary on mobile */
+    grid-row: auto;
   }
 }
