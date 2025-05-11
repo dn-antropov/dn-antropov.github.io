@@ -68,7 +68,7 @@ const Work = () => {
             className="vid"
           >
             <source src="/projects/private/gaussiandreams/webm/gaussiandreams.webm" type="video/webm" />
-            <source src="/projects/private/gaussiandreams/webm/gaussiandreams.mp4" type="video/mp4" />
+            <source src="/projects/private/gaussiandreams/mp4/gaussiandreams.mp4" type="video/mp4" />
             Your browser does not support the video.
           </video>
         </Link>
