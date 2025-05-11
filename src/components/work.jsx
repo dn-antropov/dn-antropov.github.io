@@ -60,13 +60,17 @@ const Work = () => {
         <Link to="/projects/gaussiandreams">
           <h1>AI Hallucinations as Gaussian Splats</h1>
           <video
-            src="/projects/private/gaussiandreams/webm/gaussiandreams.webm"
+            // src="/projects/private/gaussiandreams/webm/gaussiandreams.webm"
             autoPlay
             muted
             loop
             playsInline
             className="vid"
-          />
+          >
+            <source src="/projects/private/gaussiandreams/webm/gaussiandreams.webm" type="video/webm" />
+            <source src="/projects/private/gaussiandreams/webm/gaussiandreams.mp4" type="video/mp4" />
+            Your browser does not support the video.
+          </video>
         </Link>
       </div>
       <div className="thumbnail headline">
