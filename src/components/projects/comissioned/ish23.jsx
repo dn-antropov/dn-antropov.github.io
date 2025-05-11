@@ -41,7 +41,8 @@ const ISH23 = () => {
             <div className="meta-value">
               Research and development of an advanced background removal algorithm,
               processing visitor photos into Unreal Engine from a database,
-              and optimizing performance for rendering on an LED wall, on-site support
+              and optimizing performance for rendering on an LED wall and individual screens on location,
+              on-site support
             </div>
           </div>
         </div>

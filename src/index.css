@@ -28,15 +28,20 @@ h1 {
   font-weight: bold;
   letter-spacing: 0.35rem;
   line-height: 1.1;
-  margin-left: 9rem;
+
+  margin-left: 5vw;
+  margin-right: 5vw;
   padding-top: 8rem;
 }
 
 p {
-  font-size: 1.3em;
+  font-size: 1.5em;
   letter-spacing: 0.075rem;
-  margin: 1.5rem 6rem 0 9rem;
   position: relative;
+
+  margin-left: 5vw;
+  margin-right: 5vw;
+  margin-top: 1.5rem;
 }
 
 .container {
@@ -52,7 +57,6 @@ p {
   margin-left: calc(-50vw + 50%);
   padding-top: 2rem;
   text-align: center;
-  width: 100vw;
 }
 
 .thumbnail h1 {
@@ -68,17 +72,18 @@ p {
 }
 
 .thumbnail .vid {
+  width: 90vw !important;
+  max-width: 90vw !important;
+  aspect-ratio: 16 / 9 !important;
+  height: auto !important;
+  object-fit: cover !important;
   display: block;
-  width: 100%;
-  height: auto;
-  object-fit: cover;
-  border-radius: 0.5rem;
   margin: 1.5rem auto;
-  max-width: 90%;
+  border-radius: 0.5rem;
 }
 
 .thumbnail.headline {
-  align-items: flex-start; /* pushes content to the left */
+  align-items: flex-start;
 }
 
 .iframe-container {
@@ -96,41 +101,15 @@ p {
   width: 350px;
 }
 
-@media (max-width: 1024px) {
-  h1 {
-    font-size: 3em;
-    margin-left: 3rem;
-    padding-top: 6rem;
-  }
-
-  p {
-    margin: 1.5rem 3rem 0 3rem;
-  }
-
-  .thumbnail h1 {
-    font-size: 2.2rem;
-    margin-left: 3rem;
-  }
-
-  .thumbnail .vid {
-    margin: 1.5rem auto;
-  }
-
-  .container {
-    padding: 0 3rem;
-  }
-}
-
 @media (max-width: 600px) {
   h1 {
-    font-size: 2.4em;
-    letter-spacing: 0.2rem;
+    font-size: 2.4rem;
     margin-left: 1.5rem;
     padding-top: 4rem;
   }
 
   p {
-    font-size: 1.2em;
+    font-size: 1.2rem;
     margin: 1rem 1.5rem;
   }
 
@@ -166,5 +145,46 @@ p {
   .container {
     width: 100%;
     padding: 0 1.5rem;
+  }
+}
+
+@media (max-width: 1024px) {
+  h1 {
+    font-size: 3em;
+    margin-left: 3rem;
+    padding-top: 6rem;
+  }
+
+  p {
+    font-size: 1.4rem;
+    margin: 1.5rem 3rem 0 3rem;
+  }
+
+  .thumbnail h1 {
+    font-size: 2.2rem;
+    margin-left: 3rem;
+  }
+
+  .thumbnail .vid {
+    margin: 1.5rem auto;
+  }
+
+  .container {
+    padding: 0 3rem;
+  }
+}
+
+@media (min-width: 2560px) {
+  h1 {
+    font-size: 5em;
+    padding-top: 12rem;
+  }
+
+  p {
+    font-size: 2rem;
+  }
+
+  .thumbnail h1 {
+    font-size: 5rem;
   }
 }
