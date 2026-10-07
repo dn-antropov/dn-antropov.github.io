@@ -5,7 +5,7 @@ import { OrthographicCamera } from '@react-three/drei';
 import { Canvas } from '@react-three/fiber';
 
 import DoublePenrose from '../geometries/double_penrose_animated';
-import Spheres from '../geometries/spheres';
+import Click from '../geometries/click';
 import Background from '../geometries/background'
 import About from './about';
 import Work from './work';
@@ -43,11 +43,13 @@ const Scene = () => {
 
   return (
     <div style={{ position: 'relative', width: '100%', height: '100%' }}>
+      <Element name='top'>
       <div className='art'>
         <Canvas dpr={[1, 2]}>
           <ambientLight intensity={1.0} />
           <Background />
           <DoublePenrose />
+          <Click />
           <OrthographicCamera
             makeDefault
             manual
@@ -62,6 +64,7 @@ const Scene = () => {
           />
         </Canvas>
       </div>
+      </Element>
       <Element name='about'>
         <About />
       </Element>

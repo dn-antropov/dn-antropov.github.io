@@ -1,11 +1,12 @@
 import React, { useEffect, useRef, useMemo } from 'react';
-import { useLoader, useFrame, useThree } from '@react-three/fiber';
+import { useLoader, useFrame } from '@react-three/fiber';
 import { useAnimations, useFBO } from '@react-three/drei';
 import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader.js';
 import { Vector2, Vector3, Quaternion, Euler, LoopRepeat, ShaderMaterial } from 'three';
 
 import vertexShader from '../shaders/vertexShader.glsl';
 import fragmentShader from '../shaders/fragmentShader.glsl';
+import useTap from '../hooks/useTap';
 
 export default function DoublePenrose(props) {
   const rotation = new Vector3(35.265, -45.0, 0.0);
@@ -69,33 +70,28 @@ export default function DoublePenrose(props) {
   // Offscreen rendering target (FBO)
   const mainRenderTarget = useFBO();
 
-  const gl = useThree((state) => state.gl);
-  const clock = useThree((state) => state.clock);
   const bounceStart = useRef(-Infinity);
   const bounceDuration = 1.0;
 
-  useEffect(() => {
-    const handlePointerDown = () => {
-      bounceStart.current = clock.getElapsedTime();
-    };
-
-    gl.domElement.addEventListener('pointerdown', handlePointerDown);
-    return () => gl.domElement.removeEventListener('pointerdown', handlePointerDown);
-  }, [gl, clock]);
+  useTap((tap) => {
+    bounceStart.current = tap.time;
+  });
 
   useFrame((state) => {
     const p = (state.clock.getElapsedTime() - bounceStart.current) / bounceDuration;
     uniforms.squize.value = p >= 0 && p < 1 ? p : 0.0;
 
     const { gl, scene, camera } = state;
-
+    // Disable what needs to be ignored
+    camera.layers.disable(1);
+    
     // Hide the meshes
     meshRefs.current.forEach(mesh => mesh.visible = false);
 
     gl.setRenderTarget(mainRenderTarget);
     // Render into the FBO
     gl.render(scene, camera);
-
+    
     // Pass the texture data to our shader material
     shaderMaterial.uniforms.uTexture.value = mainRenderTarget.texture;
     shaderMaterial.uniforms.uTime.value = state.clock.getElapsedTime();
@@ -109,6 +105,8 @@ export default function DoublePenrose(props) {
     gl.setRenderTarget(null);
     // Show the mesh
     meshRefs.current.forEach(mesh => mesh.visible = true);
+    
+    camera.layers.enable(1);
   });
 
 

@@ -1,10 +1,25 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import './header.css';
 
 const Header = () => {
   const [menuOpen, setMenuOpen] = useState(false);
+  const [scrolledDown, setScrolledDown] = useState(false);
   const navigate = useNavigate();
+
+  useEffect(() => {
+    const handleScroll = () => {
+      setScrolledDown(window.scrollY > window.innerHeight * 0.5);
+    };
+
+    handleScroll();
+    window.addEventListener('scroll', handleScroll, { passive: true });
+    window.addEventListener('resize', handleScroll);
+    return () => {
+      window.removeEventListener('scroll', handleScroll);
+      window.removeEventListener('resize', handleScroll);
+    };
+  }, []);
 
   const handleNav = (section) => {
     setMenuOpen(false);
@@ -23,6 +38,13 @@ const Header = () => {
       </div>
       <nav className={`menu ${menuOpen ? 'open' : ''}`}>
         <ul>
+          {scrolledDown && (
+            <li>
+              <button className='menu-link button-reset' onClick={() => handleNav('top')}>
+                Top
+              </button>
+            </li>
+          )}
           <li>
             <button className='menu-link button-reset' onClick={() => handleNav('about')}>
               About

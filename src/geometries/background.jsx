@@ -1,5 +1,4 @@
-import { FullScreenQuad } from 'three/addons/postprocessing/Pass.js';
-import {Euler, Quaternion, ShaderMaterial, Vector2, Vector3} from 'three';
+import {ShaderMaterial, Vector2} from 'three';
 import {useMemo} from "react";
 
 
@@ -8,6 +7,7 @@ void main() {
   gl_Position = vec4(position.xy, 0.0, 1.0);
 }
 `;
+
 import fragmentShader from '../shaders/background.glsl';
 import {useFrame} from "@react-three/fiber";
 
