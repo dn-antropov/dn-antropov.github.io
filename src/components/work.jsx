@@ -73,17 +73,6 @@ const Work = () => {
           </video>
         </Link>
       </div>
-      <div className="thumbnail headline">
-        <h1>Recursive Neural Networks for Sounds Creation</h1>
-      </div>
-      <div className="iframe-container">
-        <iframe
-          className="bandcamp-iframe"
-          src="https://bandcamp.com/EmbeddedPlayer/album=2455724268/size=large/bgcol=333333/linkcol=0f91ff/tracklist=false/track=558240815/transparent=true/"
-          seamless>
-          <a href="https://godacollective.bandcamp.com/album/nohomo">NOHOMO by GODA</a>
-        </iframe>
-      </div>
     </>
     );
   };

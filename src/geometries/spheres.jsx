@@ -1,4 +1,3 @@
-import * as THREE from 'three';
 import{ useRef } from 'react';
 import { range, easeInOutQuad } from '../utils';
 

@@ -6,6 +6,7 @@ import { Canvas } from '@react-three/fiber';
 
 import DoublePenrose from '../geometries/double_penrose_animated';
 import Spheres from '../geometries/spheres';
+import Background from '../geometries/background'
 import About from './about';
 import Work from './work';
 import Contact from './contact';
@@ -45,7 +46,7 @@ const Scene = () => {
       <div className='art'>
         <Canvas dpr={[1, 2]}>
           <ambientLight intensity={1.0} />
-          <Spheres />
+          <Background />
           <DoublePenrose />
           <OrthographicCamera
             makeDefault

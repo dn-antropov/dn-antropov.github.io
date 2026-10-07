@@ -3,13 +3,13 @@ varying vec3 eyeVector;
 varying vec4 worldPos;
 
 void main() {
-  worldPos = modelMatrix * vec4(position, 1.0);
-  vec4 mvPosition = viewMatrix * worldPos;
+    worldPos = modelMatrix * vec4(position, 1.0);
+    vec4 mvPosition = viewMatrix * worldPos;
 
-  gl_Position = projectionMatrix * mvPosition;
+    gl_Position = projectionMatrix * mvPosition;
 
-  vec3 transformedNormal = normalMatrix * normal;
-  worldNormal = normalize(transformedNormal);
+    vec3 transformedNormal = normalMatrix * normal;
+    worldNormal = normalize(transformedNormal);
 
-  eyeVector = normalize(worldPos.xyz - cameraPosition);
+    eyeVector = normalize(worldPos.xyz - cameraPosition);
 }

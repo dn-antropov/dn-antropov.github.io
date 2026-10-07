@@ -32,6 +32,7 @@ export default function DoublePenrose(props) {
         window.innerHeight
       ).multiplyScalar(Math.min(window.devicePixelRatio, 2))
     },
+    resaturation: {value: .75},
   }), []);
 
   const shaderMaterial = useMemo(() => new ShaderMaterial({
@@ -66,15 +67,15 @@ export default function DoublePenrose(props) {
   }, [actions]);
 
   // Use mouse coordinates to set light
-  useEffect(() => {
-    const handleMouseMove = (event) => {
-      uniforms.uMouse.value.x = event.clientX / window.innerWidth * 2 - 1.0;
-      uniforms.uMouse.value.y = (1.0 - event.clientY / window.innerHeight) * 2 - 1.0;
-    };
-
-    window.addEventListener('mousemove', handleMouseMove);
-    return () => window.removeEventListener('mousemove', handleMouseMove);
-  }, [uniforms]);
+  // useEffect(() => {
+  //   const handleMouseMove = (event) => {
+  //     uniforms.uMouse.value.x = event.clientX / window.innerWidth * 2 - 1.0;
+  //     uniforms.uMouse.value.y = (1.0 - event.clientY / window.innerHeight) * 2 - 1.0;
+  //   };
+  //
+  //   window.addEventListener('mousemove', handleMouseMove);
+  //   return () => window.removeEventListener('mousemove', handleMouseMove);
+  // }, [uniforms]);
 
   // Offscreen rendering target (FBO)
   const mainRenderTarget = useFBO();
@@ -92,6 +93,8 @@ export default function DoublePenrose(props) {
     // Pass the texture data to our shader material
     shaderMaterial.uniforms.uTexture.value = mainRenderTarget.texture;
     shaderMaterial.uniforms.uTime.value = state.clock.getElapsedTime();
+    shaderMaterial.uniforms.resaturation.value = 0.75;
+    
     const localNormal = new Vector3(0, 1, 0);
     const quaternion = new Quaternion().setFromEuler(new Euler(rotation.x, rotation.y, rotation.z));
     const planeNormal = localNormal.clone().applyQuaternion(quaternion).normalize();
