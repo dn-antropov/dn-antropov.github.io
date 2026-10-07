@@ -21,6 +21,7 @@ export default function Click (props) {
   );
   useEffect(() => {
     dummy.position.setY(100.);
+    dummy.rotation.set(0, 0, 33);
     dummy.scale.setScalar(0.2);
     dummy.updateMatrix();
     for (let i = 0; i < MAX; i++) mesh.current.setMatrixAt(i, dummy.matrix);
