@@ -16,12 +16,12 @@ export default function Click (props) {
   const dummy = useMemo(() => new Object3D(), []);
   const texture = useTexture('/textures/click.png')
   const slots = useMemo(
-    () => Array.from({ length: MAX }, () => ({ active: false, born: 0, x: 0, y: 0, dx: 0, dy: 0 })),
+    () => Array.from({ length: MAX }, () => ({ active: false, born: 0, x: 0, y: 0, dx: 0, dy: 0, angle: 0 })),
     []
   );
   useEffect(() => {
     dummy.position.setY(100.);
-    dummy.scale.setScalar(0.25);
+    dummy.scale.setScalar(0.2);
     dummy.updateMatrix();
     for (let i = 0; i < MAX; i++) mesh.current.setMatrixAt(i, dummy.matrix);
     mesh.current.instanceMatrix.needsUpdate = true;
@@ -42,6 +42,7 @@ export default function Click (props) {
           dummy.position.setY(100.);
         } else {
           dummy.position.set(slot.x + slot.dx * age * 1.5, slot.y + slot.dy * age * 1.5, 5);
+          dummy.rotation.set(0, 0, slot.angle * age)
         }
         dummy.updateMatrix();
         mesh.current.setMatrixAt(i, dummy.matrix);
@@ -55,12 +56,17 @@ export default function Click (props) {
     cursor.current = (cursor.current + 1) % MAX;
     slot.active = true;
     slot.born = tap.time;
-    slot.x = tap.world.x;
-    slot.y = tap.world.y;
-    
-    const angle = Math.random() * Math.PI * 0.1 + 0.25;
+    // slot.x = tap.world.x;
+    // slot.y = tap.world.y;
+    slot.x = 0;
+    slot.y = 0;
+    const angle = Math.random() * Math.PI * 2;
     slot.dx = Math.cos(angle);
     slot.dy = Math.sin(angle);
+    if (slot.dx < 0)
+      slot.angle = 6;
+    else
+      slot.angle = -6
   });
   return (
     <instancedMesh
