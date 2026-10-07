@@ -1,5 +1,5 @@
 import React, { useEffect, useRef, useMemo } from 'react';
-import { useLoader, useFrame } from '@react-three/fiber';
+import { useLoader, useFrame, useThree } from '@react-three/fiber';
 import { useAnimations, useFBO } from '@react-three/drei';
 import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader.js';
 import { Vector2, Vector3, Quaternion, Euler, LoopRepeat, ShaderMaterial } from 'three';
@@ -25,7 +25,6 @@ export default function DoublePenrose(props) {
     cutPlaneNormal: {
       value: new Vector3(0, 0, 0)
     },
-    uMouse: { value: new Vector2(0.5, 0.5) },
     winResolution: {
       value: new Vector2(
         window.innerWidth,
@@ -33,6 +32,7 @@ export default function DoublePenrose(props) {
       ).multiplyScalar(Math.min(window.devicePixelRatio, 2))
     },
     resaturation: {value: .75},
+    squize: { value: 0 },
   }), []);
 
   const shaderMaterial = useMemo(() => new ShaderMaterial({
@@ -66,21 +66,27 @@ export default function DoublePenrose(props) {
     }
   }, [actions]);
 
-  // Use mouse coordinates to set light
-  // useEffect(() => {
-  //   const handleMouseMove = (event) => {
-  //     uniforms.uMouse.value.x = event.clientX / window.innerWidth * 2 - 1.0;
-  //     uniforms.uMouse.value.y = (1.0 - event.clientY / window.innerHeight) * 2 - 1.0;
-  //   };
-  //
-  //   window.addEventListener('mousemove', handleMouseMove);
-  //   return () => window.removeEventListener('mousemove', handleMouseMove);
-  // }, [uniforms]);
-
   // Offscreen rendering target (FBO)
   const mainRenderTarget = useFBO();
 
+  const gl = useThree((state) => state.gl);
+  const clock = useThree((state) => state.clock);
+  const bounceStart = useRef(-Infinity);
+  const bounceDuration = 1.0;
+
+  useEffect(() => {
+    const handlePointerDown = () => {
+      bounceStart.current = clock.getElapsedTime();
+    };
+
+    gl.domElement.addEventListener('pointerdown', handlePointerDown);
+    return () => gl.domElement.removeEventListener('pointerdown', handlePointerDown);
+  }, [gl, clock]);
+
   useFrame((state) => {
+    const p = (state.clock.getElapsedTime() - bounceStart.current) / bounceDuration;
+    uniforms.squize.value = p >= 0 && p < 1 ? p : 0.0;
+
     const { gl, scene, camera } = state;
 
     // Hide the meshes
