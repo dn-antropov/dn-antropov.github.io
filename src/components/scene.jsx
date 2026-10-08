@@ -7,6 +7,9 @@ import { Canvas } from '@react-three/fiber';
 import DoublePenrose from '../geometries/double_penrose_animated';
 import Click from '../geometries/click';
 import Background from '../geometries/background'
+import { ScoreOverlay, ScoreTracker } from './score';
+import Milestones from './milestones';
+import { TapSource } from '../hooks/useTap';
 import About from './about';
 import Work from './work';
 import Contact from './contact';
@@ -50,6 +53,8 @@ const Scene = () => {
           <Background />
           <DoublePenrose />
           <Click />
+          <ScoreTracker />
+          <TapSource />
           <OrthographicCamera
             makeDefault
             manual
@@ -63,6 +68,8 @@ const Scene = () => {
             position={[0, 0, 100]}
           />
         </Canvas>
+        <ScoreOverlay />
+        <Milestones />
       </div>
       </Element>
       <Element name='about'>

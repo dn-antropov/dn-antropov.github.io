@@ -4,8 +4,8 @@ import { useAnimations, useFBO } from '@react-three/drei';
 import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader.js';
 import { Vector2, Vector3, Quaternion, Euler, LoopRepeat, ShaderMaterial } from 'three';
 
-import vertexShader from '../shaders/vertexShader.glsl';
-import fragmentShader from '../shaders/fragmentShader.glsl';
+import vertexShader from '../shaders/penroseVertex.glsl';
+import fragmentShader from '../shaders/penroseFragment.glsl';
 import useTap from '../hooks/useTap';
 
 export default function DoublePenrose(props) {

@@ -1,0 +1,65 @@
+.milestones {
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+  left: 50%;
+  max-width: min(90vw, 40rem);
+  pointer-events: none;
+  bottom: calc(100% - max(30vh, 12rem));
+  bottom: calc(100% - max(30svh, 12rem));
+  justify-content: flex-end;
+  position: absolute;
+  transform: translateX(-50%);
+  width: 100%;
+  z-index: 5;
+}
+
+.milestone {
+  animation: milestone-life var(--duration) ease forwards;
+  display: grid;
+  grid-template-rows: 1fr;
+  width: 100%;
+}
+
+.milestone-clip {
+  min-height: 0;
+  overflow: hidden;
+}
+
+.milestone-inner {
+  color: white;
+  font-family: 'Raleway', sans-serif;
+  font-size: 1.3rem;
+  letter-spacing: 0.075rem;
+  padding-top: 0.75rem;
+  text-align: center;
+}
+
+@keyframes milestone-life {
+  0% {
+    grid-template-rows: 0fr;
+    opacity: 0;
+  }
+  3% {
+    grid-template-rows: 1fr;
+    opacity: 1;
+  }
+  93% {
+    grid-template-rows: 1fr;
+    opacity: 1;
+  }
+  97% {
+    grid-template-rows: 1fr;
+    opacity: 0;
+  }
+  100% {
+    grid-template-rows: 0fr;
+    opacity: 0;
+  }
+}
+
+@media (max-width: 600px) {
+  .milestone-inner {
+    font-size: 1rem;
+  }
+}

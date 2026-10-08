@@ -8,7 +8,7 @@ void main() {
 }
 `;
 
-import fragmentShader from '../shaders/background.glsl';
+import fragmentShader from '../shaders/backgroundFragment.glsl';
 import {useFrame} from "@react-three/fiber";
 
 export default function Background(props) {

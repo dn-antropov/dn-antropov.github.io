@@ -1,0 +1,33 @@
+.score {
+  bottom: calc(3rem + env(safe-area-inset-bottom, 0px));
+  bottom: calc(100% - 100svh + 3rem + env(safe-area-inset-bottom, 0px));
+  color: white;
+  display: flex;
+  font-size: 2rem;
+  left: 50%;
+  letter-spacing: 0;
+  opacity: 0;
+  pointer-events: none;
+  position: absolute;
+  transform: translateX(-50%);
+  transition: opacity 1.5s ease;
+  user-select: none;
+  z-index: 5;
+}
+
+.score.visible {
+  opacity: 1;
+  transition: opacity 0.3s ease;
+}
+
+.score-digit {
+  display: inline-block;
+  text-align: center;
+  width: 1.2em;
+}
+
+@media (max-width: 600px) {
+  .score {
+    font-size: 1.4rem;
+  }
+}

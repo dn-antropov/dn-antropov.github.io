@@ -7,3 +7,9 @@ html {
   height: 100vh;
   position: relative;
 }
+
+.art canvas {
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  user-select: none;
+}

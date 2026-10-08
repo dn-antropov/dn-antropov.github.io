@@ -1,0 +1,7 @@
+[
+  { "score": 1, "message": "Message for 1 points" },
+  { "score": 3, "message": "Message for 3 points" },
+  { "score": 10, "message": "Message for 10 points" },
+  { "score": 50, "message": "Message for 50 points" },
+  { "score": 100, "message": "Message for 100 points" }
+]
