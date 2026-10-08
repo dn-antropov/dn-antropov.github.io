@@ -71,14 +71,26 @@ export default function DoublePenrose(props) {
   const mainRenderTarget = useFBO();
 
   const bounceStart = useRef(-Infinity);
+  const bounceQueued = useRef(false);
   const bounceDuration = 1.0;
+  const continueThreshold = 0.4;
 
   useTap((tap) => {
-    bounceStart.current = tap.time;
+    const p = (tap.time - bounceStart.current) / bounceDuration;
+    if (p >= 1) {
+      bounceStart.current = tap.time;
+    } else if (p >= continueThreshold) {
+      bounceQueued.current = true;
+    }
   });
 
   useFrame((state) => {
-    const p = (state.clock.getElapsedTime() - bounceStart.current) / bounceDuration;
+    let p = (state.clock.getElapsedTime() - bounceStart.current) / bounceDuration;
+    if (p >= 1 && bounceQueued.current) {
+      bounceQueued.current = false;
+      bounceStart.current += bounceDuration;
+      p -= 1;
+    }
     uniforms.squize.value = p >= 0 && p < 1 ? p : 0.0;
 
     const { gl, scene, camera } = state;

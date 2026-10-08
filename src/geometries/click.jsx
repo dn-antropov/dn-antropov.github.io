@@ -1,9 +1,10 @@
 import { Object3D } from 'three';
 import { useTexture } from '@react-three/drei';
 import {useRef, useMemo, useEffect} from 'react'
-import { useFrame } from '@react-three/fiber'
+import {useFrame, useLoader} from '@react-three/fiber'
 
 import useTap from '../hooks/useTap'
+import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader.js';
 
 const MAX = 1000;
 const LIFETIME = 1.
@@ -14,15 +15,16 @@ const data = Array.from({ length: 1000 }, (r = 10) => ({ random: Math.random(), 
 export default function Click (props) {
   const mesh = useRef();
   const dummy = useMemo(() => new Object3D(), []);
-  const texture = useTexture('/textures/click.png')
+  //const texture = useTexture('/textures/click.png')
+  const { scene } = useLoader(GLTFLoader, './glb/triangle.glb');
   const slots = useMemo(
-    () => Array.from({ length: MAX }, () => ({ active: false, born: 0, x: 0, y: 0, dx: 0, dy: 0, angle: 0 })),
+    () => Array.from({ length: MAX }, () => ({ active: false, born: 0, x: 0, y: 0, dx: 0, dy: 0, xAngle: 0, yAngle: 0, zAngle: 0, scale: 0 })),
     []
   );
   useEffect(() => {
     dummy.position.setY(100.);
     dummy.rotation.set(0, 0, 33);
-    dummy.scale.setScalar(0.2);
+    dummy.scale.setScalar(0.00);
     dummy.updateMatrix();
     for (let i = 0; i < MAX; i++) mesh.current.setMatrixAt(i, dummy.matrix);
     mesh.current.instanceMatrix.needsUpdate = true;
@@ -42,8 +44,9 @@ export default function Click (props) {
           slot.active = false;
           dummy.position.setY(100.);
         } else {
-          dummy.position.set(slot.x + slot.dx * age * 1.5, slot.y + slot.dy * age * 1.5, 5);
-          dummy.rotation.set(0, 0, slot.angle * age)
+          dummy.position.set(slot.x + slot.dx * age * 1.5, slot.y + slot.dy * age * 1.7, 5);
+          dummy.rotation.set(slot.xAngle * age, slot.yAngle * age, slot.zAngle * age)
+          dummy.scale.setScalar(slot.scale * age)
         }
         dummy.updateMatrix();
         mesh.current.setMatrixAt(i, dummy.matrix);
@@ -64,23 +67,23 @@ export default function Click (props) {
     const angle = Math.random() * Math.PI * 2;
     slot.dx = Math.cos(angle);
     slot.dy = Math.sin(angle);
-    if (slot.dx < 0)
-      slot.angle = 6;
-    else
-      slot.angle = -6
+    slot.scale = Math.random() * 0.025 + 0.025
+    slot.xAngle = Math.random() * Math.PI * 2;
+    slot.yAngle = Math.random() * Math.PI * 2;
+    slot.zAngle = Math.random() * Math.PI * 2;
   });
   return (
     <instancedMesh
       ref={mesh}
-      args={[undefined, undefined, MAX]}
+      args={[scene.children[0].geometry, undefined, MAX]}
       layers={1}
       frustumCulled={false}
       raycast={() => null}
     >
-      <planeGeometry/>
-      <meshBasicMaterial
-        map={texture}
-        transparent
+      <meshStandardMaterial
+        color="orchid"
+        transparent opacity={0.5}
+        depthWrite={false} 
       />
     </instancedMesh>
   )
