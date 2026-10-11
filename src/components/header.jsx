@@ -40,8 +40,8 @@ const Header = () => {
         <ul>
           {scrolledDown && (
             <li>
-              <button className='menu-link button-reset' onClick={() => handleNav('top')}>
-                Top
+              <button className='menu-link button-reset' onClick={() => handleNav('game')}>
+                Game
               </button>
             </li>
           )}

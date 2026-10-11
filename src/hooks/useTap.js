@@ -96,6 +96,11 @@ export function TapSource() {
       event.preventDefault();
     };
 
+    const handleTouchMove = (event) => {
+      if (press?.holding && event.cancelable) event.preventDefault();
+    };
+
+    element.addEventListener('touchmove', handleTouchMove, { passive: false });
     element.addEventListener('pointerdown', handlePointerDown);
     element.addEventListener('pointermove', handlePointerMove);
     element.addEventListener('pointerup', handlePointerUp);
@@ -103,6 +108,7 @@ export function TapSource() {
     element.addEventListener('contextmenu', handleContextMenu);
     return () => {
       stopHold();
+      element.removeEventListener('touchmove', handleTouchMove);
       element.removeEventListener('pointerdown', handlePointerDown);
       element.removeEventListener('pointermove', handlePointerMove);
       element.removeEventListener('pointerup', handlePointerUp);
