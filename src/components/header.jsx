@@ -51,8 +51,13 @@ const Header = () => {
             </button>
           </li>
           <li>
-            <button className='menu-link button-reset' onClick={() => handleNav('work')}>
-              Work
+            <button className='menu-link button-reset' onClick={() => handleNav('commissioned')}>
+              Commissioned
+            </button>
+          </li>
+          <li>
+            <button className='menu-link button-reset' onClick={() => handleNav('personal')}>
+              Personal
             </button>
           </li>
           <li>

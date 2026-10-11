@@ -11,7 +11,7 @@ import { ScoreOverlay, ScoreTracker } from './score';
 import Milestones from './milestones';
 import { TapSource } from '../hooks/useTap';
 import About from './about';
-import Work from './work';
+import ProjectSection from './projects/project_section';
 import Contact from './contact';
 
 const Scene = () => {
@@ -46,7 +46,7 @@ const Scene = () => {
 
   return (
     <div style={{ position: 'relative', width: '100%', height: '100%' }}>
-      <Element name='top'>
+      <Element name='game'>
       <div className='art'>
         <Canvas dpr={[1, 2]}>
           <ambientLight intensity={1.0} />
@@ -75,9 +75,15 @@ const Scene = () => {
       <Element name='about'>
         <About />
       </Element>
-      <Element name='work'>
-        <Work />
+      <hr className='section-divider' />
+      <Element name='commissioned'>
+        <ProjectSection category='commissioned' />
       </Element>
+      <hr className='section-divider' />
+      <Element name='personal'>
+        <ProjectSection category='personal' />
+      </Element>
+      <hr className='section-divider' />
       <Element name='contact'>
         <Contact />
       </Element>
