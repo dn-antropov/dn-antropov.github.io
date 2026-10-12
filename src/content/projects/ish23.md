@@ -1,6 +1,6 @@
 ---
 title: Real-Time Image Processing Pipeline
-cardTitle: Image Processing Pipeline for Viessmann at ISH23
+cardTitle: Developer of a Real-Time Image Processing Pipeline
 category: commissioned
 order: 4
 facts:
@@ -16,7 +16,9 @@ facts:
       processing visitor photos into Unreal Engine from a database,
       and optimizing performance for rendering on an LED wall and individual screens on location,
       on-site support
-card: ish23_cut_03.mp4
+card:
+  - ish23_cut_03.mp4
+  - rider.png
 hero: ish23_cut_02.mp4
 media:
   layout: full

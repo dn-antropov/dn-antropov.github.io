@@ -1,6 +1,7 @@
 import { Navigate, useParams } from 'react-router-dom';
 import { getProject } from '../../content';
 import Video from './video';
+import Markdown from './markdown';
 import './project.css';
 
 const ProjectPage = () => {
@@ -15,7 +16,11 @@ const ProjectPage = () => {
     <div className="project">
       {hero ? (
         <div className="project-hero">
-          <Video sources={hero} className="project-hero-video" />
+          {hero.kind === 'video' ? (
+            <Video sources={hero.sources} className="project-hero-video" />
+          ) : (
+            <img src={hero.src} alt="" className="project-hero-video" />
+          )}
           <h1>{title}</h1>
         </div>
       ) : (
@@ -31,7 +36,7 @@ const ProjectPage = () => {
           ))}
         </div>
       )}
-      <div className="project-body" dangerouslySetInnerHTML={{ __html: html }} />
+      <Markdown className="project-body" html={html} />
       {media.layout === 'full' ? (
         media.items.map((item, i) => (
           <Video key={i} sources={item.sources} className="vid-full-width" />

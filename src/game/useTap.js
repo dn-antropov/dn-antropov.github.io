@@ -1,7 +1,7 @@
 import { useEffect, useRef } from 'react';
 import { useThree } from '@react-three/fiber';
 import { Vector2, Vector3 } from 'three';
-import { getScore } from '../store/score';
+import { getScore } from './store';
 
 const TAP_MAX_DURATION = 250;
 const TAP_MAX_DISTANCE = 10;

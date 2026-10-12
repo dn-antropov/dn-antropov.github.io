@@ -1,6 +1,7 @@
 ---
-title: Porsche Taycan AR App for Journalists
-cardTitle: Augmented Reality App for the Porsche Taycan
+title: Augmented Reality App for Journalists
+hidden: true
+cardTitle: Senior Developer of Augmented Reality App for Journalists
 category: commissioned
 order: 2
 facts:
@@ -11,12 +12,15 @@ facts:
   - label: Year
     value: 2021
   - label: Role
-    value: Lorem ipsum dolor sit amet, consectetur adipiscing elit
-card: intro.mp4
-hero: intro.mp4
+    value: Senior Developer
+  - label: Tech Stack
+    value: Unity Engine
+card: banner.mp4
+hero: banner.mp4
 media:
-  layout: full
+  layout: grid
   items:
+    - intro.mp4
     - technical-parts.mp4
 ---
 

@@ -1,6 +1,7 @@
 import { Link } from 'react-router-dom';
 import { projectsIn, sections } from '../../content';
-import Video from './video';
+import CardMedia from './card_media';
+import Markdown from './markdown';
 
 const ProjectSection = ({ category }) => {
   const section = sections[category];
@@ -8,12 +9,12 @@ const ProjectSection = ({ category }) => {
   return (
     <>
       <h1>{section.title}</h1>
-      <div dangerouslySetInnerHTML={{ __html: section.html }} />
+      <Markdown html={section.html} />
       {projectsIn(category).map((project) => (
         <div className="thumbnail" key={project.slug}>
           <Link to={`/projects/${project.slug}`}>
             <h1>{project.cardTitle ?? project.title}</h1>
-            <Video sources={project.card} className="vid" />
+            <CardMedia items={project.card} />
           </Link>
         </div>
       ))}

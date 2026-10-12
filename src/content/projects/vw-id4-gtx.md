@@ -1,5 +1,6 @@
 ---
 title: Volkswagen ID.4 GTX Mixed-Reality World Premiere
+hidden: true
 cardTitle: Mixed-Reality World Premiere for the Volkswagen ID.4 GTX
 category: commissioned
 order: 5

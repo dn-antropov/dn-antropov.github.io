@@ -1,6 +1,6 @@
 import { useEffect, useRef, useState } from 'react';
-import { useScore } from '../store/score';
-import milestones from '../data/milestones.json';
+import { useScore } from '../store';
+import milestones from '../milestones.json';
 import './milestones.css';
 
 const VISIBLE_FOR = 15000;

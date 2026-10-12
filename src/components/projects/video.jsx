@@ -1,6 +1,6 @@
 import { useEffect, useRef } from 'react';
 
-const Video = ({ sources, className }) => {
+const Video = ({ sources, className, style }) => {
   const ref = useRef();
   const id = sources.map(({ src }) => src).join('|');
 
@@ -18,7 +18,7 @@ const Video = ({ sources, className }) => {
   }, [id]);
 
   return (
-    <video key={id} ref={ref} muted loop playsInline preload="none" className={className}>
+    <video key={id} ref={ref} muted loop playsInline preload="none" className={className} style={style}>
       {sources.map(({ src, type }) => (
         <source key={src} src={src} type={type} />
       ))}

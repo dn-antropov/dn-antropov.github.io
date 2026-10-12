@@ -6,7 +6,7 @@ import { Vector2, Vector3, Quaternion, Euler, LoopRepeat, ShaderMaterial } from 
 
 import vertexShader from '../shaders/penroseVertex.glsl';
 import fragmentShader from '../shaders/penroseFragment.glsl';
-import useTap from '../hooks/useTap';
+import useTap from '../useTap';
 
 export default function DoublePenrose(props) {
   const rotation = new Vector3(35.265, -45.0, 0.0);
@@ -14,7 +14,7 @@ export default function DoublePenrose(props) {
   const meshRefs = useRef([]);
 
   // Load the GLTF model
-  const { scene, animations } = useLoader(GLTFLoader, './glb/animated_double_penrose.glb');
+  const { scene, animations } = useLoader(GLTFLoader, '/game/animated_double_penrose.glb');
 
   // Extract animations
   const { actions } = useAnimations(animations, group);

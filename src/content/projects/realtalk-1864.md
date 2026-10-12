@@ -1,18 +1,23 @@
 ---
-title: REALTALK 1864
-cardTitle: Conversations with AI Characters in the Frankfurt Judengasse of 1864
+title: Realtalk 1864
+cardTitle: Lead Developer of the Realtalk 1864
 category: commissioned
 order: 1
 facts:
   - label: Client
-    value: Jüdisches Museum Frankfurt
+    value: Jewish Museum Frankfurt
   - label: Contractor
     value: NSYNK
   - label: Year
     value: 2026
   - label: Role
-    value: Lorem ipsum dolor sit amet, consectetur adipiscing elit
-card: banner.mp4
+    value: Lead Developer
+  - label: Tech Stack
+    value: Unreal Engine, AI Voice Agents, Pixel Streaming, Web
+card:
+  - banner.mp4
+  - unreal.png
+  - rider.png
 hero: banner.mp4
 media:
   layout: grid
@@ -20,6 +25,8 @@ media:
     - wipe-reveal.mp4
     - browser.mp4
 ---
+
+The app is free to try [in the browser](https://realtalk1864.de/start).
 
 Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt
 ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco

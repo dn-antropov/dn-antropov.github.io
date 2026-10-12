@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
-import useTap from '../hooks/useTap';
-import { addPoint, useScore } from '../store/score';
+import useTap from '../useTap';
+import { addPoint, useScore } from '../store';
 import './score.css';
 
 const DIGITS = ['▶︎', '▼︎', '◀︎', '▲︎'];

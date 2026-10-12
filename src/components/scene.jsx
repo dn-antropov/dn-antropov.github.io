@@ -1,33 +1,18 @@
-import { useState, useEffect } from 'react';
-import { useLocation } from 'react-router-dom';
+import { useEffect } from 'react';
+import { useLocation, useNavigationType } from 'react-router-dom';
 import { scroller, Element } from 'react-scroll';
-import { OrthographicCamera } from '@react-three/drei';
-import { Canvas } from '@react-three/fiber';
 
-import DoublePenrose from '../geometries/double_penrose_animated';
-import Click from '../geometries/click';
-import Background from '../geometries/background'
-import { ScoreOverlay, ScoreTracker } from './score';
-import Milestones from './milestones';
-import { TapSource } from '../hooks/useTap';
+import Game from '../game/game';
 import About from './about';
 import ProjectSection from './projects/project_section';
 import Contact from './contact';
 
 const Scene = () => {
-  const [size, setSize] = useState({ width: window.innerWidth, height: window.innerHeight });
   const location = useLocation();
+  const navigationType = useNavigationType();
 
   useEffect(() => {
-    const handleResize = () => {
-      setSize({ width: window.innerWidth, height: window.innerHeight });
-    };
-    window.addEventListener('resize', handleResize);
-    return () => window.removeEventListener('resize', handleResize);
-  }, []);
-
-  useEffect(() => {
-    if (location.state?.scrollTo) {
+    if (location.state?.scrollTo && navigationType !== 'POP') {
       // Delay the scroll slightly to ensure DOM is ready
       setTimeout(() => {
         scroller.scrollTo(location.state.scrollTo, {
@@ -39,38 +24,10 @@ const Scene = () => {
     }
   }, [location]);
 
-  const ratio = size.height / size.width;
-  const frustum = 10;
-  const horizontal = ratio < 1 ? frustum / ratio : frustum;
-  const vertical = ratio < 1 ? frustum : frustum * ratio;
-
   return (
     <div style={{ position: 'relative', width: '100%', height: '100%' }}>
       <Element name='game'>
-      <div className='art'>
-        <Canvas dpr={[1, 2]}>
-          <ambientLight intensity={1.0} />
-          <Background />
-          <DoublePenrose />
-          <Click />
-          <ScoreTracker />
-          <TapSource />
-          <OrthographicCamera
-            makeDefault
-            manual
-            zoom={6}
-            top={vertical}
-            bottom={-vertical}
-            left={-horizontal}
-            right={horizontal}
-            near={1}
-            far={500}
-            position={[0, 0, 100]}
-          />
-        </Canvas>
-        <ScoreOverlay />
-        <Milestones />
-      </div>
+        <Game />
       </Element>
       <Element name='about'>
         <About />

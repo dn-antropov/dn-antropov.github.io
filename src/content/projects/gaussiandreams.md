@@ -1,8 +1,9 @@
 ---
-title: Generate Gaussian Splats from AI Hallucinations
-cardTitle: AI Hallucinations as Gaussian Splats
+title: AI Hallucinations and Gaussian Splats
+hidden: false
+cardTitle: Playing with AI Hallucinations and Gaussian Splats
 category: personal
-order: 1
+order: 2
 facts:
   - label: Year
     value: 2024

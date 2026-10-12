@@ -74,14 +74,27 @@ p {
   text-decoration: none;
 }
 
-.thumbnail .vid {
+.thumbnail .card-media {
   aspect-ratio: 16 / 9;
   border-radius: 0.5rem;
-  display: block;
-  height: auto;
   margin: 1.5rem 0;
-  object-fit: cover;
+  overflow: hidden;
+  position: relative;
   width: 100%;
+}
+
+.thumbnail .card-panel {
+  inset: 0;
+  position: absolute;
+}
+
+.thumbnail .card-panel video,
+.thumbnail .card-panel img {
+  display: block;
+  height: 100%;
+  object-fit: cover;
+  position: absolute;
+  top: 0;
 }
 
 .section-divider {

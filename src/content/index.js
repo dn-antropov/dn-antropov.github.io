@@ -20,6 +20,13 @@ const createMarkdown = (slug) =>
           '</figure>',
         ].join('');
       },
+      link({ href, title, tokens }) {
+        const text = this.parser.parseInline(tokens);
+        const external = /^[a-z]+:/i.test(href) && !href.startsWith('mailto:');
+        const titleAttribute = title ? ` title="${escapeAttribute(title)}"` : '';
+        const targetAttributes = external ? ' target="_blank" rel="noopener noreferrer"' : '';
+        return `<a href="${escapeAttribute(href)}"${titleAttribute}${targetAttributes}>${text}</a>`;
+      },
       paragraph({ tokens }) {
         if (tokens.length === 1 && tokens[0].type === 'image') return this.parser.parseInline(tokens);
         return false;
@@ -45,7 +52,12 @@ const toSources = (slug, files) =>
     type: VIDEO_TYPES[file.split('.').pop().toLowerCase()],
   }));
 
-const toMediaItem = (slug, item) =>
+const toPanel = (slug, file) =>
+  VIDEO_TYPES[file.split('.').pop().toLowerCase()]
+    ? { kind: 'video', sources: toSources(slug, file) }
+    : { kind: 'image', src: resolveHref(slug, file) };
+
+const toMediaItem =(slug, item) =>
   typeof item === 'string'
     ? { sources: toSources(slug, item), vertical: false }
     : { sources: toSources(slug, item.src), vertical: Boolean(item.vertical) };
@@ -62,8 +74,8 @@ export const projects = Object.entries(projectFiles)
       slug,
       html,
       facts: data.facts ?? [],
-      card: data.card ? toSources(slug, data.card) : [],
-      hero: data.hero ? toSources(slug, data.hero) : null,
+      card: [data.card ?? []].flat().map((file) => toPanel(slug, file)),
+      hero: data.hero ? toPanel(slug, data.hero) : null,
       media: {
         layout: data.media?.layout ?? 'grid',
         items: (data.media?.items ?? []).map((item) => toMediaItem(slug, item)),
@@ -79,6 +91,7 @@ export const sections = Object.fromEntries(
   })
 );
 
-export const getProject = (slug) => projects.find((project) => project.slug === slug);
+export const getProject = (slug) => projects.find((project) => project.slug === slug && !project.draft);
 
-export const projectsIn = (category) => projects.filter((project) => project.category === category);
+export const projectsIn = (category) =>
+  projects.filter((project) => project.category === category && !project.hidden && !project.draft);
