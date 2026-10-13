@@ -14,8 +14,11 @@ or in any of my games on that page.
 I was always genuinely curious about the application of deep learning in the fields of
 computer vision, speech, text and object recognition. I used it widely in my daily work and experimented a lot with it
 in my spare time. I am a big proponent of automatization of routine tasks nobody cared about or wanted to do. But when it comes
-to using generative AI for human expression be it art or coding I am not using it.
-I value human craft, learning by doing and human care. I see how people in the industry outsource their thinking to generative
-AI and don't want to follow this path. I found my happy place in the games. There I do not use generative AI at all and
-make all the things by hand. I enjoy the process of writing code as much of the process of drawing art or making music,
+to using generative AI for human expression be it art or coding I am not using it anymore. I was fun in the very beginning,
+when it was quirky and lame and had a character, but not when it simply substitutes human labor.
+
+I still value the craft, learning by doing and things made with care. I see how people in the industry outsource their
+thinking to generative AI and don't want to follow this path. I found my happy place in the games.
+There I do not use generative AI at all and make all the things by hand.
+I enjoy the process of writing code as much of the process of drawing art or making music,
 and I won't let AI take it away from me.

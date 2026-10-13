@@ -1,23 +1,42 @@
-import { Object3D } from 'three';
-import { useTexture } from '@react-three/drei';
+import {InstancedBufferAttribute, Object3D, PlaneGeometry, ShaderMaterial} from 'three';
 import {useRef, useMemo, useEffect} from 'react'
 import {useFrame, useLoader} from '@react-three/fiber'
 
 import useTap from '../useTap'
 import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader.js';
 
-const MAX = 1000;
+import fragmentShader from '../shaders/tapFragment.glsl';
+import vertexShader from "../shaders/tapVertex.glsl";
+
+const MAX = 500;
 const LIFETIME = 1.
 const randomVector = (r) => [r / 2 - Math.random() * r, r / 2 - Math.random() * r, r / 2 - Math.random() * r]
 const randomEuler = () => [Math.random() * Math.PI, Math.random() * Math.PI, Math.random() * Math.PI]
 const data = Array.from({ length: 1000 }, (r = 10) => ({ random: Math.random(), position: randomVector(r), rotation: randomEuler() }))
 
+const TAP_LIFETIME = 0.6;
+const TAP_SIZE = 0.5;
+const TAP_Z = 6;
+
+const shaderMaterial = new ShaderMaterial({
+  vertexShader,
+  fragmentShader,
+  transparent: true,
+  depthWrite: false,
+})
+
+const tapProgress = new InstancedBufferAttribute(new Float32Array(MAX).fill(1), 1);
+const tapGeometry = new PlaneGeometry(1, 1);
+tapGeometry.setAttribute('aProgress', tapProgress);
+
+
 export default function Click (props) {
-  const mesh = useRef();
+  const triangleMesh = useRef();
+  const planeMesh = useRef();
   const dummy = useMemo(() => new Object3D(), []);
   //const texture = useTexture('/textures/click.png')
   const { scene } = useLoader(GLTFLoader, '/game/triangle.glb');
-  const slots = useMemo(
+  const triangle_slots = useMemo(
     () => Array.from({ length: MAX }, () => ({ active: false, born: 0, x: 0, y: 0, dx: 0, dy: 0, xAngle: 0, yAngle: 0, zAngle: 0, scale: 0 })),
     []
   );
@@ -26,17 +45,61 @@ export default function Click (props) {
     dummy.rotation.set(0, 0, 33);
     dummy.scale.setScalar(0.00);
     dummy.updateMatrix();
-    for (let i = 0; i < MAX; i++) mesh.current.setMatrixAt(i, dummy.matrix);
-    mesh.current.instanceMatrix.needsUpdate = true;
+    for (let i = 0; i < MAX; i++) {
+      triangleMesh.current.setMatrixAt(i, dummy.matrix);
+      planeMesh.current.setMatrixAt(i, dummy.matrix);
+    }
+    triangleMesh.current.instanceMatrix.needsUpdate = true;
+    planeMesh.current.instanceMatrix.needsUpdate = true;
   }, [dummy])
-  
+
+  const tap_slots = useMemo(() => Array.from({ length: MAX }, () => ({ active: false, born: 0 })), []);
+  const tapCursor = useRef(0);
+
+  useFrame(({ clock }) => {
+    const now = clock.getElapsedTime();
+    let dirty = false;
+
+    for (let i = 0; i < MAX; i++) {
+      const slot = tap_slots[i];
+      if (!slot.active) continue;
+
+      const progress = (now - slot.born) / TAP_LIFETIME;
+      if (progress >= 1) {
+        slot.active = false;
+        tapProgress.setX(i, 1);
+      } else {
+        tapProgress.setX(i, progress);
+      }
+      dirty = true;
+    }
+    if (dirty) tapProgress.needsUpdate = true;
+  });
+
+  useTap((tap) => {
+    const i = tapCursor.current;
+    tapCursor.current = (i + 1) % MAX;
+    tap_slots[i].active = true;
+    tap_slots[i].born = tap.time;
+
+    dummy.position.set(tap.world.x, tap.world.y, TAP_Z);
+    dummy.rotation.set(0, 0, 0);
+    dummy.scale.setScalar(TAP_SIZE);
+    dummy.updateMatrix();
+    planeMesh.current.setMatrixAt(i, dummy.matrix);
+    planeMesh.current.instanceMatrix.needsUpdate = true;
+
+    tapProgress.setX(i, 0);
+    tapProgress.needsUpdate = true;
+  });
+
   const cursor = useRef(0);
   useFrame(({clock}) => {
       const now = clock.getElapsedTime();
       let dirty = false;
   
       for (let i = 0; i < MAX; i++) {
-        const slot = slots[i];
+        const slot = triangle_slots[i];
         if (!slot.active) continue;
   
         const age = (now - slot.born) / LIFETIME;
@@ -49,14 +112,14 @@ export default function Click (props) {
           dummy.scale.setScalar(slot.scale * age)
         }
         dummy.updateMatrix();
-        mesh.current.setMatrixAt(i, dummy.matrix);
+        triangleMesh.current.setMatrixAt(i, dummy.matrix);
         dirty = true;
       }
-      if (dirty) mesh.current.instanceMatrix.needsUpdate = true;
+      if (dirty) triangleMesh.current.instanceMatrix.needsUpdate = true;
     }
   )
   useTap((tap) => {
-    const slot = slots[cursor.current];
+    const slot = triangle_slots[cursor.current];
     cursor.current = (cursor.current + 1) % MAX;
     slot.active = true;
     slot.born = tap.time;
@@ -72,19 +135,32 @@ export default function Click (props) {
     slot.yAngle = Math.random() * Math.PI * 2;
     slot.zAngle = Math.random() * Math.PI * 2;
   });
+
+
   return (
-    <instancedMesh
-      ref={mesh}
+    <>    
+      <instancedMesh
+      ref={triangleMesh}
       args={[scene.children[0].geometry, undefined, MAX]}
       layers={1}
       frustumCulled={false}
       raycast={() => null}
-    >
+      >
       <meshStandardMaterial
         color="orchid"
         transparent opacity={0.5}
-        depthWrite={false} 
+        depthWrite={false}
       />
-    </instancedMesh>
+      </instancedMesh>
+        <instancedMesh
+          ref={planeMesh}
+          args={[tapGeometry, shaderMaterial, MAX]}
+          layers={1}
+          frustumCulled={false}
+          raycast={() => null}
+        />
+
+    </>
+
   )
 }
