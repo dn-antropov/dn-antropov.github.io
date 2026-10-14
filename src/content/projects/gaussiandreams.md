@@ -7,6 +7,8 @@ order: 2
 facts:
   - label: Year
     value: 2024
+  - label: Tech Stack
+    value: DreamScene360, Unreal Engine
 card: gaussiandreams.mp4
 hero: gaussiandreams.mp4
 ---

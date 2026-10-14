@@ -1,5 +1,6 @@
 import { parse as parseYaml } from 'yaml';
 import { Marked } from 'marked';
+import projectFileList from 'virtual:project-files';
 
 const VIDEO_TYPES = { webm: 'video/webm', mp4: 'video/mp4', mov: 'video/quicktime' };
 
@@ -57,10 +58,22 @@ const toPanel = (slug, file) =>
     ? { kind: 'video', sources: toSources(slug, file) }
     : { kind: 'image', src: resolveHref(slug, file) };
 
-const toMediaItem =(slug, item) =>
+const MEDIA_FILE = /\.(mp4|webm|mov|jpe?g|png|webp|gif|avif|svg)$/i;
+
+const expandFolders = (slug, items) =>
+  items.flatMap((item) => {
+    if (typeof item !== 'string' || !item.endsWith('/')) return [item];
+    const folder = item === './' || item === '/' ? '' : item;
+    const prefix = `${slug}/${folder}`;
+    return projectFileList
+      .filter((file) => file.startsWith(prefix) && !file.slice(prefix.length).includes('/') && MEDIA_FILE.test(file))
+      .map((file) => file.slice(slug.length + 1));
+  });
+
+const toMediaItem = (slug, item) =>
   typeof item === 'string'
-    ? { sources: toSources(slug, item), vertical: false }
-    : { sources: toSources(slug, item.src), vertical: Boolean(item.vertical) };
+    ? { ...toPanel(slug, item), vertical: false }
+    : { ...toPanel(slug, item.src), vertical: Boolean(item.vertical) };
 
 const projectFiles = import.meta.glob('./projects/?*.md', { query: '?raw', import: 'default', eager: true });
 const sectionFiles = import.meta.glob('./sections/?*.md', { query: '?raw', import: 'default', eager: true });
@@ -74,11 +87,11 @@ export const projects = Object.entries(projectFiles)
       slug,
       html,
       facts: data.facts ?? [],
-      card: [data.card ?? []].flat().map((file) => toPanel(slug, file)),
+      card: expandFolders(slug, [data.card ?? []].flat()).map((file) => toPanel(slug, file)),
       hero: data.hero ? toPanel(slug, data.hero) : null,
       media: {
         layout: data.media?.layout ?? 'grid',
-        items: (data.media?.items ?? []).map((item) => toMediaItem(slug, item)),
+        items: expandFolders(slug, [data.media?.items ?? []].flat()).map((item) => toMediaItem(slug, item)),
       },
     };
   })

@@ -2,7 +2,6 @@ import { useEffect, useState } from 'react';
 import useTap from '../useTap';
 import { addPoint, useScore } from '../store';
 import { toQuaternary } from '../quaternary';
-import './score.css';
 
 const LENGTH = 8;
 const VISIBLE_FOR = 5000;

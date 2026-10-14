@@ -3,9 +3,8 @@ import { useLocation, useNavigationType } from 'react-router-dom';
 import { scroller, Element } from 'react-scroll';
 
 import Game from '../game/game';
-import About from './about';
+import TextSection from './text_section';
 import ProjectSection from './projects/project_section';
-import Contact from './contact';
 
 const Scene = () => {
   const location = useLocation();
@@ -30,7 +29,7 @@ const Scene = () => {
         <Game />
       </Element>
       <Element name='about'>
-        <About />
+        <TextSection name='about' />
       </Element>
       <hr className='section-divider' />
       <Element name='commissioned'>
@@ -42,7 +41,7 @@ const Scene = () => {
       </Element>
       <hr className='section-divider' />
       <Element name='contact'>
-        <Contact />
+        <TextSection name='contact' />
       </Element>
     </div>
   );

@@ -2,7 +2,6 @@ import { useEffect, useRef, useState } from 'react';
 import { useScore } from '../store';
 import milestones from '../milestones.json';
 import { withQuaternaryNumbers } from '../quaternary';
-import './milestones.css';
 
 const VISIBLE_FOR = 15000;
 
