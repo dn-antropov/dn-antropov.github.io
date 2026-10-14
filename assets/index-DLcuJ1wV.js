@@ -4314,14 +4314,14 @@ pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui offi
 mollit anim id est laborum.
 `,Oj=`---
 title: Stop The Fracking Robots
-cardTitle: Stop The Fracking Robots — a Physics Shooter
+cardTitle: Stop The Fracking Robots (Game Jame Entry)
 category: personal
 order: 1
 facts:
   - label: Year
     value: 2025
   - label: Context
-    value: Winter Game Jam 2025, made in two weeks
+    value: Two weeks game jam
   - label: Engine
     value: Godot
   - label: Platforms
@@ -4332,8 +4332,10 @@ card:
 hero: shot.jpg
 ---
 
-A 2D physics-based shooter set under the Southern Ocean: a scientist who escaped to a deep-sea
-base fights back against mega-corporations drilling into the Antarctic for the planet's last resources.
+A 2D physics-based shoot-em-up with an interesting gimmick of using magnet to manipulate the world objects to fight the enemies.
+I am a big fun of unusual physics based game mechanics and made this game as proof of concept if magnetism can be used in 
+shoot-em-up genre. Judging by response of the game jam participants the idea was quite successful. Most of the art and soundtrack are 
+made by myself, except the assets credited on the game's page.
 
 [Play it on itch.io](https://dnantropov.itch.io/stop-the-fracking-robots)
 `,Uj=`---
