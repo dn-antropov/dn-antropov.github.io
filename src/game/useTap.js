@@ -2,11 +2,22 @@ import { useEffect, useRef } from 'react';
 import { useThree } from '@react-three/fiber';
 import { Vector2, Vector3 } from 'three';
 import { getScore } from './store';
+import milestones from './milestones.json';
 
 const TAP_MAX_DURATION = 250;
 const TAP_MAX_DISTANCE = 10;
-export const HOLD_UNLOCK_SCORE = 10;
-const HOLD_TAPS_PER_SECOND = 10;
+
+const levels = milestones
+  .filter((milestone) => milestone.holdTapsPerSecond != null)
+  .sort((a, b) => a.score - b.score);
+
+const holdRate = (score) => {
+  let rate = 0;
+  for (const level of levels) {
+    if (score >= level.score) rate = level.holdTapsPerSecond;
+  }
+  return rate;
+};
 
 const subscribers = new Set();
 
@@ -18,7 +29,7 @@ export function TapSource() {
     const element = gl.domElement;
     let press = null;
     let holdTimeout = null;
-    let holdInterval = null;
+    let holdTick = null;
 
     const emit = (clientX, clientY) => {
       const { camera, clock } = get();
@@ -36,9 +47,19 @@ export function TapSource() {
 
     const stopHold = () => {
       clearTimeout(holdTimeout);
-      clearInterval(holdInterval);
+      clearTimeout(holdTick);
       holdTimeout = null;
-      holdInterval = null;
+      holdTick = null;
+    };
+
+    const scheduleHoldTap = () => {
+      const rate = holdRate(getScore());
+      if (rate <= 0) return;
+      holdTick = setTimeout(() => {
+        if (!press?.holding) return;
+        emit(press.lastX, press.lastY);
+        scheduleHoldTap();
+      }, 1000 / rate);
     };
 
     const startHold = () => {
@@ -46,7 +67,7 @@ export function TapSource() {
       if (!press) return;
       press.holding = true;
       emit(press.lastX, press.lastY);
-      holdInterval = setInterval(() => emit(press.lastX, press.lastY), 1000 / HOLD_TAPS_PER_SECOND);
+      scheduleHoldTap();
     };
 
     const handlePointerDown = (event) => {
@@ -62,7 +83,7 @@ export function TapSource() {
         holding: false,
       };
       element.setPointerCapture(event.pointerId);
-      if (getScore() >= HOLD_UNLOCK_SCORE) {
+      if (holdRate(getScore()) > 0) {
         holdTimeout = setTimeout(startHold, TAP_MAX_DURATION);
       }
     };

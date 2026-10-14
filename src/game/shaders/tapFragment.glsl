@@ -6,8 +6,10 @@ void main() {
 
     float d = distance(vUv, vec2(0.5));
     float edge = fwidth(d);
+    edge *= edge;
     float radius = mix(0.05, 0.48, vProgress);
-    float width = mix(0.08, 0.01, vProgress);
+    // float width = mix(0.08, 0.01, vProgress);
+    float width = 0.025;
     float inner = smoothstep(radius - width - edge, radius - width, d);
     float outer = 1.0 - smoothstep(radius, radius + edge, d);
     float alpha = inner * outer * (1.0 - vProgress);

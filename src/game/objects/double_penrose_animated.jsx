@@ -33,7 +33,7 @@ export default function DoublePenrose(props) {
       ).multiplyScalar(Math.min(window.devicePixelRatio, 2))
     },
     resaturation: {value: .75},
-    squize: { value: 0 },
+    squeeze: { value: 0 },
   }), []);
 
   const shaderMaterial = useMemo(() => new ShaderMaterial({
@@ -72,7 +72,7 @@ export default function DoublePenrose(props) {
 
   const bounceStart = useRef(-Infinity);
   const bounceQueued = useRef(false);
-  const bounceDuration = 1.0;
+  const bounceDuration = 0.4;
   const continueThreshold = 0.4;
 
   useTap((tap) => {
@@ -91,7 +91,7 @@ export default function DoublePenrose(props) {
       bounceStart.current += bounceDuration;
       p -= 1;
     }
-    uniforms.squize.value = p >= 0 && p < 1 ? p : 0.0;
+    uniforms.squeeze.value = p >= 0 && p < 1 ? p : 0.0;
 
     const { gl, scene, camera } = state;
     // Disable what needs to be ignored

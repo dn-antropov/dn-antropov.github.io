@@ -1,14 +1,11 @@
 import { useEffect, useState } from 'react';
 import useTap from '../useTap';
 import { addPoint, useScore } from '../store';
+import { toQuaternary } from '../quaternary';
 import './score.css';
 
-const DIGITS = ['▶︎', '▼︎', '◀︎', '▲︎'];
 const LENGTH = 8;
 const VISIBLE_FOR = 5000;
-
-const toQuaternary = (value) =>
-  value.toString(4).padStart(LENGTH, '0').split('').map((digit) => DIGITS[Number(digit)]);
 
 export const ScoreTracker = () => {
   useTap(addPoint);
@@ -28,7 +25,7 @@ export const ScoreOverlay = () => {
 
   return (
     <div className={`score ${visible ? 'visible' : ''}`} aria-label={`Score ${score}`}>
-      {toQuaternary(score).map((symbol, i) => (
+      {toQuaternary(score, LENGTH).map((symbol, i) => (
         <span key={i} className='score-digit'>{symbol}</span>
       ))}
     </div>

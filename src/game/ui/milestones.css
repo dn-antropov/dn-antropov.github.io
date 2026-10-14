@@ -29,10 +29,16 @@
 .milestone-inner {
   color: white;
   font-family: 'Raleway', sans-serif;
-  font-size: 1.3rem;
+  font-size: 1.2rem;
   letter-spacing: 0.075rem;
   padding-top: 0.75rem;
   text-align: center;
+  transition: font-size 0.4s ease;
+  white-space: pre-line;
+}
+
+.milestone.latest .milestone-inner {
+  font-size: 1.9rem;
 }
 
 @keyframes milestone-life {
@@ -60,6 +66,10 @@
 
 @media (max-width: 600px) {
   .milestone-inner {
-    font-size: 1rem;
+    font-size: 0.85rem;
+  }
+
+  .milestone.latest .milestone-inner {
+    font-size: 1.2rem;
   }
 }

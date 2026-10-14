@@ -15,7 +15,7 @@ const randomEuler = () => [Math.random() * Math.PI, Math.random() * Math.PI, Mat
 const data = Array.from({ length: 1000 }, (r = 10) => ({ random: Math.random(), position: randomVector(r), rotation: randomEuler() }))
 
 const TAP_LIFETIME = 0.6;
-const TAP_SIZE = 0.5;
+const TAP_SIZE = 0.67;
 const TAP_Z = 6;
 
 const shaderMaterial = new ShaderMaterial({

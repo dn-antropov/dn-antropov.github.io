@@ -1,7 +1,12 @@
 [
-  { "score": 1, "message": "Message for 1 points" },
-  { "score": 3, "message": "Message for 3 points" },
-  { "score": 10, "message": "Message for 10 points" },
-  { "score": 50, "message": "Message for 50 points" },
-  { "score": 100, "message": "Message for 100 points" }
+  { "score": 1, "message": "You have gained 1 triangle!" },
+  { "score": 3, "message": "You have got 3 triangles. Don't stop, mortal!" },
+  { "score": 10, "message": "You have unlocked 'Press and Hold' mechanic\nTwo taps per second", "holdTapsPerSecond": 2 },
+  { "score": 20, "message": "Message for 20 triangles" },
+  { "score": 30, "message": "Message for 30 triangles" },
+  { "score": 40, "message": "Message for 40 triangles" },
+  { "score": 50, "message": "For gaining 50 triangles we update auto tapping to 4 taps per second", "holdTapsPerSecond": 4 },
+  { "score": 100, "message": "Message for 100 triangles"},
+  { "score": 200, "message": "Message for 200 triangles" },
+  { "score": 300, "message": "Message for 300 triangles"}
 ]

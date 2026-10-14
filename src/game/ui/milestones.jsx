@@ -1,6 +1,7 @@
 import { useEffect, useRef, useState } from 'react';
 import { useScore } from '../store';
 import milestones from '../milestones.json';
+import { withQuaternaryNumbers } from '../quaternary';
 import './milestones.css';
 
 const VISIBLE_FOR = 15000;
@@ -19,7 +20,7 @@ const Milestones = () => {
     reached.forEach((milestone) => {
       shown.current.add(milestone);
       const id = nextId.current++;
-      setMessages((list) => [...list, { id, text: milestone.message }]);
+      setMessages((list) => [...list, { id, text: withQuaternaryNumbers(milestone.message) }]);
       timeouts.current.push(
         setTimeout(() => setMessages((list) => list.filter((m) => m.id !== id)), VISIBLE_FOR)
       );
@@ -33,8 +34,12 @@ const Milestones = () => {
 
   return (
     <div className='milestones' aria-live='polite'>
-      {messages.map((message) => (
-        <div key={message.id} className='milestone' style={{ '--duration': `${VISIBLE_FOR}ms` }}>
+      {messages.map((message, i) => (
+        <div
+          key={message.id}
+          className={`milestone ${i === messages.length - 1 ? 'latest' : ''}`}
+          style={{ '--duration': `${VISIBLE_FOR}ms` }}
+        >
           <div className='milestone-clip'>
             <div className='milestone-inner'>{message.text}</div>
           </div>
