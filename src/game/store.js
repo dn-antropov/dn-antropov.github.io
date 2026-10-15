@@ -10,9 +10,9 @@ const subscribe = (listener) => {
   return () => listeners.delete(listener);
 };
 
-export const addPoint = () => {
+export const addPoints = (amount = 1) => {
   state = {
-    score: Math.min(state.score + 1, MAX_SCORE),
+    score: Math.min(state.score + amount, MAX_SCORE),
     lastTap: state.lastTap + 1,
   };
   listeners.forEach((listener) => listener());

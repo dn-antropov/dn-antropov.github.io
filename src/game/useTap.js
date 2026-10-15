@@ -2,22 +2,12 @@ import { useEffect, useRef } from 'react';
 import { useThree } from '@react-three/fiber';
 import { Vector2, Vector3 } from 'three';
 import { getScore } from './store';
-import milestones from './milestones.json';
+import { milestoneValue } from './levels';
 
 const TAP_MAX_DURATION = 250;
 const TAP_MAX_DISTANCE = 10;
 
-const levels = milestones
-  .filter((milestone) => milestone.holdTapsPerSecond != null)
-  .sort((a, b) => a.score - b.score);
-
-const holdRate = (score) => {
-  let rate = 0;
-  for (const level of levels) {
-    if (score >= level.score) rate = level.holdTapsPerSecond;
-  }
-  return rate;
-};
+const holdRate = (score) => milestoneValue('holdTapsPerSecond', score, 0);
 
 const subscribers = new Set();
 

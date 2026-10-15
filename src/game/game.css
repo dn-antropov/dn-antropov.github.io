@@ -1,4 +1,5 @@
 .art {
+  --message-width: min(90vw, 40rem);
   height: 100vh;
   position: relative;
   width: 100vw;
@@ -46,12 +47,29 @@
   flex-direction: column;
   justify-content: flex-end;
   left: 50%;
-  max-width: min(90vw, 40rem);
+  max-width: var(--message-width);
   pointer-events: none;
   position: absolute;
   transform: translateX(-50%);
   width: 100%;
   z-index: 5;
+}
+
+.milestones {
+  --fade: 0.5rem;
+  background: rgba(0, 0, 0, 0);
+  box-shadow: 0 0 var(--fade) calc(var(--fade) / 2) rgba(0, 0, 0, 0);
+  transition: background-color 0.6s ease, box-shadow 0.6s ease;
+}
+
+.milestones:not(:empty) {
+  padding: 0.25rem 1.25rem 1rem;
+  width: var(--message-width);
+}
+
+.milestones.visible:not(:empty) {
+  background: rgba(0, 0, 0, 0.35);
+  box-shadow: 0 0 var(--fade) calc(var(--fade) / 2) rgba(0, 0, 0, 0.45);
 }
 
 .milestone {

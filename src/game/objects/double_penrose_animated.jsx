@@ -7,6 +7,12 @@ import { Vector2, Vector3, Quaternion, Euler, LoopRepeat, ShaderMaterial } from 
 import vertexShader from '../shaders/penroseVertex.glsl';
 import fragmentShader from '../shaders/penroseFragment.glsl';
 import useTap from '../useTap';
+import { getScore } from '../store';
+import { milestoneValue } from '../levels';
+
+const BASE_BOUNCE_DURATION = 0.4;
+
+const currentBounceDuration = () => milestoneValue('squeezeDuration', getScore(), BASE_BOUNCE_DURATION);
 
 export default function DoublePenrose(props) {
   const rotation = new Vector3(35.265, -45.0, 0.0);
@@ -72,24 +78,27 @@ export default function DoublePenrose(props) {
 
   const bounceStart = useRef(-Infinity);
   const bounceQueued = useRef(false);
-  const bounceDuration = 0.4;
+  const bounceDuration = useRef(BASE_BOUNCE_DURATION);
   const continueThreshold = 0.4;
 
   useTap((tap) => {
-    const p = (tap.time - bounceStart.current) / bounceDuration;
+    const p = (tap.time - bounceStart.current) / bounceDuration.current;
     if (p >= 1) {
       bounceStart.current = tap.time;
+      bounceDuration.current = currentBounceDuration();
     } else if (p >= continueThreshold) {
       bounceQueued.current = true;
     }
   });
 
   useFrame((state) => {
-    let p = (state.clock.getElapsedTime() - bounceStart.current) / bounceDuration;
+    const now = state.clock.getElapsedTime();
+    let p = (now - bounceStart.current) / bounceDuration.current;
     if (p >= 1 && bounceQueued.current) {
       bounceQueued.current = false;
-      bounceStart.current += bounceDuration;
-      p -= 1;
+      bounceStart.current += bounceDuration.current;
+      bounceDuration.current = currentBounceDuration();
+      p = (now - bounceStart.current) / bounceDuration.current;
     }
     uniforms.squeeze.value = p >= 0 && p < 1 ? p : 0.0;
 
