@@ -11,11 +11,7 @@ facts:
   - label: Year
     value: 2023
   - label: Role
-    value: >-
-      Research and development of an advanced background removal algorithm,
-      processing visitor photos into Unreal Engine from a database,
-      and optimizing performance for rendering on an LED wall and individual screens on location,
-      on-site support
+    value: Software Developer
 card:
   - ish23_cut_03.mp4
   - rider.png
@@ -26,14 +22,8 @@ media:
     - ish23_cut_01.mp4
 ---
 
-Together with Markgraph and their client Viessmann, NSYNK crafted an immersive visitor
-engagement concept that seamlessly took over the entire Viessmann booth at ISH 2023.
-
-A key element of the experience was a network of six photo stations, where professional
-photographers captured portraits of attendees throughout the day. Guests could then explore
-their photos, apply visual filters, and fine-tune the look to their preference.
-
-Once approved, the processed images were instantly transmitted to a range of digital displays
-across the booth—including compact satellite screens positioned around the space, a centrally
-embedded 6x4-meter LED floor display, and a commanding 42-meter-wide LED screen mounted at the
-top of the booth structure—creating a dynamic and personalized visual presence for every participant.
+I created an image processing pipeline for a booth at industrial fare. A key element of the experience were six photo stations,
+where guests could make a photo, apply visual filters, and put it on the 42-meter-wide LED screen. The pipeline took the
+photo from the camera, programmatically removed a background and moved every photo to Unreal Engine for rendering. Additionally,
+I created an Unreal Engine mobile app to be used as an interface for photographers and fare participants to edit and send the
+photos to the wall.

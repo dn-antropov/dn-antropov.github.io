@@ -7,7 +7,7 @@ Based in Frankfurt, Germany.
 Drop me a letter: [dn.antropov@gmail.com](mailto:dn.antropov@gmail.com)
 
 All of my privately developed games you can find on [Codeberg](https://codeberg.org/dn-antropov).
-Current [GitHub](https://www.github.com/dn-antropov) AI policy is making me sad, so don't keep my recent work there,
+Current [GitHub](https://www.github.com/dn-antropov) AI policy is making me sad, so don't put my work there anymore,
 but you can find snippets of my previous projects.
 
 I don't actively post on socials apart from [Bluesky](https://bsky.app/profile/dnantropov.bsky.social).
