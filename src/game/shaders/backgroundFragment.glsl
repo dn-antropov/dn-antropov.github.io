@@ -7,8 +7,10 @@ vec3 contrast(vec3 color, float contrast)
     float midpoint = pow(0.5, 2.2);
     return ((color - midpoint) * contrast + midpoint);
 }
+varying vec2 vUv;
+
 void main() {
-    vec2 uv = gl_FragCoord.xy / winResolution.xy;
+    vec2 uv = vUv;
     uv.y *= winResolution.y / winResolution.x;
     float d = -uTime * 0.09;
     float a = 0.0;

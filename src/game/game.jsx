@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import { OrthographicCamera } from '@react-three/drei';
 import { Canvas } from '@react-three/fiber';
 
@@ -11,14 +11,25 @@ import { TapSource } from './useTap';
 import './game.css';
 
 const Game = () => {
+  const art = useRef();
   const [size, setSize] = useState({ width: window.innerWidth, height: window.innerHeight });
+  const [inView, setInView] = useState(true);
 
   useEffect(() => {
-    const handleResize = () => {
-      setSize({ width: window.innerWidth, height: window.innerHeight });
+    const element = art.current;
+    const resizeObserver = new ResizeObserver(([entry]) => {
+      const { width, height } = entry.contentRect;
+      setSize((current) =>
+        current.width === width && current.height === height ? current : { width, height }
+      );
+    });
+    const visibilityObserver = new IntersectionObserver(([entry]) => setInView(entry.isIntersecting));
+    resizeObserver.observe(element);
+    visibilityObserver.observe(element);
+    return () => {
+      resizeObserver.disconnect();
+      visibilityObserver.disconnect();
     };
-    window.addEventListener('resize', handleResize);
-    return () => window.removeEventListener('resize', handleResize);
   }, []);
 
   const ratio = size.height / size.width;
@@ -27,8 +38,8 @@ const Game = () => {
   const vertical = ratio < 1 ? frustum : frustum * ratio;
 
   return (
-    <div className='art'>
-      <Canvas dpr={[1, 2]}>
+    <div className='art' ref={art}>
+      <Canvas dpr={[1, 1.5]} frameloop={inView ? 'always' : 'never'}>
         <ambientLight intensity={1.0} />
         <Background />
         <DoublePenrose />

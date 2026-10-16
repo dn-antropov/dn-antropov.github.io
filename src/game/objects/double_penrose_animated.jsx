@@ -1,5 +1,5 @@
 import React, { useEffect, useRef, useMemo } from 'react';
-import { useLoader, useFrame } from '@react-three/fiber';
+import { useLoader, useFrame, useThree } from '@react-three/fiber';
 import { useAnimations, useFBO } from '@react-three/drei';
 import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader.js';
 import { Vector2, Vector3, Quaternion, Euler, LoopRepeat, ShaderMaterial } from 'three';
@@ -11,6 +11,7 @@ import { getScore } from '../store';
 import { milestoneValue } from '../levels';
 
 const BASE_BOUNCE_DURATION = 0.4;
+const FBO_SCALE = 0.5;
 
 const currentBounceDuration = () => milestoneValue('squeezeDuration', getScore(), BASE_BOUNCE_DURATION);
 
@@ -74,7 +75,16 @@ export default function DoublePenrose(props) {
   }, [actions]);
 
   // Offscreen rendering target (FBO)
-  const mainRenderTarget = useFBO();
+  const size = useThree((state) => state.size);
+  const dpr = useThree((state) => state.viewport.dpr);
+  const mainRenderTarget = useFBO(
+    Math.max(1, Math.round(size.width * dpr * FBO_SCALE)),
+    Math.max(1, Math.round(size.height * dpr * FBO_SCALE))
+  );
+  const planeNormal = useMemo(
+    () => new Vector3(0, 1, 0).applyQuaternion(new Quaternion().setFromEuler(new Euler(rotation.x, rotation.y, rotation.z))).normalize(),
+    []
+  );
 
   const bounceStart = useRef(-Infinity);
   const bounceQueued = useRef(false);
@@ -93,6 +103,7 @@ export default function DoublePenrose(props) {
 
   useFrame((state) => {
     const now = state.clock.getElapsedTime();
+    state.gl.getDrawingBufferSize(uniforms.winResolution.value);
     let p = (now - bounceStart.current) / bounceDuration.current;
     if (p >= 1 && bounceQueued.current) {
       bounceQueued.current = false;
@@ -118,9 +129,6 @@ export default function DoublePenrose(props) {
     shaderMaterial.uniforms.uTime.value = state.clock.getElapsedTime();
     shaderMaterial.uniforms.resaturation.value = 0.75;
     
-    const localNormal = new Vector3(0, 1, 0);
-    const quaternion = new Quaternion().setFromEuler(new Euler(rotation.x, rotation.y, rotation.z));
-    const planeNormal = localNormal.clone().applyQuaternion(quaternion).normalize();
     shaderMaterial.uniforms.cutPlaneNormal.value.copy(planeNormal);
 
     gl.setRenderTarget(null);
