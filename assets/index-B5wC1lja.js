@@ -4295,15 +4295,19 @@ media:
     - browser.mp4
 ---
 
-The app is free to try [in the browser](https://realtalk1864.de/start).
+Realtalk 1864 is a serious game base on a reconstruction of Jewish ghetto street in Frankfurt. You have an opportunity
+to go back in time walk the street and meet its people. You can talk to 5 historical figures that response via LLM chatbot.
 
-Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt
-ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco
-laboris nisi ut aliquip ex ea commodo consequat.
+I was a lead developer of the game, concentrating mainly on gameplay systems, player controls, UX/UI and implementation
+of LLM audio calls inside the game engine. As a lead developer I also overlooked the work of other developers and tech artists, keeping an eye on performance optimization,
+code organization and asset creation.
 
-Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla
-pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt
-mollit anim id est laborum.
+Next challenge after finishing the game was bringing experience to the pixel streaming platform, that introduced 
+bottlenecks due to low spec hardware. Video compression also forced us to use UI elements rendered in the browser for text
+intensive screens, which needed not trivial solution. On top of that it was created by a team of less than 10 people, that
+didn't leave anything untouched by me as a lead developer.
+
+The game is playable [in the browser](https://realtalk1864.de/start).
 `,Hj=`---
 title: Stop The Fracking Robots
 cardTitle: Stop The Fracking Robots (Game Jame Entry)
