@@ -22,8 +22,9 @@ media:
     - ish23_cut_01.mp4
 ---
 
-I created an image processing pipeline for a booth at industrial fare. A key element of the experience were six photo stations,
-where guests could make a photo, apply visual filters, and put it on the 42-meter-wide LED screen. The pipeline took the
-photo from the camera, programmatically removed a background and moved every photo to Unreal Engine for rendering. Additionally,
-I created an Unreal Engine mobile app to be used as an interface for photographers and fare participants to edit and send the
-photos to the wall.
+I created an image processing pipeline for a booth at the ISH 2023 trade fair. The key element of the experience
+was six photo stations, where guests could take a photo, apply visual filters and send it to a 42-meter-wide LED screen.
+The pipeline took each photo from the camera, removed the background automatically and passed the result
+to Unreal Engine for rendering.
+
+I also created an Unreal Engine mobile app that photographers and fair visitors used to edit the photos and send them to the wall.

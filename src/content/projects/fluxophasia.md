@@ -1,13 +1,13 @@
 ---
-title: Fluxus Machine
-cardTitle: GPT-2 trained on Fluxus art texts
+title: A GPT-2 Fluxus Machine
+cardTitle: Fluxus Performances Written by GPT-2
 category: personal
 order: 3
 facts:
   - label: Year
     value: 2022
   - label: Tech Stack
-    value: Tensorflow, GPT-2
+    value: TensorFlow, GPT-2
 card:
   - gallery/002-18133014139039792.jpg
 media:
@@ -15,9 +15,10 @@ media:
   items: gallery/
 ---
 
-Project explores weirdness and clunkiness of early deep learning transformer models. GPT-2 was trained on texts of [book of 
-performance of Fluxus art group](https://www.thing.net/~grist/ld/fluxusworkbook.pdf), sex instructions and actions you should
-take in case of life hazards. The prompt was a short phrase that sounded like it could be a real name of a performance
-and results were bizarre and poetic descriptions of artistic performances.
+This project explores the weirdness and clunkiness of early transformer-based deep learning models. GPT-2 was trained
+on texts from the [book of performance of Fluxus art group](https://www.thing.net/~grist/ld/fluxusworkbook.pdf), on sex instructions, and on what to do in life-threatening emergencies.
 
-The training data and the scripts for generating the poetry are found on my [github](https://github.com/dn-antropov/fluxmachine/)
+Each piece starts with a prompt that sounds like the name of a performance or the beginning of an instruction.
+The model’s generations are bizarre and poetic descriptions of artistic performances.
+
+The training data and the scripts for generating the poetry are available on my [github](https://github.com/dn-antropov/fluxmachine/)

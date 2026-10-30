@@ -2,16 +2,19 @@
 title: Personal
 ---
 
-Coming from a media art background I recently took game making seriously. Games are ultimate form of expression, but I feel
-that Unreal Engine is forcing me into one way of doing things and in my personal projects I break away from it
-by working in Godot or in plain C/C++, where I can make things fast and efficient.
+Coming from a media art background, I have recently started taking game development seriously. I see games
+as the ultimate form of expression and try to approach them that way. I feel that Unreal Engine pushes me into
+one way of thinking, and more often than not I end up working against it. In my personal projects I break away from it
+and work in Godot or plain C/C++, where I can make things fast and efficient.
 
-Another passion of mine is mathematical beauty of shaders. I always rely more on shader animations and materials.
-You see example of this the parody game about [squeezing the Penrose triangle](/) and in the games on the page.
+Another passion of mine is the mathematical beauty of shaders. For me, it is easier to write a shader than to draw
+or model something in DCC software. You’ll find examples of this procedural approaches in all of my projects.
 
-I am genuinely curious about the application of deep learning in the field of
-computer vision, speech and object recognition. I used it widely in my daily work and experimented a lot with it
-in my spare time. On the other hand I enjoy the process of writing code by hand as much as making art and music,
-and I prefer to not outsource anything that I am passionate about to LLMs. You might see quirky experiments with generative AI
-on that page. Important difference for me is to make the voice of machine obvious, so it widens our expression 
-instead of substituting or mimicking human art.
+Let’s address the elephant in the room. I am genuinely curious about applying deep learning to computer vision,
+speech and object recognition. I have used it widely in my daily work and experimented with it a lot in my spare time. 
+On the other hand, I enjoy writing code by hand as much as making art and music, and I prefer not to outsource anything
+I am passionate about to LLMs.
+
+You might see some quirky experiments with generative AI on this page, but the important
+difference for me is that I make it obvious that they were made by a machine. I think machine-made art should widen our
+expressive vocabulary instead of replacing or mimicking human art.
