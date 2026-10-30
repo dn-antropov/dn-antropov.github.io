@@ -4127,8 +4127,8 @@ void main() {
   gl_Position = vec4(position.xy, 0.0, 1.0);
 }
 `;function dj(n){const e=z.useMemo(()=>({uTime:{value:0},winResolution:{value:new de(window.innerWidth,window.innerHeight).multiplyScalar(Math.min(window.devicePixelRatio,2))},desaturation:{value:0}}),[]),t=z.useMemo(()=>new Yi({vertexShader:hj,fragmentShader:fj,uniforms:e}),[e]);return yc(i=>{const{gl:r}=i;t.uniforms.uTime.value=i.clock.getElapsedTime(),r.getDrawingBufferSize(t.uniforms.winResolution.value),t.uniforms.desaturation.value=.5}),se.jsx("mesh",{material:t,frustumCulled:!1,renderOrder:-1,children:se.jsx("planeGeometry",{args:[2,2]})})}const pj=65535;let fg={score:0,lastTap:0};const fw=new Set,mj=n=>(fw.add(n),()=>fw.delete(n)),gj=(n=1)=>{fg={score:Math.min(fg.score+n,pj),lastTap:fg.lastTap+1},fw.forEach(e=>e())},yj=()=>z.useSyncExternalStore(mj,()=>fg),vj=["▶︎","▼︎","◀︎","▲︎"],_j=(n,e=0)=>n.toString(4).padStart(e,"0").split("").map(t=>vj[Number(t)]),xj=8,Sj=5e3,wj=()=>(by(()=>gj(1)),null),Mj=()=>{const{score:n,lastTap:e}=yj(),[t,i]=z.useState(!1);return z.useEffect(()=>{if(e===0)return;i(!0);const r=setTimeout(()=>i(!1),Sj);return()=>clearTimeout(r)},[e]),se.jsx("div",{className:`score ${t?"visible":""}`,"aria-label":`Score ${n}`,children:_j(n,xj).map((r,s)=>se.jsx("span",{className:"score-digit",children:r},s))})},Ej=()=>{const n=z.useRef(),[e,t]=z.useState({width:window.innerWidth,height:window.innerHeight}),[i,r]=z.useState(!0);z.useEffect(()=>{const u=n.current,h=new ResizeObserver(([p])=>{const{width:m,height:y}=p.contentRect;t(x=>x.width===m&&x.height===y?x:{width:m,height:y})}),d=new IntersectionObserver(([p])=>r(p.isIntersecting));return h.observe(u),d.observe(u),()=>{h.disconnect(),d.disconnect()}},[]);const s=e.height/e.width,o=10,a=s<1?o/s:o,l=s<1?o:o*s;return se.jsxs("div",{className:"art",ref:n,children:[se.jsxs(f7,{dpr:[1,1.5],frameloop:i?"always":"never",children:[se.jsx("ambientLight",{intensity:1}),se.jsx(dj,{}),se.jsx(ej,{}),se.jsx(cj,{}),se.jsx(wj,{}),se.jsx(J7,{}),se.jsx(d7,{makeDefault:!0,manual:!0,zoom:6,top:l,bottom:-l,left:-a,right:a,near:1,far:500,position:[0,0,100]})]}),se.jsx(Mj,{})]})},Tj=`---
-title: Simulated Car Drive
-cardTitle: Lead Developer of Simulated Car Drive
+title: Driving Simulation for BMW i Vision Dee
+cardTitle: Lead Developer of the BMW i Vision Dee Driving Simulator
 category: commissioned
 order: 3
 facts:
@@ -4153,27 +4153,35 @@ media:
     - playoutsection.mp4
 ---
 
-At CES, more than 16,000 visitors stepped into an interactive driving experience.
-Thanks to a close collaboration between Journee, Usaneers, THE GAME, and NSYNK, attendees were
-invited to explore both reality and the Metaverse from behind the wheel of DEE.
+I developed a custom driving simulation that was controlled by the car’s actual driving controls and electronics.
+The Unreal Engine simulation was rendered on the screen in front of the car and projected onto the inside
+of the car’s windows.
+
+I was responsible for making the driving feel great. The driving physics was based on an early version of Chaos Vehicle
+physics, but the real challenge was making simulated driving feel as real as controlling a full-sized car,
+especially given the delay in the steering wheel and pedal data coming from the car.
+
+Keeping the ride smooth was another challenge. Because of the multi-screen setup, I had to keep the scene complexity in check,
+and the scene included MetaHumans walking along the street, Niagara particle systems generously placed by the designers,
+and level streaming that showed extra content at the right moments of the ride.
+
+Finally, I was part of the on-site team at the auto show in Shanghai, keeping an eye on how the system performed
+with real visitors and doing hotfixes while the show was running.
 
 ## My scope of work
 ![My part in the BMW i Vision Dee project](diagram.svg)
 
-NSYNK developed a custom driving simulator that seamlessly connected DEE to the car's actual
-electronics, allowing it to function as a bridge between physical and virtual environments.
-Through the use of the Mixed Reality Slider, participants could decide whether to cruise through
-the real streets of Las Vegas or dive into an abstract, digitally enhanced version of the city.
+
 `,Aj=`---
-title: Fluxus Machine
-cardTitle: GPT-2 trained on Fluxus art texts
+title: A GPT-2 Fluxus Machine
+cardTitle: Fluxus Performances Written by GPT-2
 category: personal
 order: 3
 facts:
   - label: Year
     value: 2022
   - label: Tech Stack
-    value: Tensorflow, GPT-2
+    value: TensorFlow, GPT-2
 card:
   - gallery/002-18133014139039792.jpg
 media:
@@ -4181,16 +4189,17 @@ media:
   items: gallery/
 ---
 
-Project explores weirdness and clunkiness of early deep learning transformer models. GPT-2 was trained on texts of [book of 
-performance of Fluxus art group](https://www.thing.net/~grist/ld/fluxusworkbook.pdf), sex instructions and actions you should
-take in case of life hazards. The prompt was a short phrase that sounded like it could be a real name of a performance
-and results were bizarre and poetic descriptions of artistic performances.
+This project explores the weirdness and clunkiness of early transformer-based deep learning models. GPT-2 was trained
+on texts from the [book of performance of Fluxus art group](https://www.thing.net/~grist/ld/fluxusworkbook.pdf), on sex instructions, and on what to do in life-threatening emergencies.
 
-The training data and the scripts for generating the poetry are found on my [github](https://github.com/dn-antropov/fluxmachine/)
+Each piece starts with a prompt that sounds like the name of a performance or the beginning of an instruction.
+The model’s generations are bizarre and poetic descriptions of artistic performances.
+
+The training data and the scripts for generating the poetry are available on my [github](https://github.com/dn-antropov/fluxmachine/)
 `,bj=`---
 title: AI Hallucinations and Gaussian Splats
 hidden: false
-cardTitle: Playing with AI Hallucinations and Gaussian Splats
+cardTitle: Walking Through a Bosch Painting Dreamed Up by AI
 category: personal
 order: 2
 facts:
@@ -4202,10 +4211,10 @@ card: gaussiandreams.mp4
 hero: gaussiandreams.mp4
 ---
 
-I combined Stable Diffusion and DreamScene360 to create immersive, 360-degree panoramas.
-First, Stable Diffusion generated an equirectangular panorama of a fictional world inspired by Bosch.
-Then, I processed the panorama through DreamScene360, which converted it into a Gaussian splat.
-The result is a surreal, immersive scene rendered in Unreal Engine.`,Cj=`---
+I combined Stable Diffusion and DreamScene360 to create immersive 360-degree environments. First,
+Stable Diffusion generated an equirectangular panorama of a fictional world inspired by Hieronymus Bosch.
+Then I ran the panorama through DreamScene360, which converted it into a Gaussian splat. The result is a surreal,
+explorable scene rendered in Unreal Engine.`,Cj=`---
 title: Real-Time Image Processing Pipeline
 cardTitle: Developer of a Real-Time Image Processing Pipeline
 category: commissioned
@@ -4229,11 +4238,12 @@ media:
     - ish23_cut_01.mp4
 ---
 
-I created an image processing pipeline for a booth at industrial fare. A key element of the experience were six photo stations,
-where guests could make a photo, apply visual filters, and put it on the 42-meter-wide LED screen. The pipeline took the
-photo from the camera, programmatically removed a background and moved every photo to Unreal Engine for rendering. Additionally,
-I created an Unreal Engine mobile app to be used as an interface for photographers and fare participants to edit and send the
-photos to the wall.
+I created an image processing pipeline for a booth at the ISH 2023 trade fair. The key element of the experience
+was six photo stations, where guests could take a photo, apply visual filters and send it to a 42-meter-wide LED screen.
+The pipeline took each photo from the camera, removed the background automatically and passed the result
+to Unreal Engine for rendering.
+
+I also created an Unreal Engine mobile app that photographers and fair visitors used to edit the photos and send them to the wall.
 `,Rj=`---
 title: Augmented Reality App for Journalists
 hidden: true
@@ -4269,7 +4279,7 @@ pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui offi
 mollit anim id est laborum.
 `,Pj=`---
 title: Realtalk 1864
-cardTitle: Lead Developer of the Realtalk 1864
+cardTitle: Lead Developer of Realtalk 1864
 category: commissioned
 order: 1
 facts:
@@ -4295,29 +4305,29 @@ media:
     - browser.mp4
 ---
 
-Realtalk 1864 is a serious game base on a reconstruction of Jewish ghetto street in Frankfurt. You have an opportunity
-to go back in time walk the street and meet its people. You can talk to 5 historical figures that response via LLM chatbot.
+Realtalk 1864 is a serious game based on a reconstruction of the Judengasse, Frankfurt’s historic Jewish street,
+as it was in 1864. You can travel back in time, walk down the street and meet its people:
+five characters based on historical sources, who answer your questions through LLM-driven voice conversations.
 
-I was a lead developer of the game, concentrating mainly on gameplay systems, player controls, UX/UI and implementation
-of LLM audio calls inside the game engine. As a lead developer I also overlooked the work of other developers and tech artists, keeping an eye on performance optimization,
-code organization and asset creation.
+I was the lead developer of the game, focusing mainly on gameplay systems, player controls,
+UX/UI and integrating LLM voice calls into the game engine. As lead developer, I also oversaw the work
+of the other developers and technical artists, keeping an eye on performance optimization, code organization
+and asset creation.
 
-Next challenge after finishing the game was bringing experience to the pixel streaming platform, that introduced 
-bottlenecks due to low spec hardware. Video compression also forced us to use UI elements rendered in the browser for text
-intensive screens, which needed not trivial solution. On top of that it was created by a team of less than 10 people, that
-didn't leave anything untouched by me as a lead developer.
+The next challenge after finishing the game was bringing the experience to a pixel streaming platform,
+whose low-spec hardware introduced new bottlenecks. Video compression also forced us to render text-heavy screens
+as browser UI rather than in the engine, which required a non-trivial solution. On top of that, the game was built
+by a team of fewer than ten people, so there was hardly a part of it I didn’t touch as lead developer.
 
 The game is playable [in the browser](https://realtalk1864.de/start).
 `,Ij=`---
-title: Stop The Fracking Robots
-cardTitle: Stop The Fracking Robots (Game Jame Entry)
+title: Stop the Fracking Robots
+cardTitle: Stop the Fracking Robots (Game Jam Entry)
 category: personal
 order: 1
 facts:
   - label: Year
     value: 2025
-  - label: Context
-    value: Two weeks game jam
   - label: Engine
     value: Godot
   - label: Platforms
@@ -4328,10 +4338,11 @@ card:
 hero: shot.jpg
 ---
 
-A 2D physics-based shoot-em-up with an interesting gimmick of using magnet to manipulate the world objects to fight the enemies.
-I am a big fun of unusual physics based game mechanics and made this game as proof of concept if magnetism can be used in 
-shoot-em-up genre. Judging by response of the game jam participants the idea was quite successful. Most of the art and soundtrack are 
-made by myself, except the assets credited on the game's page.
+A 2D physics-based shoot ’em up with a twist: you use a magnet to grab objects in the world and turn them against
+your enemies. I’m a big fan of unusual physics-based mechanics, and I made this game as a proof of concept
+to see whether magnetism could work in the shoot ’em up genre. Judging by the response from other game jam participants,
+the idea was quite successful. I made most of the art and the soundtrack myself, apart from the assets
+credited on the game’s page.
 
 [Play it on itch.io](https://dnantropov.itch.io/stop-the-fracking-robots)
 `,Lj=`---
@@ -4368,38 +4379,36 @@ mollit anim id est laborum.
 title: About
 ---
 
-I am a creative technologist with unusual background. I received a humanitarian education and have got a PhD in art
-history. At the same time I was always fascinated by computers and the power they give us in creating complex self-organized
-systems, simulations and games. I learned to program in the 5th grade while attending Delphi course, but
-came back to it only when I decided to pursue media artist career.
+I am a creative technologist with an unusual background. I studied the humanities and even hold a PhD in art history.
+I have always been fascinated by computers and by the way they let us create complex self-organizing systems,
+simulations and games. I learned to program in Delphi in the 5th grade, but only took programming seriously when
+I decided to pursue a career as a media artist.
 
-I've spent a lot of time in live-programming environment [vvvv](https://vvvv.org/) doing heavy shader work and interactive
-installations for exhibitions and museums. Eventually that brought me to working with interactive design agencies
-as a developer of realtime AR and VR presentations for large audiences. That eventually brought me to Unity and Unreal
-engines as they became standard tools in the industry.
+In the beginning, I worked a lot in live-programming environment [vvvv](https://vvvv.org/), programming graphics and interactive
+installations for exhibitions and museums. Eventually, I started working for interactive design agencies as a developer
+of real-time AR and VR experiences. When the industry shifted to the Unity and Unreal engines, I pivoted to working
+with them as well.
 
-I gradually taught myself everything I was missing from not having a computer science degree. I am probably not that well
-versed in obscure computational algorithms, that I nevertheless learn in my spare time. I am a sole believer in learning
-by doing approach. I don't shy away complex problems and experience of finishing my PhD taught me how to do research
-any complicated topic be it design or programming, that's why these days I do a lot of game development where I think
-most of my talents find the right place.`,Nj=`---
+I gradually taught myself everything I had missed by not having a computer science degree. I’m not deeply versed
+in obscure computational theory; I learn mostly by doing. I don’t shy away from complex problems: finishing my PhD
+taught me how to research complicated topics and solve hard problems`,Nj=`---
 title: Commissioned work
 ---
 
-I work mainly as an Unreal Engine developer. Generally I am tech agnostic and occasionally jump into Unity or Godot
-and venture into complex technical stacks including computer vision, artificial intelligence,
-custom-made sensors, multi-screen setups, unconventional haptics, or data-driven visualizations.
-Due to rapidly changing nature of interaction design field where I spent most of my career, I used to 
-quickly learn and apply new technologies.
+I work as an Unreal Engine developer, with occasional ventures into Unity and Godot. I do a lot of research and development
+in computer vision, artificial intelligence, custom-made sensors, multi-screen setups, unconventional haptics
+and data-driven visualizations. Interaction design, where I have spent most of my career, changes rapidly,
+so I am used to quickly learning and applying emerging technologies.
 
-My expertise is inside of Unreal Engine including building gameplay systems, writing complex game logic, helping technical artists
-with C++ and shader code, optimizing performance and creating tools for designers.
-Throughout my career I worked with small teams of enthusiastic professionals on rapidly moving projects. I learned the hard way,
-that performance is king and clean code is less important than speed of development.
+My Unreal Engine expertise includes building gameplay systems, writing complex game logic, helping technical artists
+with C++, shaders and materials, deep performance optimization, and creating tools that make my teammates’ work easier.
+Throughout my career, I have worked only in small teams of enthusiastic professionals on fast-moving projects.
+I learned the hard way that performance is king, and that clean code matters less than hardware-friendly code.
 
-I always gravitate to games, interactivity, and player experience. I realized that achieving good results there is only possible
-with deep understanding of underlying technologies and performance oriented design. I believe that, although LLMs
-can automate grunt work, I will always enjoy making things by hand in order to learn and perfect the craft.`,Dj=`---
+I have always gravitated towards games and interactive experiences. I know that achieving good results in these fields
+requires a deep understanding of the underlying technologies, the hardware and how people behave. I believe that
+although LLMs can automate grunt work, they lack understanding in all of these areas. And even if they someday
+become good enough to do this work, I will always enjoy making things by hand, to learn and perfect the craft.`,Dj=`---
 title: Contact
 ---
 
@@ -4407,30 +4416,33 @@ Based in Frankfurt, Germany.
 
 Drop me a letter: [dn.antropov@gmail.com](mailto:dn.antropov@gmail.com)
 
-All of my privately developed games you can find on [Codeberg](https://codeberg.org/dn-antropov).
-Current [GitHub](https://www.github.com/dn-antropov) AI policy is making me sad, so don't put my work there anymore,
-but you can find snippets of my previous projects.
+You can find all my personal games and other small projects on [Codeberg](https://codeberg.org/dn-antropov).
+[GitHub](https://www.github.com/dn-antropov)'s current AI policy makes me sad, so don't put my work there anymore,
+but you can find snippets of my older projects.
 
-I don't actively post on socials apart from [Bluesky](https://bsky.app/profile/dnantropov.bsky.social).
-Some of my audiovisual works, travel photos or political yapping you can find on [Instagram](https://www.instagram.com/pastichegram).
-I also have a page on [LinkedIn](https://www.linkedin.com/in/dn-antropov), but to be honest I can't stand the corporate spirit and barely open it myself.
+I don’t post much on social media, apart from [Bluesky](https://bsky.app/profile/dnantropov.bsky.social).
+You can find some of my audiovisual work, travel photos and political yapping on [Instagram](https://www.instagram.com/pastichegram).
+I also have a page on [LinkedIn](https://www.linkedin.com/in/dn-antropov), but to be honest, I can't stand the corporate spirit there and barely open it myself.
 `,Oj=`---
 title: Personal
 ---
 
-Coming from a media art background I recently took game making seriously. Games are ultimate form of expression, but I feel
-that Unreal Engine is forcing me into one way of doing things and in my personal projects I break away from it
-by working in Godot or in plain C/C++, where I can make things fast and efficient.
+Coming from a media art background, I have recently started taking game development seriously. I see games
+as the ultimate form of expression and try to approach them that way. I feel that Unreal Engine pushes me into
+one way of thinking, and more often than not I end up working against it. In my personal projects I break away from it
+and work in Godot or plain C/C++, where I can make things fast and efficient.
 
-Another passion of mine is mathematical beauty of shaders. I always rely more on shader animations and materials.
-You see example of this the parody game about [squeezing the Penrose triangle](/) and in the games on the page.
+Another passion of mine is the mathematical beauty of shaders. For me, it is easier to write a shader than to draw
+or model something in DCC software. You’ll find examples of this procedural approaches in all of my projects.
 
-I am genuinely curious about the application of deep learning in the field of
-computer vision, speech and object recognition. I used it widely in my daily work and experimented a lot with it
-in my spare time. On the other hand I enjoy the process of writing code by hand as much as making art and music,
-and I prefer to not outsource anything that I am passionate about to LLMs. You might see quirky experiments with generative AI
-on that page. Important difference for me is to make the voice of machine obvious, so it widens our expression 
-instead of substituting or mimicking human art.
+Let’s address the elephant in the room. I am genuinely curious about applying deep learning to computer vision,
+speech and object recognition. I have used it widely in my daily work and experimented with it a lot in my spare time. 
+On the other hand, I enjoy writing code by hand as much as making art and music, and I prefer not to outsource anything
+I am passionate about to LLMs.
+
+You might see some quirky experiments with generative AI on this page, but the important
+difference for me is that I make it obvious that they were made by a machine. I think machine-made art should widen our
+expressive vocabulary instead of replacing or mimicking human art.
 `,bM=Symbol.for("yaml.alias"),hw=Symbol.for("yaml.document"),oa=Symbol.for("yaml.map"),c3=Symbol.for("yaml.pair"),Ps=Symbol.for("yaml.scalar"),Dc=Symbol.for("yaml.seq"),Lr=Symbol.for("yaml.node.type"),Oc=n=>!!n&&typeof n=="object"&&n[Lr]===bM,W0=n=>!!n&&typeof n=="object"&&n[Lr]===hw,dd=n=>!!n&&typeof n=="object"&&n[Lr]===oa,Pn=n=>!!n&&typeof n=="object"&&n[Lr]===c3,Qt=n=>!!n&&typeof n=="object"&&n[Lr]===Ps,pd=n=>!!n&&typeof n=="object"&&n[Lr]===Dc;function bn(n){if(n&&typeof n=="object")switch(n[Lr]){case oa:case Dc:return!0}return!1}function Rn(n){if(n&&typeof n=="object")switch(n[Lr]){case bM:case oa:case Ps:case Dc:return!0}return!1}const f3=n=>(Qt(n)||bn(n))&&!!n.anchor,qa=Symbol("break visit"),Uj=Symbol("skip children"),lh=Symbol("remove node");function Uc(n,e){const t=Fj(e);W0(n)?Gu(null,n.contents,t,Object.freeze([n]))===lh&&(n.contents=null):Gu(null,n,t,Object.freeze([]))}Uc.BREAK=qa;Uc.SKIP=Uj;Uc.REMOVE=lh;function Gu(n,e,t,i){const r=Bj(n,e,t,i);if(Rn(r)||Pn(r))return zj(n,i,r),Gu(n,r,t,i);if(typeof r!="symbol"){if(bn(e)){i=Object.freeze(i.concat(e));for(let s=0;s<e.items.length;++s){const o=Gu(s,e.items[s],t,i);if(typeof o=="number")s=o-1;else{if(o===qa)return qa;o===lh&&(e.items.splice(s,1),s-=1)}}}else if(Pn(e)){i=Object.freeze(i.concat(e));const s=Gu("key",e.key,t,i);if(s===qa)return qa;s===lh&&(e.key=null);const o=Gu("value",e.value,t,i);if(o===qa)return qa;o===lh&&(e.value=null)}}return r}function Fj(n){return typeof n=="object"&&(n.Collection||n.Node||n.Value)?Object.assign({Alias:n.Node,Map:n.Node,Scalar:n.Node,Seq:n.Node},n.Value&&{Map:n.Value,Scalar:n.Value,Seq:n.Value},n.Collection&&{Map:n.Collection,Seq:n.Collection},n):n}function Bj(n,e,t,i){var r,s,o,a,l;if(typeof t=="function")return t(n,e,i);if(dd(e))return(r=t.Map)==null?void 0:r.call(t,n,e,i);if(pd(e))return(s=t.Seq)==null?void 0:s.call(t,n,e,i);if(Pn(e))return(o=t.Pair)==null?void 0:o.call(t,n,e,i);if(Qt(e))return(a=t.Scalar)==null?void 0:a.call(t,n,e,i);if(Oc(e))return(l=t.Alias)==null?void 0:l.call(t,n,e,i)}function zj(n,e,t){const i=e[e.length-1];if(bn(i))i.items[n]=t;else if(Pn(i))n==="key"?i.key=t:i.value=t;else if(W0(i))i.contents=t;else{const r=Oc(i)?"alias":"scalar";throw new Error(`Cannot replace node with ${r} parent`)}}const Hj={"!":"%21",",":"%2C","[":"%5B","]":"%5D","{":"%7B","}":"%7D"},Vj=n=>n.replace(/[!,[\]{}]/g,e=>Hj[e]);class bi{constructor(e,t){this.docStart=null,this.docEnd=!1,this.yaml=Object.assign({},bi.defaultYaml,e),this.tags=Object.assign({},bi.defaultTags,t)}clone(){const e=new bi(this.yaml,this.tags);return e.docStart=this.docStart,e}atDocument(){const e=new bi(this.yaml,this.tags);switch(this.yaml.version){case"1.1":this.atNextDocument=!0;break;case"1.2":this.atNextDocument=!1,this.yaml={explicit:bi.defaultYaml.explicit,version:"1.2"},this.tags=Object.assign({},bi.defaultTags);break}return e}add(e,t){this.atNextDocument&&(this.yaml={explicit:bi.defaultYaml.explicit,version:"1.1"},this.tags=Object.assign({},bi.defaultTags),this.atNextDocument=!1);const i=e.trim().split(/[ \t]+/),r=i.shift();switch(r){case"%TAG":{if(i.length!==2&&(t(0,"%TAG directive should contain exactly two parts"),i.length<2))return!1;const[s,o]=i;return this.tags[s]=o,!0}case"%YAML":{if(this.yaml.explicit=!0,i.length!==1)return t(0,"%YAML directive should contain exactly one part"),!1;const[s]=i;if(s==="1.1"||s==="1.2")return this.yaml.version=s,!0;{const o=/^\d+\.\d+$/.test(s);return t(6,`Unsupported YAML version ${s}`,o),!1}}default:return t(0,`Unknown directive ${r}`,!0),!1}}tagName(e,t){if(e==="!")return"!";if(e[0]!=="!")return t(`Not a valid tag: ${e}`),null;if(e[1]==="<"){const o=e.slice(2,-1);return o==="!"||o==="!!"?(t(`Verbatim tags aren't resolved, so ${e} is invalid.`),null):(e[e.length-1]!==">"&&t("Verbatim tags must end with a >"),o)}const[,i,r]=e.match(/^(.*!)([^!]*)$/s);r||t(`The ${e} tag has no suffix`);const s=this.tags[i];if(s)try{return s+decodeURIComponent(r)}catch(o){return t(String(o)),null}return i==="!"?e:(t(`Could not resolve tag: ${e}`),null)}tagString(e){for(const[t,i]of Object.entries(this.tags))if(e.startsWith(i))return t+Vj(e.substring(i.length));return e[0]==="!"?e:`!<${e}>`}toString(e){const t=this.yaml.explicit?[`%YAML ${this.yaml.version||"1.2"}`]:[],i=Object.entries(this.tags);let r;if(e&&i.length>0&&Rn(e.contents)){const s={};Uc(e.contents,(o,a)=>{Rn(a)&&a.tag&&(s[a.tag]=!0)}),r=Object.keys(s)}else r=[];for(const[s,o]of i)s==="!!"&&o==="tag:yaml.org,2002:"||(!e||r.some(a=>a.startsWith(o)))&&t.push(`%TAG ${s} ${o}`);return t.join(`
 `)}}bi.defaultYaml={explicit:!1,version:"1.2"};bi.defaultTags={"!!":"tag:yaml.org,2002:"};function h3(n){if(/[\x00-\x19\s,[\]{}]/.test(n)){const t=`Anchor must not contain whitespace or control characters: ${JSON.stringify(n)}`;throw new Error(t)}return!0}function d3(n){const e=new Set;return Uc(n,{Value(t,i){i.anchor&&e.add(i.anchor)}}),e}function p3(n,e){for(let t=1;;++t){const i=`${n}${t}`;if(!e.has(i))return i}}function Gj(n,e){const t=[],i=new Map;let r=null;return{onAnchor:s=>{t.push(s),r??(r=d3(n));const o=p3(e,r);return r.add(o),o},setAnchors:()=>{for(const s of t){const o=i.get(s);if(typeof o=="object"&&o.anchor&&(Qt(o.node)||bn(o.node)))o.node.anchor=o.anchor;else{const a=new Error("Failed to resolve repeated object (this should not happen)");throw a.source=s,a}}},sourceObjects:i}}function Wu(n,e,t,i){if(i&&typeof i=="object")if(Array.isArray(i))for(let r=0,s=i.length;r<s;++r){const o=i[r],a=Wu(n,i,String(r),o);a===void 0?delete i[r]:a!==o&&(i[r]=a)}else if(i instanceof Map)for(const r of Array.from(i.keys())){const s=i.get(r),o=Wu(n,i,r,s);o===void 0?i.delete(r):o!==s&&i.set(r,o)}else if(i instanceof Set)for(const r of Array.from(i)){const s=Wu(n,i,r,r);s===void 0?i.delete(r):s!==r&&(i.delete(r),i.add(s))}else for(const[r,s]of Object.entries(i)){const o=Wu(n,i,r,s);o===void 0?delete i[r]:o!==s&&(i[r]=o)}return n.call(e,t,i)}function Cr(n,e,t){if(Array.isArray(n))return n.map((i,r)=>Cr(i,String(r),t));if(n&&typeof n.toJSON=="function"){if(!t||!f3(n))return n.toJSON(e,t);const i={aliasCount:0,count:1,res:void 0};t.anchors.set(n,i),t.onCreate=s=>{i.res=s,delete t.onCreate};const r=n.toJSON(e,t);return t.onCreate&&t.onCreate(r),r}return typeof n=="bigint"&&!(t!=null&&t.keep)?Number(n):n}class CM{constructor(e){Object.defineProperty(this,Lr,{value:e})}clone(){const e=Object.create(Object.getPrototypeOf(this),Object.getOwnPropertyDescriptors(this));return this.range&&(e.range=this.range.slice()),e}toJS(e,{mapAsMap:t,maxAliasCount:i,onAnchor:r,reviver:s}={}){if(!W0(e))throw new TypeError("A document argument is required");const o={anchors:new Map,doc:e,keep:!0,mapAsMap:t===!0,mapKeyWarned:!1,maxAliasCount:typeof i=="number"?i:100},a=Cr(this,"",o);if(typeof r=="function")for(const{count:l,res:u}of o.anchors.values())r(u,l);return typeof s=="function"?Wu(s,{"":a},"",a):a}}class RM extends CM{constructor(e){super(bM),this.source=e,Object.defineProperty(this,"tag",{set(){throw new Error("Alias nodes cannot have tags")}})}resolve(e,t){if((t==null?void 0:t.maxAliasCount)===0)throw new ReferenceError("Alias resolution is disabled");let i;t!=null&&t.aliasResolveCache?i=t.aliasResolveCache:(i=[],Uc(e,{Node:(s,o)=>{(Oc(o)||f3(o))&&i.push(o)}}),t&&(t.aliasResolveCache=i));let r;for(const s of i){if(s===this)break;s.anchor===this.source&&(r=s)}if(r&&t){const{anchors:s,doc:o,maxAliasCount:a}=t;let l=s.get(r);if(l||(Cr(r,null,t),l=s.get(r)),(l==null?void 0:l.res)===void 0){const u="This should not happen: Alias anchor was not resolved?";throw new ReferenceError(u)}if(a>=0&&(l.count+=1,l.aliasCount===0&&(l.aliasCount=hg(o,r,s)),l.count*l.aliasCount>a)){const u="Excessive alias count indicates a resource exhaustion attack";throw new ReferenceError(u)}}return r}toJSON(e,t){if(!t)return{source:this.source};const i=this.resolve(t.doc,t);if(!i){const r=`Unresolved alias (the anchor must be set before the alias): ${this.source}`;throw new ReferenceError(r)}return t.anchors.get(i).res}toString(e,t,i){const r=`*${this.source}`;if(e){if(h3(this.source),e.options.verifyAliasOrder&&!e.anchors.has(this.source)){const s=`Unresolved alias (the anchor must be set before the alias): ${this.source}`;throw new Error(s)}if(e.implicitKey)return`${r} `}return r}}function hg(n,e,t){if(Oc(e)){const i=e.resolve(n),r=t&&i&&t.get(i);return r?r.count*r.aliasCount:0}else if(bn(e)){let i=0;for(const r of e.items){const s=hg(n,r,t);s>i&&(i=s)}return i}else if(Pn(e)){const i=hg(n,e.key,t),r=hg(n,e.value,t);return Math.max(i,r)}return 1}const m3=n=>!n||typeof n!="function"&&typeof n!="object";class yt extends CM{constructor(e){super(Ps),this.value=e}toJSON(e,t){return t!=null&&t.keep?this.value:Cr(this.value,e,t)}toString(){return String(this.value)}}yt.BLOCK_FOLDED="BLOCK_FOLDED";yt.BLOCK_LITERAL="BLOCK_LITERAL";yt.PLAIN="PLAIN";yt.QUOTE_DOUBLE="QUOTE_DOUBLE";yt.QUOTE_SINGLE="QUOTE_SINGLE";const Wj="tag:yaml.org,2002:";function jj(n,e,t){if(e){const i=t.filter(s=>s.tag===e),r=i.find(s=>!s.format)??i[0];if(!r)throw new Error(`Tag ${e} not found`);return r}return t.find(i=>{var r;return((r=i.identify)==null?void 0:r.call(i,n))&&!i.format})}function Bh(n,e,t){var d,p,m;if(W0(n)&&(n=n.contents),Rn(n))return n;if(Pn(n)){const y=(p=(d=t.schema[oa]).createNode)==null?void 0:p.call(d,t.schema,null,t);return y.items.push(n),y}(n instanceof String||n instanceof Number||n instanceof Boolean||typeof BigInt<"u"&&n instanceof BigInt)&&(n=n.valueOf());const{aliasDuplicateObjects:i,onAnchor:r,onTagObj:s,schema:o,sourceObjects:a}=t;let l;if(i&&n&&typeof n=="object"){if(l=a.get(n),l)return l.anchor??(l.anchor=r(n)),new RM(l.anchor);l={anchor:null,node:null},a.set(n,l)}e!=null&&e.startsWith("!!")&&(e=Wj+e.slice(2));let u=jj(n,e,o.tags);if(!u){if(n&&typeof n.toJSON=="function"&&(n=n.toJSON()),!n||typeof n!="object"){const y=new yt(n);return l&&(l.node=y),y}u=n instanceof Map?o[oa]:Symbol.iterator in Object(n)?o[Dc]:o[oa]}s&&(s(u),delete t.onTagObj);const h=u!=null&&u.createNode?u.createNode(t.schema,n,t):typeof((m=u==null?void 0:u.nodeClass)==null?void 0:m.from)=="function"?u.nodeClass.from(t.schema,n,t):new yt(n);return e?h.tag=e:u.default||(h.tag=u.tag),l&&(l.node=h),h}function Cy(n,e,t){let i=t;for(let r=e.length-1;r>=0;--r){const s=e[r];if(typeof s=="number"&&Number.isInteger(s)&&s>=0){const o=[];o[s]=i,i=o}else i=new Map([[s,i]])}return Bh(i,void 0,{aliasDuplicateObjects:!1,keepUndefined:!1,onAnchor:()=>{throw new Error("This should not happen, please report a bug.")},schema:n,sourceObjects:new Map})}const Hf=n=>n==null||typeof n=="object"&&!!n[Symbol.iterator]().next().done;class g3 extends CM{constructor(e,t){super(e),Object.defineProperty(this,"schema",{value:t,configurable:!0,enumerable:!1,writable:!0})}clone(e){const t=Object.create(Object.getPrototypeOf(this),Object.getOwnPropertyDescriptors(this));return e&&(t.schema=e),t.items=t.items.map(i=>Rn(i)||Pn(i)?i.clone(e):i),this.range&&(t.range=this.range.slice()),t}addIn(e,t){if(Hf(e))this.add(t);else{const[i,...r]=e,s=this.get(i,!0);if(bn(s))s.addIn(r,t);else if(s===void 0&&this.schema)this.set(i,Cy(this.schema,r,t));else throw new Error(`Expected YAML collection at ${i}. Remaining path: ${r}`)}}deleteIn(e){const[t,...i]=e;if(i.length===0)return this.delete(t);const r=this.get(t,!0);if(bn(r))return r.deleteIn(i);throw new Error(`Expected YAML collection at ${t}. Remaining path: ${i}`)}getIn(e,t){const[i,...r]=e,s=this.get(i,!0);return r.length===0?!t&&Qt(s)?s.value:s:bn(s)?s.getIn(r,t):void 0}hasAllNullValues(e){return this.items.every(t=>{if(!Pn(t))return!1;const i=t.value;return i==null||e&&Qt(i)&&i.value==null&&!i.commentBefore&&!i.comment&&!i.tag})}hasIn(e){const[t,...i]=e;if(i.length===0)return this.has(t);const r=this.get(t,!0);return bn(r)?r.hasIn(i):!1}setIn(e,t){const[i,...r]=e;if(r.length===0)this.set(i,t);else{const s=this.get(i,!0);if(bn(s))s.setIn(r,t);else if(s===void 0&&this.schema)this.set(i,Cy(this.schema,r,t));else throw new Error(`Expected YAML collection at ${i}. Remaining path: ${r}`)}}}const $j=n=>n.replace(/^(?!$)(?: $)?/gm,"#");function to(n,e){return/^\n+$/.test(n)?n.substring(1):e?n.replace(/^(?! *$)/gm,e):n}const ol=(n,e,t)=>n.endsWith(`
 `)?to(t,e):t.includes(`
