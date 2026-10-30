@@ -1,14 +1,13 @@
 import { useEffect, useState } from 'react';
 import useTap from '../useTap';
-import { addPoints, getScore, useScore } from '../store';
+import { addPoints, useScore } from '../store';
 import { toQuaternary } from '../quaternary';
-import { milestoneValue } from '../levels';
 
 const LENGTH = 8;
 const VISIBLE_FOR = 5000;
 
 export const ScoreTracker = () => {
-  useTap(() => addPoints(milestoneValue('pointsPerTap', getScore(), 1)));
+  useTap(() => addPoints(1));
   return null;
 };
 

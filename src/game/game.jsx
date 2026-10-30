@@ -6,7 +6,6 @@ import DoublePenrose from './objects/double_penrose_animated';
 import Click from './objects/click';
 import Background from './objects/background';
 import { ScoreOverlay, ScoreTracker } from './ui/score';
-import Milestones from './ui/milestones';
 import { TapSource } from './useTap';
 import './game.css';
 
@@ -60,7 +59,6 @@ const Game = () => {
         />
       </Canvas>
       <ScoreOverlay />
-      <Milestones />
     </div>
   );
 };

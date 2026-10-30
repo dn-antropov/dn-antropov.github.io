@@ -18,6 +18,5 @@ export const addPoints = (amount = 1) => {
   listeners.forEach((listener) => listener());
 };
 
-export const getScore = () => state.score;
 
 export const useScore =() => useSyncExternalStore(subscribe, () => state);

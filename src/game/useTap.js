@@ -1,13 +1,8 @@
 import { useEffect, useRef } from 'react';
 import { useThree } from '@react-three/fiber';
 import { Vector2, Vector3 } from 'three';
-import { getScore } from './store';
-import { milestoneValue } from './levels';
-
 const TAP_MAX_DURATION = 250;
 const TAP_MAX_DISTANCE = 10;
-
-const holdRate = (score) => milestoneValue('holdTapsPerSecond', score, 0);
 
 const subscribers = new Set();
 
@@ -18,8 +13,6 @@ export function TapSource() {
   useEffect(() => {
     const element = gl.domElement;
     let press = null;
-    let holdTimeout = null;
-    let holdTick = null;
 
     const emit = (clientX, clientY) => {
       const { camera, clock } = get();
@@ -35,96 +28,31 @@ export function TapSource() {
       subscribers.forEach((subscriber) => subscriber(tap));
     };
 
-    const stopHold = () => {
-      clearTimeout(holdTimeout);
-      clearTimeout(holdTick);
-      holdTimeout = null;
-      holdTick = null;
-    };
-
-    const scheduleHoldTap = () => {
-      const rate = holdRate(getScore());
-      if (rate <= 0) return;
-      holdTick = setTimeout(() => {
-        if (!press?.holding) return;
-        emit(press.lastX, press.lastY);
-        scheduleHoldTap();
-      }, 1000 / rate);
-    };
-
-    const startHold = () => {
-      holdTimeout = null;
-      if (!press) return;
-      press.holding = true;
-      emit(press.lastX, press.lastY);
-      scheduleHoldTap();
-    };
-
     const handlePointerDown = (event) => {
       if (!event.isPrimary || event.button !== 0) return;
-      stopHold();
-      press = {
-        id: event.pointerId,
-        x: event.clientX,
-        y: event.clientY,
-        lastX: event.clientX,
-        lastY: event.clientY,
-        time: event.timeStamp,
-        holding: false,
-      };
-      element.setPointerCapture(event.pointerId);
-      if (holdRate(getScore()) > 0) {
-        holdTimeout = setTimeout(startHold, TAP_MAX_DURATION);
-      }
-    };
-
-    const handlePointerMove = (event) => {
-      if (!press || event.pointerId !== press.id) return;
-      press.lastX = event.clientX;
-      press.lastY = event.clientY;
-      const distance = Math.hypot(event.clientX - press.x, event.clientY - press.y);
-      if (!press.holding && distance > TAP_MAX_DISTANCE) stopHold();
+      press = { id: event.pointerId, x: event.clientX, y: event.clientY, time: event.timeStamp };
     };
 
     const handlePointerUp = (event) => {
       if (!press || event.pointerId !== press.id) return;
-      const wasHolding = press.holding;
       const duration = event.timeStamp - press.time;
       const distance = Math.hypot(event.clientX - press.x, event.clientY - press.y);
-      stopHold();
       press = null;
-      if (wasHolding) return;
       if (duration > TAP_MAX_DURATION || distance > TAP_MAX_DISTANCE) return;
       emit(event.clientX, event.clientY);
     };
 
     const handlePointerCancel = () => {
-      stopHold();
       press = null;
     };
 
-    const handleContextMenu = (event) => {
-      event.preventDefault();
-    };
-
-    const handleTouchMove = (event) => {
-      if (press?.holding && event.cancelable) event.preventDefault();
-    };
-
-    element.addEventListener('touchmove', handleTouchMove, { passive: false });
     element.addEventListener('pointerdown', handlePointerDown);
-    element.addEventListener('pointermove', handlePointerMove);
     element.addEventListener('pointerup', handlePointerUp);
     element.addEventListener('pointercancel', handlePointerCancel);
-    element.addEventListener('contextmenu', handleContextMenu);
     return () => {
-      stopHold();
-      element.removeEventListener('touchmove', handleTouchMove);
       element.removeEventListener('pointerdown', handlePointerDown);
-      element.removeEventListener('pointermove', handlePointerMove);
       element.removeEventListener('pointerup', handlePointerUp);
       element.removeEventListener('pointercancel', handlePointerCancel);
-      element.removeEventListener('contextmenu', handleContextMenu);
     };
   }, [gl, get]);
 
