@@ -26,21 +26,17 @@ media:
 ---
 
 I developed a custom driving simulation that was controlled by the car’s actual driving controls and electronics.
-The Unreal Engine simulation was rendered on the screen in front of the car and projected onto the inside
+The Unreal Engine simulation was displayed on the screen in front of the car and projected onto the inside
 of the car’s windows.
 
-I was responsible for making the driving feel great. The driving physics was based on an early version of Chaos Vehicle
-physics, but the real challenge was making simulated driving feel as real as controlling a full-sized car,
-especially given the delay in the steering wheel and pedal data coming from the car.
+I was responsible for making the driving feel great. The real challenge was making Chaos-simulated driving feel as real
+as controlling a full-sized car, especially given the delay in the steering wheel and pedal data coming from the car.
 
-Keeping the ride smooth was another challenge. Because of the multi-screen setup, I had to keep the scene complexity in check,
-and the scene included MetaHumans walking along the street, Niagara particle systems generously placed by the designers,
-and level streaming that showed extra content at the right moments of the ride.
+Keeping the ride smooth was another challenge. The scene included MetaHumans walking along the street,
+Niagara particle systems generously placed by the designers, and streamed content that appeared at the right moments
+of the ride. It was a technical hurdle to render it to multiple viewports.
 
-Finally, I was part of the on-site team at the auto show in Shanghai, keeping an eye on how the system performed
+I was part of the on-site team at the auto show in Shanghai, keeping an eye on how the system performed
 with real visitors and doing hotfixes while the show was running.
-
-## My scope of work
-![My part in the BMW i Vision Dee project](diagram.svg)
 
 
