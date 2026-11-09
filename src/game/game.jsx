@@ -1,13 +1,31 @@
 import { useState, useEffect, useRef } from 'react';
 import { OrthographicCamera } from '@react-three/drei';
-import { Canvas } from '@react-three/fiber';
+import { Canvas, useThree } from '@react-three/fiber';
 
 import DoublePenrose from './objects/double_penrose_animated';
 import Click from './objects/click';
 import Background from './objects/background';
 import { ScoreOverlay, ScoreTracker } from './ui/score';
 import { TapSource } from './useTap';
+import Finale from './ui/finale';
 import './game.css';
+
+const RenderWhileVisible = ({ active }) => {
+  const invalidate = useThree((state) => state.invalidate);
+
+  useEffect(() => {
+    if (!active) return;
+    let frame;
+    const tick = () => {
+      invalidate();
+      frame = requestAnimationFrame(tick);
+    };
+    tick();
+    return () => cancelAnimationFrame(frame);
+  }, [active, invalidate]);
+
+  return null;
+};
 
 const Game = () => {
   const art = useRef();
@@ -38,7 +56,8 @@ const Game = () => {
 
   return (
     <div className='art' ref={art}>
-      <Canvas dpr={[1, 1.5]} frameloop={inView ? 'always' : 'never'}>
+      <Canvas dpr={[1, 1.5]} frameloop='demand'>
+        <RenderWhileVisible active={inView} />
         <ambientLight intensity={1.0} />
         <Background />
         <DoublePenrose />
@@ -59,6 +78,7 @@ const Game = () => {
         />
       </Canvas>
       <ScoreOverlay />
+      <Finale />
     </div>
   );
 };

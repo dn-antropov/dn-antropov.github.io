@@ -38,8 +38,42 @@
   width: 1.2em;
 }
 
+.finale {
+  background: rgba(0, 0, 0, 0.35);
+  box-shadow: 0 0 0.5rem 0.25rem rgba(0, 0, 0, 0.45);
+  color: var(--color-strong);
+  font-family: var(--font-heading);
+  font-size: 1.9rem;
+  left: 50%;
+  letter-spacing: var(--tracking);
+  max-width: min(90vw, 40rem);
+  opacity: 0;
+  padding: 1rem 1.5rem;
+  pointer-events: none;
+  position: absolute;
+  text-align: center;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  transition: opacity 1s ease;
+  white-space: pre-line;
+  width: max-content;
+  z-index: 6;
+}
+
+.finale.visible {
+  opacity: 1;
+}
+
+.finale:empty {
+  display: none;
+}
+
 @media (max-width: 600px) {
   .score {
     font-size: 1.4rem;
+  }
+
+  .finale {
+    font-size: 1.2rem;
   }
 }
