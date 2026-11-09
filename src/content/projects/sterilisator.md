@@ -30,3 +30,5 @@ the progression and figuring out a better UX, so I see this project as a good tr
 I've released the game [on itch.io](https://dnantropov.itch.io/sterilisator) in a very early alpha state, mostly as a source of motivation to keep working on it.
 The game is in active development and might be rough around the edges. You are welcome to try it and leave a feedback in 
 the [comments section](https://dnantropov.itch.io/sterilisator/comments).
+
+The code is available on [Codeberg](https://codeberg.org/dn-antropov/hdd-maintainer)
