@@ -4453,8 +4453,9 @@ I also have a page on [LinkedIn](https://www.linkedin.com/in/dn-antropov), but t
 title: Personal
 ---
 
-Coming from a media art background, I have recently started taking game development seriously.
-Games are the ultimate form of expression and I find the most joy in making them.
+Coming from a media art background, I am currently pivoting into game development.
+Games are the ultimate form of expression, blending creativity and engineering. I like how games allow me to create worlds
+and to apply my professional and personal skills (e.g., music making).
 
 For my personal indie projects I rarely use Unreal Engine. It's too bloated when it comes to small stuff. For my small games
 I use Godot or plain C/C++ that allow me to do things quickly and efficiently.
