@@ -8,6 +8,7 @@ import Background from './objects/background';
 import { ScoreOverlay, ScoreTracker } from './ui/score';
 import { TapSource } from './useTap';
 import Finale from './ui/finale';
+import ClickHint from './ui/click_hint';
 import './game.css';
 
 const RenderWhileVisible = ({ active }) => {
@@ -79,6 +80,7 @@ const Game = () => {
       </Canvas>
       <ScoreOverlay />
       <Finale />
+      <ClickHint />
     </div>
   );
 };
