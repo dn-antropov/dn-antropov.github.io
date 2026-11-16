@@ -7,7 +7,7 @@ includes building gameplay systems and writing complex game logic.
 
 As a tech artist I optimize blueprints and materials for artists. As a C++ developer I create editor tools for teammates.
 Working in small teams of enthusiastic professionals on fast-moving projects taught me how to fill many roles. In real-time
-graphics performance is king, and clean code matters less than hardware-friendly code.
+graphics performance is king, and that it is important to write hardware-friendly code.
 
 I love making games and interactive experiences. Achieving outstanding results in these fields requires
 a deep understanding of the underlying technologies, the hardware and human behavior. I believe that although LLMs can
