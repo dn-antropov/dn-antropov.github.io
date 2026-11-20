@@ -4344,7 +4344,7 @@ media:
 ---
 
 Sterilisator was meant to be a quick dip of my toe into the incremental genre. It took me a while to realize that I am
-not a huge fan of UI-only game. On the other hand, I really enjoy the process of designing and balancing
+not a huge fan of UI-only games. On the other hand, I really enjoy the process of designing and balancing
 the progression and figuring out a better UX, so I see this project as a good training ground.
 
 I've released the game [on itch.io](https://dnantropov.itch.io/sterilisator) in a very early alpha state, mostly as a source of motivation to keep working on it.
@@ -4433,7 +4433,7 @@ includes building gameplay systems and writing complex game logic.
 
 As a tech artist I optimize blueprints and materials for artists. As a C++ developer I create editor tools for teammates.
 Working in small teams of enthusiastic professionals on fast-moving projects taught me how to fill many roles. In real-time
-graphics performance is king, and that it is important to write hardware-friendly code.
+graphics performance is king, and it is important to write hardware-friendly code.
 
 I love making games and interactive experiences. Achieving outstanding results in these fields requires
 a deep understanding of the underlying technologies, the hardware and human behavior. I believe that although LLMs can
