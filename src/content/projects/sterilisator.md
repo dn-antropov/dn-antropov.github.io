@@ -24,7 +24,7 @@ media:
 ---
 
 Sterilisator was meant to be a quick dip of my toe into the incremental genre. It took me a while to realize that I am
-not a huge fan of UI-only game. On the other hand, I really enjoy the process of designing and balancing
+not a huge fan of UI-only games. On the other hand, I really enjoy the process of designing and balancing
 the progression and figuring out a better UX, so I see this project as a good training ground.
 
 I've released the game [on itch.io](https://dnantropov.itch.io/sterilisator) in a very early alpha state, mostly as a source of motivation to keep working on it.
